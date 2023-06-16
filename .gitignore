@@ -1,5 +1,42 @@
-*.bad 
-*.jar
-/node_modules
-/bin
-/target
+
+
+*/*.class
+*/.settings/*
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*/*.jar
+*/*.war
+*/*.ear
+
+*/node_modules
+**/node_modules
+*/target
+*/.project
+*/.classpath
+*/.angular
+*/.cache
+**/.angular
+**/.cache
+*/mylog.txt
+
+*/*.iml
+*/.gradle
+*/local.properties
+*/.idea/caches
+*/.idea/libraries
+*/.idea/modules.xml
+*/.idea/workspace.xml
+*/.idea/navEditor.xml
+*/.idea/assetWizardSettings.xml
+*/.DS_Store
+*/build
+*/build/*
+**/build
+*/captures
+*/.externalNativeBuild
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
