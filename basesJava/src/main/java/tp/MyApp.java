@@ -10,7 +10,19 @@ public class MyApp {
 		test_types();
 		test_personnes();
 		test_String();
-		//test4();
+		test_Adresse();
+	}
+	
+	public static void test_Adresse() {
+		Adresse a1 = new Adresse();
+		a1.setNum("23");
+		a1.setRue("rue xyz");
+		a1.setCodePostal("76000");
+		a1.setVille("Rouen");
+		System.out.println("a1=" + a1);
+		
+		Adresse a2 = new Adresse("24" , "rue elle" , "75012" , "Paris");
+		System.out.println("a2=" + a2);
 	}
 	
 	public static void test_String() {
