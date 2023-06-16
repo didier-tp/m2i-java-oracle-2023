@@ -54,9 +54,13 @@ public class Personne {
 	public void incrementerAge(){
 		// un an de plus (ça modifie l'age interne de l'objet Personne ,
 		// mais pas de return)
-		
-		//this.age = this.age + 1;
-		this.age++;
+		if(this.age != null ) {
+			//this.age = this.age + 1;
+			this.age++;
+		} 
+		else {
+			this.age = 1;
+		}
 	}
 	
 	public String nomComplet(){
