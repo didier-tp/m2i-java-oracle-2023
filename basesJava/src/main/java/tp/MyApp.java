@@ -9,10 +9,39 @@ public class MyApp {
 		//à lancer sous eclipse avec Run as  / java application
 		test_types();
 		test_personnes();
+		test_String();
+		//test4();
+	}
+	
+	public static void test_String() {
+		//construire et afficher la grosse chaine de caractères suivante:
+		//"1,2,3,4,......,64"
+		StringBuilder buffer = new StringBuilder(64*2);
+		buffer.append("1");
+		for(int i=2; i<=64; i++) {
+			buffer.append(",");
+			buffer.append(i);
+		}
+		String chSuite = buffer.toString();
+		System.out.println("chSuite=" + chSuite);
+		
+		//extraire de chaineDate la partie "mois" au milieu entre les deux "/"
+		String chaineDate = "16/06/2023";
+		int posDuPremierSlash = chaineDate.indexOf("/");
+		int posDuDernierSlash = chaineDate.lastIndexOf("/");
+		String chaineMois = chaineDate.substring(posDuPremierSlash+1 , posDuDernierSlash);
+		System.out.println("chaineMois=" + chaineMois);
+		
+		String m2i ="m2i";
+		String m2iMaj = m2i.toUpperCase();
+		System.out.println("m2i=" + m2i);
+		System.out.println("m2iMaj=" + m2iMaj);
+		
 	}
 	
 	public static void test_personnes() {
-		Personne p1 = new Personne();
+		Personne p1 = null;
+		p1 =new Personne();
 		System.out.println("p1=" + p1);//System.out.println("p1=" + p1.toString());
 		//p1.prenom="jean"; //impossible depuis que prenom est privé
 		p1.setPrenom("jean");
