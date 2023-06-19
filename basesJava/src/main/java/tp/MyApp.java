@@ -27,7 +27,7 @@ public class MyApp {
 	}
 	
 	public static void test_bagages(){
-		Bagage b = null;
+		Bagage b = null; //peut peut référencer un Bagage quelconque (Sac ou Valise)
 		//b=new Bagage(); //new direct sur Bagage interdit car Bagage est abstract
 		b= new Sac("sac1" , "rouge" , 12.0 , 15.0); //new Sac(label,couleur,poids,volume)
 		System.out.println("b=" + b.toString());
