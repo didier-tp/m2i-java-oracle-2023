@@ -34,6 +34,23 @@ public class MyApp {
 		   Employe emp2 = new Employe("didier" , "Defrance" , 53, 2000);
 		   emp2.incrementerAge();
 		   System.out.println("emp2=" + emp2.toString()); 
+		   
+		   Personne p=null; //p pourra référencer une Personne quelconque (Personne ou Employe)
+		   p = new Personne("luc" , "SkyWalker" , 25);
+		   System.out.println("p="+p.toString());  //appel de .toString() version Personne
+		   
+		   p=emp1;
+		   //p = new Employe(".." , "..." , ...);
+		   p.incrementerAge();
+		   System.out.println("p="+p.toString()); //appel de .toString() version Employe
+		   
+		   //p.setSalaire(2500); //impossible puisque certaines personnes n'ont pas de salaire
+		   if(p instanceof Employe) {
+			   Employe pVuCommeEmploye = (Employe) p;
+			   pVuCommeEmploye.setSalaire(2500);
+		   }
+		   
+		   System.out.println("p="+p.toString()); 
      }
 	
 	public static void test_Collection() {
