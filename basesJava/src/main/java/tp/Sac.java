@@ -23,7 +23,7 @@ public class Sac extends Bagage {
 
 	@Override
 	public double getVolume() {
-		System.out.println("getVolume() appelé sur un sac de volume=" + this.volume);
+		//System.out.println("getVolume() appelé sur un sac de volume=" + this.volume);
 		return this.volume;
 	}
 

@@ -20,10 +20,18 @@ public class MyApp {
 		//test_Collection();
 		//test_employe();
 		
-		test_bagages();
+		//test_bagages();
+		test_avion();
 		
 		//MyApp myApp = new MyApp();
 		//myApp.test_pas_static();
+	}
+	
+	public static void test_avion() {
+		Avion a1 = new Avion(); a1.setLabel("avion A320");
+		a1.addBagage(new Sac("sac1" , "rouge" , 12.0 , 15.0));
+		a1.addBagage(new Valise("valise1" , "bleu" , 32.0 , 10.0  , 20.0 , 30.0));
+		a1.afficher();
 	}
 	
 	public static void test_bagages(){

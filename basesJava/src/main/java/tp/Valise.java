@@ -8,8 +8,8 @@ public class Valise extends Bagage {
 
 	@Override
 	public double getVolume() {
-		System.out.println("getVolume() appelé sur une valise  de dimension=" 
-	                   + this.largeur + "*"  + this.hauteur + "*" +  this.profondeur);
+		/*System.out.println("getVolume() appelé sur une valise  de dimension=" 
+	                   + this.largeur + "*"  + this.hauteur + "*" +  this.profondeur);*/
 		return (this.largeur * this.hauteur * this.profondeur) / 1000;
 	}
 

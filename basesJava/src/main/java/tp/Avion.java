@@ -32,6 +32,14 @@ public class Avion {
     		System.out.println("\t" + b.toString() + " de volume= " + b.getVolume());
     	}
     }
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel(String label) {
+		this.label = label;
+	}
     
     
     
