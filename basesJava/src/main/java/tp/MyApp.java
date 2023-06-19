@@ -30,6 +30,10 @@ public class MyApp {
 		   emp1.setSalaire(2000);
 		   emp1.incrementerAge(); //on peut appeler une méthode héritée sans la reprogrammer sur classe Employe
 		   System.out.println("emp1=" + emp1.toString()); //.toString() redéfinie/améliorée sur classe Employe
+		   
+		   Employe emp2 = new Employe("didier" , "Defrance" , 53, 2000);
+		   emp2.incrementerAge();
+		   System.out.println("emp2=" + emp2.toString()); 
      }
 	
 	public static void test_Collection() {

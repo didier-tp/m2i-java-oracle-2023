@@ -1,5 +1,6 @@
 package tp;
 
+
 /*
   la classe Employe va hériter de la classe Personne
   et va ajouter un salaire de type Integer
@@ -17,20 +18,33 @@ package tp;
   }
   
  */
-public class Employe extends Personne{
-	
-    private Integer salaire;
-    
-    //constructeur par défaut:
-    public Employe() {
-		super();
-		this.salaire = 0;
-	}
 
+public class Employe extends Personne {
 	
+	private Integer salaire;
+	
+	
+	
+
+	public Employe() {
+		super();//appel du constructeur par défaut (avec 0 param) de la superclasse Personne
+		this.salaire= 0;
+	}
+	
+	
+  
+    //exemple d'appel :  Employe emp2 = new Employe("didier" , "Defrance" , 53, 2000);
+	public Employe(String prenom, String nom, Integer age , Integer salaire) {
+	   //... à coder en Tp via super(...,...,...) et ...
+	   super(prenom,nom,age);//passage de paramètre au constructeur de la superclasse Personne
+	                         //qui va initialiser les parties héritées .prenom , .nom , .age
+	   this.salaire=salaire; //initialisation du salaire
+	}
+	
+
 	@Override
 	public String toString() {
-		return "Employe [salaire=" + salaire + ", héritant de " + super.toString() + "]";
+		return "Employe [salaire=" + salaire + ", heritant de" + super.toString() + "]";
 	}
 
 
@@ -41,5 +55,8 @@ public class Employe extends Personne{
 	public void setSalaire(Integer salaire) {
 		this.salaire = salaire;
 	}
-    
+	
+	
+	
+
 }
