@@ -18,10 +18,25 @@ public class MyApp {
 		//test_Tableaux();
 		
 		//test_Collection();
-		test_employe();
+		//test_employe();
+		
+		test_bagages();
 		
 		//MyApp myApp = new MyApp();
 		//myApp.test_pas_static();
+	}
+	
+	public static void test_bagages(){
+		Bagage b = null;
+		//b=new Bagage(); //new direct sur Bagage interdit car Bagage est abstract
+		b= new Sac("sac1" , "rouge" , 12.0 , 15.0); //new Sac(label,couleur,poids,volume)
+		System.out.println("b=" + b.toString());
+		System.out.println("volume en litres de b=" + b.getVolume());
+		
+		b= new Valise("valise1" , "bleu" , 32.0 , 10.0  , 20.0 , 30.0); 
+		//new Valise(label,couleur,poids,largeur, hauteur, profondeur)
+		System.out.println("b=" + b.toString());
+		System.out.println("volume en litres de b=" + b.getVolume());
 	}
 	
 	public static void test_employe(){

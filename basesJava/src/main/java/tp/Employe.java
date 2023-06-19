@@ -39,6 +39,7 @@ public class Employe extends Personne {
 	   super(prenom,nom,age);//passage de paramètre au constructeur de la superclasse Personne
 	                         //qui va initialiser les parties héritées .prenom , .nom , .age
 	   this.salaire=salaire; //initialisation du salaire
+	   //this.setNom("toto"); ou bien this.nom ="toto" si .nom en protected dans classe Personne
 	}
 	
 
