@@ -1,8 +1,12 @@
 package tp;
 
+import java.util.Arrays;
+
 import javax.swing.JOptionPane;
 
 public class MyApp {
+	
+	public static final int TAILLE_MAX=24;
 
 	public static void main(String[] args) {
 		System.out.println("Hello world");
@@ -11,7 +15,30 @@ public class MyApp {
 		test_personnes();
 		test_String();
 		test_Adresse();
+		test_Tableaux();
 	}
+	
+	public static void test_Tableaux() {
+		
+		//déclarer une référence sur un tableau de double
+		double tableau[];
+		//créer le tableau d'une taille de 24
+		tableau = new double[TAILLE_MAX];
+		//effectuer une boucle for
+		//et placer en position i la racine carrée de  i : Math.sqrt(i)
+        for(int i=0;i<tableau.length;i++) {
+			tableau[i]=Math.sqrt(i);
+		}	
+		//afficher en boucle toutes les valeurs du tableau
+		for(int i=0;i<tableau.length;i++) {
+			System.out.println(tableau[i]);
+		}
+		//Afficher tout le tableau d'un seul coup:
+		System.out.println(Arrays.toString(tableau));
+		
+	}
+	
+	
 	
 	public static void test_Adresse() {
 		Adresse a1 = new Adresse();
@@ -66,13 +93,19 @@ public class MyApp {
 		System.out.println("nom complet de p1=" + p1.nomComplet()); 
 		System.out.println("p1=" + p1.toString());
 		
-		Personne p2 = new Personne("Axelle" , "Aire" , 45);
+		Personne p2 = new Personne("Axelle" , "Aire" , 19);
 		System.out.println("p2=" + p2.toString());
 		//p2.setPrenom("Axelle");
 		//p2.setNom("Aire"); p2.setAge(35);
 		p2.incrementerAge();
 		System.out.println("nom complet de p2=" + p2.nomComplet()); 
 		System.out.println("p2=" + p2.toString());
+		
+		System.out.println("age majorité=" + Personne.getAgeMajorité());
+		System.out.println("pour p2/19ans , " + p2.majoriteAsString());
+		Personne.setAgeMajorité(21);
+		System.out.println("nouvel age majorité=" + Personne.getAgeMajorité());
+		System.out.println("pour p2/19ans , " + p2.majoriteAsString());
 	}
 	
 	public static void test_types() {
