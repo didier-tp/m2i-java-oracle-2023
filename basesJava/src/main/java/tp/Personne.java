@@ -71,10 +71,12 @@ public class Personne {
 		    // throw new RuntimeException("age invalide");
 	}
 
+	
 	@Override
 	public String toString() {
 		return "Personne [prenom=" + prenom + ", nom=" + nom + ", age=" + age + "]";
 	}
+	
 	
 	public void incrementerAge(){
 		// un an de plus (ça modifie l'age interne de l'objet Personne ,

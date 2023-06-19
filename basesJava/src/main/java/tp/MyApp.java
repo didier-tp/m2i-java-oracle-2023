@@ -17,11 +17,20 @@ public class MyApp {
 		//MyApp.test_Tableaux();
 		//test_Tableaux();
 		
-		test_Collection();
+		//test_Collection();
+		test_employe();
 		
 		//MyApp myApp = new MyApp();
 		//myApp.test_pas_static();
 	}
+	
+	public static void test_employe(){
+		   Employe emp1 = new Employe();
+		   emp1.setPrenom("Prenom1"); emp1.setNom("Nom1");   emp1.setAge(33);
+		   emp1.setSalaire(2000);
+		   emp1.incrementerAge(); //on peut appeler une méthode héritée sans la reprogrammer sur classe Employe
+		   System.out.println("emp1=" + emp1.toString()); //.toString() redéfinie/améliorée sur classe Employe
+     }
 	
 	public static void test_Collection() {
 		/*
