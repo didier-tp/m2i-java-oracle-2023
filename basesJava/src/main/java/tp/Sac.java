@@ -4,15 +4,18 @@ public class Sac extends Bagage {
 	
 	private double volume; //en litres
 	
+	
+	
 	public Sac() {
 		super();
+		this.volume = 10; 
 	}
 
 	public Sac(String label, String couleur, double poids) {
 		super(label, couleur, poids);
 		this.volume = 10 ; //par défaut
 	}
-	
+
 	public Sac(String label, String couleur, double poids, double volume) {
 		super(label, couleur, poids);
 		this.volume = volume;
@@ -30,8 +33,10 @@ public class Sac extends Bagage {
 
 	@Override
 	public String toString() {
-		return "Sac [volume=" + volume + " héritant de " + super.toString() + "]";
+		return "Sac [volume=" + volume + " heritant de " + super.toString() + "]";
 	}
+
+	
 	
 	
 	

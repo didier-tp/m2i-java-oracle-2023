@@ -14,7 +14,7 @@ public class Valise extends Bagage {
 	}
 
 	
-	
+
 	public Valise() {
 		super();
 	}
