@@ -15,7 +15,15 @@ public class MyApp {
 		test_personnes();
 		test_String();
 		test_Adresse();
+		//MyApp.test_Tableaux();
 		test_Tableaux();
+		
+		MyApp myApp = new MyApp();
+		myApp.test_pas_static();
+	}
+	
+	public  void test_pas_static() {
+		System.out.println("test_pas_static appelé par MyApp.main()");
 	}
 	
 	public static void test_Tableaux() {
