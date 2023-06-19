@@ -1,8 +1,7 @@
 package tp;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-
-import javax.swing.JOptionPane;
 
 public class MyApp {
 	
@@ -11,15 +10,51 @@ public class MyApp {
 	public static void main(String[] args) {
 		System.out.println("Hello world");
 		//à lancer sous eclipse avec Run as  / java application
-		test_types();
-		test_personnes();
-		test_String();
-		test_Adresse();
+		//test_types();
+		//test_personnes();
+		//test_String();
+		//test_Adresse();
 		//MyApp.test_Tableaux();
-		test_Tableaux();
+		//test_Tableaux();
 		
-		MyApp myApp = new MyApp();
-		myApp.test_pas_static();
+		test_Collection();
+		
+		//MyApp myApp = new MyApp();
+		//myApp.test_pas_static();
+	}
+	
+	public static void test_Collection() {
+		/*
+		//Avec tableaux rigides à taille fixe:
+		String[] tabJours = new String[7];
+		tabJours[0]="lundi";
+		tabJours[1]="mardi";
+		for(int i=0;i<7;i++) 
+			System.out.println(tabJours[i]);
+		*/
+		
+		//Avec collection:
+		ArrayList<String> listeJours = new ArrayList<String>();
+		listeJours.add("lundi"); listeJours.add("mardi"); 
+		System.out.println("nombre de jours = " + listeJours.size());
+		
+		System.out.println("parcours 1 via for() avec indice i:");
+		for(int i=0;i<listeJours.size();i++) 
+			System.out.print(listeJours.get(i) + " ");
+		
+		System.out.println("\n parcours 2 via for() au sens forEach :");
+		for(String jour : listeJours) 
+			System.out.print(jour + " ");
+		
+		
+		ArrayList<Personne> listePersonnes = new ArrayList<Personne>();
+		
+		listePersonnes.add(new Personne("jean" , "Bon" , 33));
+		listePersonnes.add(new Personne("alex" , "Therieur" , 44));
+		
+		System.out.println("\n liste de personnes de taille=" + listePersonnes.size());
+		for(Personne pers : listePersonnes) 
+			System.out.println("\t" + pers); // "\t" est une tabulation
 	}
 	
 	public  void test_pas_static() {
