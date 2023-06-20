@@ -1,4 +1,4 @@
-package tp;
+package tp.bagages;
 
 public class Valise extends Bagage {
 	

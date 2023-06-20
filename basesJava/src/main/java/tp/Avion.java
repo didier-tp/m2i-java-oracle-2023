@@ -2,6 +2,9 @@ package tp;
 
 import java.util.ArrayList;
 
+import tp.bagages.Bagage;
+import tp.personnes.Personne;
+
 public class Avion {
     private String label; 
     

@@ -3,6 +3,12 @@ package tp;
 import java.util.ArrayList;
 import java.util.Arrays;
 
+import tp.bagages.Bagage;
+import tp.bagages.Sac;
+import tp.bagages.Valise;
+import tp.personnes.Employee;
+import tp.personnes.Personne;
+
 public class MyApp {
 	
 	public static final int TAILLE_MAX=24;
@@ -56,8 +62,8 @@ public class MyApp {
 		a1.addBagage(new Valise("valise2" , "verte" , 32.0 , 20.0  , 40.0 , 30.0));
 		a1.addPersonne(new Personne("luc" , "SkyWalker" , 33));
 		a1.addPersonne(new Personne("passager" , "DuVent" , 23));
-		a1.addPersonne(new Employe("pilote" , "Fou" , 43, 4500 ,"Air_France"));
-		a1.addPersonne(new Employe("hotesse" , "Serieuse" , 43, 2500 , "Air_France"));
+		a1.addPersonne(new Employee("pilote" , "Fou" , 43, 4500 ,"Air_France"));
+		a1.addPersonne(new Employee("hotesse" , "Serieuse" , 43, 2500 , "Air_France"));
 		a1.afficher();
 	}
 	
@@ -75,13 +81,13 @@ public class MyApp {
 	}
 	
 	public static void test_employe(){
-		   Employe emp1 = new Employe();
+		   Employee emp1 = new Employee();
 		   emp1.setPrenom("Prenom1"); emp1.setNom("Nom1");   emp1.setAge(33);
 		   emp1.setSalaire(2000);
 		   emp1.incrementerAge(); //on peut appeler une méthode héritée sans la reprogrammer sur classe Employe
 		   System.out.println("emp1=" + emp1.toString()); //.toString() redéfinie/améliorée sur classe Employe
 		   
-		   Employe emp2 = new Employe("didier" , "Defrance" , 53, 2000);
+		   Employee emp2 = new Employee("didier" , "Defrance" , 53, 2000);
 		   emp2.incrementerAge();
 		   System.out.println("emp2=" + emp2.toString()); 
 		   
@@ -95,8 +101,8 @@ public class MyApp {
 		   System.out.println("p="+p.toString()); //appel de .toString() version Employe
 		   
 		   //p.setSalaire(2500); //impossible puisque certaines personnes n'ont pas de salaire
-		   if(p instanceof Employe) {
-			   Employe pVuCommeEmploye = (Employe) p;
+		   if(p instanceof Employee) {
+			   Employee pVuCommeEmploye = (Employee) p;
 			   pVuCommeEmploye.setSalaire(2500);
 		   }
 		   

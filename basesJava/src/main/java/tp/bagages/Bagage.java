@@ -1,4 +1,12 @@
-package tp;
+package tp.bagages;
+
+import tp.Transportable;
+
+/**
+ * Bagage est une classe abstraite représentant un bagage quelconque (sac ou valide)
+ * 
+ * @author Didier Formateur fou
+ */
 
 public abstract class Bagage /* extends Object */ implements Transportable {
 	protected String label;

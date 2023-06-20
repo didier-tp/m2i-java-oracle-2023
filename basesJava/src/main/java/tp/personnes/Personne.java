@@ -1,4 +1,6 @@
-package tp;
+package tp.personnes;
+
+import tp.Transportable;
 
 public class Personne implements Transportable {
 	

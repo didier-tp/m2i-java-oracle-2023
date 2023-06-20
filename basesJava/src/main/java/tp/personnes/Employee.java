@@ -1,5 +1,4 @@
-package tp;
-
+package tp.personnes;
 
 /*
   la classe Employe va hériter de la classe Personne
@@ -19,7 +18,7 @@ package tp;
   
  */
 
-public class Employe extends Personne {
+public class Employee extends Personne {
 	
 	private Integer salaire;
 	private String employeur;
@@ -27,7 +26,7 @@ public class Employe extends Personne {
 	
 	
 
-	public Employe() {
+	public Employee() {
 		super();//appel du constructeur par défaut (avec 0 param) de la superclasse Personne
 		this.salaire= 0;
 	}
@@ -35,7 +34,7 @@ public class Employe extends Personne {
 	
   
     //exemple d'appel :  Employe emp2 = new Employe("didier" , "Defrance" , 53, 2000);
-	public Employe(String prenom, String nom, Integer age , Integer salaire) {
+	public Employee(String prenom, String nom, Integer age , Integer salaire) {
 	   //... à coder en Tp via super(...,...,...) et ...
 	   super(prenom,nom,age);//passage de paramètre au constructeur de la superclasse Personne
 	                         //qui va initialiser les parties héritées .prenom , .nom , .age
@@ -43,7 +42,7 @@ public class Employe extends Personne {
 	   //this.setNom("toto"); ou bien this.nom ="toto" si .nom en protected dans classe Personne
 	}
 	
-	public Employe(String prenom, String nom, Integer age , Integer salaire, String employeur) {
+	public Employee(String prenom, String nom, Integer age , Integer salaire, String employeur) {
 		super(prenom,nom,age);
 		 this.salaire=salaire; 
 		 this.employeur = employeur;
