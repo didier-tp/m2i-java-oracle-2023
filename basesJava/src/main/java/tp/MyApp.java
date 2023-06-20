@@ -35,8 +35,8 @@ public class MyApp {
 		//aff.afficher("you know what ? i am happy");
 		
 		AfficheurInteractif affInteractif=null;
-		affInteractif = new AfficheurInteractifText();
-		//affInteractif = new AfficheurInteractifDialog();
+		//affInteractif = new AfficheurInteractifText();
+		affInteractif = new AfficheurInteractifDialog();
 		
 		String age = affInteractif.saisirReponse("quel est votre age ?");
 		affInteractif.afficher("votre age est " + age);
