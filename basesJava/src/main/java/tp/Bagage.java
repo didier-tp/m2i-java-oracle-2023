@@ -4,6 +4,7 @@ public abstract class Bagage /* extends Object */{
 	protected String label;
 	protected String couleur;
 	protected double poids;
+	//protected String typeBagage; // "Sac" ou bien "Valise"
 	
 	public abstract double getVolume();
 	

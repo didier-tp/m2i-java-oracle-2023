@@ -12,6 +12,10 @@ public class Valise extends Bagage {
 	                   + this.largeur + "*"  + this.hauteur + "*" +  this.profondeur);*/
 		return (this.largeur * this.hauteur * this.profondeur) / 1000;
 	}
+	
+	public double volumeDeValise() {
+		return (this.largeur * this.hauteur * this.profondeur) / 1000;
+	}
 
 	
 

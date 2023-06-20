@@ -26,6 +26,12 @@ public class Sac extends Bagage {
 		//System.out.println("getVolume() appelé sur un sac de volume=" + this.volume);
 		return this.volume;
 	}
+	
+	public double volumeDeSac() {
+		//System.out.println("getVolume() appelé sur un sac de volume=" + this.volume);
+		return this.volume;
+	}
+	
 
 	public void setVolume(double volume) {
 		this.volume = volume;

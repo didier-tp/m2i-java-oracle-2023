@@ -31,6 +31,11 @@ public class MyApp {
 		Avion a1 = new Avion(); a1.setLabel("avion A320");
 		a1.addBagage(new Sac("sac1" , "rouge" , 12.0 , 15.0));
 		a1.addBagage(new Valise("valise1" , "bleu" , 32.0 , 10.0  , 20.0 , 30.0));
+		a1.addBagage(new Valise("valise2" , "verte" , 32.0 , 20.0  , 40.0 , 30.0));
+		a1.addPersonne(new Personne("luc" , "SkyWalker" , 33));
+		a1.addPersonne(new Personne("passager" , "DuVent" , 23));
+		a1.addPersonne(new Employe("pilote" , "Fou" , 43, 4500));
+		a1.addPersonne(new Employe("hotesse" , "Serieuse" , 43, 2500));
 		a1.afficher();
 	}
 	
