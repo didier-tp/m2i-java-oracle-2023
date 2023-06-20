@@ -11,8 +11,10 @@ public class Calcul {
 	}
 	
 	public int division(int a,int b) {
-		//....
-		return a/b;
+		if(b==0)
+			throw new IllegalArgumentException("division par zéro interdite");
+		else 
+		    return a/b;
 	}
 
 }
