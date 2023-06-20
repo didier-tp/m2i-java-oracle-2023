@@ -40,9 +40,13 @@ public class MyApp {
 		
 		String age = affInteractif.saisirReponse("quel est votre age ?");
 		affInteractif.afficher("votre age est " + age);
+		/*
+		String prenom = affInteractif.saisirReponse("quel est votre prenom ?");
+		affInteractif.afficher("votre prenom est " + prenom);
 		
 		String nom = affInteractif.saisirReponse("quel est votre nom ?");
 		affInteractif.afficher("votre nom est " + nom);
+		*/
 	}
 	
 	public static void test_avion() {
