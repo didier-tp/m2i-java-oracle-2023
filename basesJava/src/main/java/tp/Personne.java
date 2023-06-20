@@ -1,6 +1,6 @@
 package tp;
 
-public class Personne {
+public class Personne implements Transportable {
 	
 	//déclarer une constante AGE_MAXI pour les personnes avec la valeur 150 
 	//et l'utiliser dans la méthode setAge()
@@ -99,6 +99,22 @@ public class Personne {
 		 // retourner la concaténation de prenom et du nom
 		 //valeur de retour de type String
 	}
+
+	private static final double POIDS_MOYEN = 70.0;
+	private static final double VOLUME_MOYEN = 70.0;
+	
+	@Override
+	public double getPoids() {
+			return POIDS_MOYEN;
+	}
+
+	@Override
+	public double getVolume() {
+		return VOLUME_MOYEN;
+	}
+
+	
+
 	
 	
 

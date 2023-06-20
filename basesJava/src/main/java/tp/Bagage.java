@@ -1,6 +1,6 @@
 package tp;
 
-public abstract class Bagage /* extends Object */{
+public abstract class Bagage /* extends Object */ implements Transportable {
 	protected String label;
 	protected String couleur;
 	protected double poids;

@@ -27,6 +27,11 @@ public class Avion {
     	for(Bagage b : this.bagages) {
     		poidsTotal += b.getPoids();
     	}
+    	//ajouter le poids (moyen ou précis) de toutes les personnes:
+    	for(Transportable personneTansportable : this.personnes) {
+    		poidsTotal += personneTansportable.getPoids();
+    	}
+    	
     	return poidsTotal;
     }
     
@@ -53,6 +58,8 @@ public class Avion {
     	System.out.println("personnes: ");
     	for(Personne p : this.personnes) {
     		System.out.println("\t" + p.toString() + " employeur=" + p.getEmployeur());
+    		//Transportable t = p;
+    		//System.out.println("\t poids de la personne transportable = " + t.getPoids());
     	}
     }
 
