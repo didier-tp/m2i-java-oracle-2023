@@ -63,6 +63,10 @@ public class Personne {
 	public Integer getAge() {
 		return age;
 	}
+	
+	public String getEmployeur() {
+		return null;
+	}
 
 	public void setAge(Integer age) {
 		if(age >=0 && age <= AGE_MAXI)

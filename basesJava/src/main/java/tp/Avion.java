@@ -52,7 +52,7 @@ public class Avion {
     	
     	System.out.println("personnes: ");
     	for(Personne p : this.personnes) {
-    		System.out.println("\t" + p.toString());
+    		System.out.println("\t" + p.toString() + " employeur=" + p.getEmployeur());
     	}
     }
 
