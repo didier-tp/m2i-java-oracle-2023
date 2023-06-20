@@ -21,10 +21,28 @@ public class MyApp {
 		//test_employe();
 		
 		//test_bagages();
-		test_avion();
+		//test_avion();
+		test_afficheur();
 		
 		//MyApp myApp = new MyApp();
 		//myApp.test_pas_static();
+	}
+	
+	public static void test_afficheur() {
+		Afficheur aff = null;
+		//aff = new AfficheurText();
+		aff = new AfficheurDialog();
+		//aff.afficher("you know what ? i am happy");
+		
+		AfficheurInteractif affInteractif=null;
+		affInteractif = new AfficheurInteractifText();
+		//affInteractif = new AfficheurInteractifDialog();
+		
+		String age = affInteractif.saisirReponse("quel est votre age ?");
+		affInteractif.afficher("votre age est " + age);
+		
+		String nom = affInteractif.saisirReponse("quel est votre nom ?");
+		affInteractif.afficher("votre nom est " + nom);
 	}
 	
 	public static void test_avion() {
