@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -107,6 +108,13 @@ public class Catalogue {
 	
 	public void afficher() {
 		System.out.println("ventes:");
+		
+		//en Tp: on va trier la liste des ventes par chiffre d'affaire croissant (ou décreoissant)
+		//ou par ordre de domaine croissant
+		
+		//appeler Collections.sort(listeAtrier,comparateurQuiVaBien); selon exemple page 75
+		Collections.sort(this.listeVentes,new ComparateurDeVente());
+		
 		for(Vente v : this.listeVentes) {
 			System.out.println("\t" + v); //v.toString() implicite
 		}
