@@ -107,14 +107,28 @@ public class Catalogue {
 	}
 	
 	public void afficher() {
-		System.out.println("ventes:");
+		//appeler Collections.sort(listeAtrier,comparateurQuiVaBien); 
+		//Collections.sort(this.listeVentes,new ComparateurDeVente()); //compare par domaine croissant
+		Collections.sort(this.listeVentes, new 
+				/* classe anonyme imbriquée qui de manière sous entendue implémente */
+				java.util.Comparator<Vente>() {
+					public int compare(Vente o1, Vente o2) {
+						return (int) (o1.getCa() - o2.getCa());
+					}
+		});
+		System.out.println("ventes par ca croissants:");
+		for(Vente v : this.listeVentes) {
+			System.out.println("\t" + v); //v.toString() implicite
+		}
 		
-		//en Tp: on va trier la liste des ventes par chiffre d'affaire croissant (ou décreoissant)
-		//ou par ordre de domaine croissant
-		
-		//appeler Collections.sort(listeAtrier,comparateurQuiVaBien); selon exemple page 75
-		Collections.sort(this.listeVentes,new ComparateurDeVente());
-		
+		Collections.sort(this.listeVentes, new 
+				/* classe anonyme imbriquée qui de manière sous entendue implémente */
+				java.util.Comparator<Vente>() {
+					public int compare(Vente o1, Vente o2) {
+						return o1.getDomaine().compareToIgnoreCase(o2.getDomaine());
+					}
+		});
+		System.out.println("ventes par domaines croissants:");
 		for(Vente v : this.listeVentes) {
 			System.out.println("\t" + v); //v.toString() implicite
 		}
