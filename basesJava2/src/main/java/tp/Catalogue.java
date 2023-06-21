@@ -2,22 +2,22 @@ package tp;
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 public class Catalogue {
 
 	private List<Vente> listeVentes = new ArrayList<>();
 
-	public void lireFichierVentes(String fileName) {
+	public void lireFichierVentesV1(String fileName) {
+		BufferedReader br = null;
 		try {
-			FileInputStream fis = new FileInputStream(fileName);
-			BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+			br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)));
 			br.readLine();// lecture de la première ligne du fichier .csv avec titres colonnes
 			String ligne = br.readLine();
 			while (ligne != null) {
@@ -29,11 +29,78 @@ public class Catalogue {
 				this.listeVentes.add(vente);
 				ligne = br.readLine();
 			}
-			br.close();
-			fis.close();
 		} catch (IOException e) {
 			e.printStackTrace();
+		} finally {
+			try {
+				br.close();
+			} catch (IOException e) {
+			    //pas grave , rien à dire	
+			}
 		}
+	}
+	
+	public void lireFichierVentes(String fileName) {
+		try(BufferedReader br = new BufferedReader(new InputStreamReader(new FileInputStream(fileName)))) {
+			br.readLine();// lecture de la première ligne du fichier .csv avec titres colonnes
+			String ligne = br.readLine();
+			while (ligne != null) {
+				String[] t = ligne.split(";");
+				//new Vente(domaineAsString, moisAsInt, caAsLong)
+				Vente vente = new Vente(t[0], 
+						                Integer.parseInt(t[1]), 
+						                Long.parseLong(t[2]));
+				this.listeVentes.add(vente);
+				ligne = br.readLine();
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		} //finally et br.close() automatique car try() avec parenthèses , try with resources
+		  //et BufferedReader implémente AutoClosable
+	}
+	
+	public void lireFichierVentesV2a(String fileName) {
+		Scanner sc = null;
+		try {
+			sc = new Scanner(new FileInputStream(fileName));
+			sc.nextLine();// lecture de la première ligne du fichier .csv avec titres colonnes
+			String ligne = sc.nextLine();
+			while (ligne != null) {
+				String[] t = ligne.split(";");
+				//new Vente(domaineAsString, moisAsInt, caAsLong)
+				Vente vente = new Vente(t[0], 
+						                Integer.parseInt(t[1]), 
+						                Long.parseLong(t[2]));
+				this.listeVentes.add(vente);
+				ligne = sc.hasNextLine()?sc.nextLine():null;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if(sc!=null)
+			   sc.close();
+		}
+	}
+	
+	//V3 avec try with resources
+	public void lireFichierVentesV3a(String fileName) {
+		try( Scanner sc = new Scanner(new FileInputStream(fileName)) ) {
+			sc.nextLine();// lecture de la première ligne du fichier .csv avec titres colonnes
+			String ligne = sc.nextLine();
+			while (ligne != null) {
+				String[] t = ligne.split(";");
+				//new Vente(domaineAsString, moisAsInt, caAsLong)
+				Vente vente = new Vente(t[0], 
+						                Integer.parseInt(t[1]), 
+						                Long.parseLong(t[2]));
+				this.listeVentes.add(vente);
+				ligne = sc.hasNextLine()?sc.nextLine():null;
+			}
+			
+		} catch (IOException e) {
+			e.printStackTrace();
+		} //finally/close automatique
 	}
 	
 	public void afficher() {
@@ -44,7 +111,6 @@ public class Catalogue {
 	}
 
 	public void ecrireFichierStats(String fileName) {
-
 		long ca_total = 0;
 		// parcourir listeVentes et calculer ca_total
 		for(Vente v:this.listeVentes) {
@@ -54,8 +120,8 @@ public class Catalogue {
 		try {
 			PrintStream ps=new PrintStream(new FileOutputStream(fileName));
 			ps.println("domaine;ca_total");
-			ps.println("all;" + ca_total);
-			//ps.printf("%s;%d", "all" , ca_total);
+			//ps.println("all;" + ca_total);
+			ps.printf("%s;%d\n", "all" , ca_total);
 			ps.close();
 		} catch (IOException e) {
 			e.printStackTrace();
