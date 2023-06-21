@@ -55,6 +55,7 @@ public class Catalogue {
 			PrintStream ps=new PrintStream(new FileOutputStream(fileName));
 			ps.println("domaine;ca_total");
 			ps.println("all;" + ca_total);
+			//ps.printf("%s;%d", "all" , ca_total);
 			ps.close();
 		} catch (IOException e) {
 			e.printStackTrace();
