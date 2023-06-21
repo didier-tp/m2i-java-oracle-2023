@@ -1,2 +1,5 @@
 domaine;ca_total
-all;617652
+all;79000
+nourriture;20000
+audiovisuel;9000
+papeterie;50000

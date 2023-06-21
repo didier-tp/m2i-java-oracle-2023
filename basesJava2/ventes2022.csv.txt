@@ -1,7 +1,7 @@
 domaine;mois;ca
-papeterie;1;234566
-audiovisuel;1;44566
-nourriture;1;4444
-papeterie;2;284566
-audiovisuel;2;44566
-nourriture;2;4944
+papeterie;1;20000
+audiovisuel;1;5000
+nourriture;1;12000
+papeterie;2;30000
+audiovisuel;2;4000
+nourriture;2;8000

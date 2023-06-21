@@ -7,7 +7,9 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 public class Catalogue {
@@ -116,12 +118,33 @@ public class Catalogue {
 		for(Vente v:this.listeVentes) {
 			ca_total += v.getCa();
 		}
+		
+		
+		Map<String,List<Vente>> mapVentesParDomaine = new HashMap<>();
+		for(Vente v:this.listeVentes) {
+			String domaine = v.getDomaine();
+			List<Vente> sousListe = mapVentesParDomaine.get(domaine);
+			if(sousListe == null) {
+				sousListe = new ArrayList<Vente>();
+				mapVentesParDomaine.put(domaine, sousListe);
+			}
+			sousListe.add(v);
+		}
+		
 		// ecrire le fichier de stats (voir page 114)
 		try {
 			PrintStream ps=new PrintStream(new FileOutputStream(fileName));
 			ps.println("domaine;ca_total");
 			//ps.println("all;" + ca_total);
 			ps.printf("%s;%d\n", "all" , ca_total);
+			for(String domaine : mapVentesParDomaine.keySet()) {
+				List<Vente> sousListe = mapVentesParDomaine.get(domaine);
+				long sous_total_ca_par_domaine = 0;
+				for(Vente v : sousListe) {
+					sous_total_ca_par_domaine += v.getCa();
+				}
+				ps.printf("%s;%d\n", domaine , sous_total_ca_par_domaine);
+			}
 			ps.close();
 		} catch (IOException e) {
 			e.printStackTrace();
