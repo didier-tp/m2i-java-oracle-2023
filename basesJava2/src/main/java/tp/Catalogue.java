@@ -12,6 +12,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.stream.Collectors;
 
 public class Catalogue {
 
@@ -106,7 +107,8 @@ public class Catalogue {
 		} //finally/close automatique
 	}
 	
-	public void afficher() {
+	//Version sans lambda expression
+	public void afficherV1() {
 		//appeler Collections.sort(listeAtrier,comparateurQuiVaBien); 
 		//Collections.sort(this.listeVentes,new ComparateurDeVente()); //compare par domaine croissant
 		Collections.sort(this.listeVentes, new 
@@ -133,6 +135,78 @@ public class Catalogue {
 			System.out.println("\t" + v); //v.toString() implicite
 		}
 	}
+	
+	//avec lambda expression
+	public void afficherV2() {
+		//appeler Collections.sort(listeAtrier,comparateurQuiVaBien); 
+		//Collections.sort(this.listeVentes,new ComparateurDeVente()); //compare par domaine croissant
+		
+		//Collections.sort(this.listeVentes, 
+		//		        (Vente o1, Vente o2) -> { return (int) (o1.getCa() - o2.getCa()); }  );
+		
+		//Collections.sort(this.listeVentes, 
+		 //                (o1, o2) -> { return (int) (o1.getCa() - o2.getCa()); }  );
+		
+		//si une seule instruction de type { return expression; }
+		//on peut ne pas écrire les { } et ne pas écrire return ... ; (c'est automatique/implicite)
+		Collections.sort(this.listeVentes, (o1, o2) ->  (int) (o1.getCa() - o2.getCa())  );
+		
+		System.out.println("ventes par ca croissants:");
+		for(Vente v : this.listeVentes) {
+			System.out.println("\t" + v); //v.toString() implicite
+		}
+		
+		Collections.sort(this.listeVentes,
+				       (Vente o1, Vente o2) -> {
+						    return o1.getDomaine().compareToIgnoreCase(o2.getDomaine());
+					        });
+		System.out.println("ventes par domaines croissants:");
+		for(Vente v : this.listeVentes) {
+			System.out.println("\t" + v); //v.toString() implicite
+		}
+	}
+	
+	//avec streams
+	public void afficher() {
+		System.out.println("ventes:");
+		
+		//this.listeVentes.stream()
+		//               .forEach( (v)-> { System.out.println("\t" + v); }   );
+		
+		/*
+		this.listeVentes.stream()
+		                .sorted( (o1, o2) ->  (int) (o1.getCa() - o2.getCa()) )
+		                .forEach( (v)-> { System.out.println("\t" + v); }   );
+		*/
+		
+		/*
+		List<Vente> listeVentesTriesParCa = 
+		this.listeVentes.stream()
+                        .sorted( (o1, o2) ->  (int) (o1.getCa() - o2.getCa()) )
+                        .collect(Collectors.toList());
+		*/
+		List<Vente> listeVentesTriesParCa = 
+				this.listeVentes.stream()
+				                .filter( (v) -> v.getDomaine().equalsIgnoreCase("papeterie") )
+		                        .sorted( (v1, v2) ->  (int) (v1.getCa() - v2.getCa()) )
+		                        //.map(v -> { v.setDomaine(v.getDomaine().toUpperCase()); return v;} ) /MOINS BIEN
+		                        .map( v -> new Vente(v.getDomaine().toUpperCase() , v.getMois() , v.getCa()))
+		                        //.collect(Collectors.toList());
+		                        .toList(); //depuis v15 environ 
+		
+		
+		System.out.println("liste d'origine =");
+		for(Vente v : this.listeVentes) {
+			System.out.println("\t" + v); 
+		}
+		
+		System.out.println("liste transformée par enchainement de fonctions =");
+		for(Vente v : listeVentesTriesParCa) {
+			System.out.println("\t" + v); 
+		}
+			
+	}
+	
 
 	public void ecrireFichierStats(String fileName) {
 		long ca_total = 0;
