@@ -2,6 +2,8 @@ package tp.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.List;
@@ -30,23 +32,42 @@ public class PersonneDaoJdbc implements PersonneDAO {
 		} 
 		return cn;
 	}
+	
+	Integer recupValeurAutoIncrPk(PreparedStatement pst){
+		Integer  pk=null;
+		try {
+		  ResultSet rsKeys = pst.getGeneratedKeys();
+		if(rsKeys.next()){ pk= rsKeys.getInt(1); }
+		} catch (SQLException e) { e.printStackTrace(); }
+		  return pk;
+	}
 
 	@Override
 	public Personne createPersonne(Personne p) {
 		
 		try( Connection cn = this.etablirConnexion() ) {
+			/*
 			Statement st = cn.createStatement();
 			String reqSql = "INSERT INTO personne(prenom,nom) VALUES(' " 
 			                  + p.getPrenom() + "' , '" + p.getNom() + "')" ;
 			int nbLignesAffectees = st.executeUpdate(reqSql);
-			System.out.println("nb lignes inserees : " + nbLignesAffectees);
+			*/
+			PreparedStatement st = 
+					cn.prepareStatement("INSERT INTO personne(prenom,nom) VALUES(?,?)",
+							            Statement.RETURN_GENERATED_KEYS);
+			st.setString(1, p.getPrenom()); //premier ? remplacé par la valeur du prenom
+			st.setString(2, p.getNom()); //deuxième ? remplacé par la valeur du nom
+			int nbLignesAffectees = st.executeUpdate();
+			Integer idAutoIncremente = recupValeurAutoIncrPk(st);
+			p.setId(idAutoIncremente);
+			//System.out.println("nb lignes inserees : " + nbLignesAffectees);
 			st.close();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		//finally/close automatique avec try(with_resource_autocloasable) 
 		
-		return p; //code temporaire (à améliorer)
+		return p; //on retourne p avec la clef primaire auto incrémentée
 	}
 
 	@Override

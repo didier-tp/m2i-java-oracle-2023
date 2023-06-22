@@ -11,12 +11,23 @@ public class MyApp {
 
 	public static void main(String[] args) {
 		//testCrud();
-		testConnectionJdbc();
+		//testConnectionJdbc();
+		testCrudJdbc();
 	}
 	
 	public static void testConnectionJdbc() {
 		PersonneDaoJdbc personneDaoJdbc = new PersonneDaoJdbc();
 		System.out.println("connexion etablie=" + personneDaoJdbc.etablirConnexion());
+	}
+	
+	public static void testCrudJdbc() {
+	
+        PersonneDAO personneDAO = new PersonneDaoJdbc();
+		
+		//créer quelques personnes
+		Personne p1 = new Personne(null,"alex" , "Therieur");//id encore inconnu
+		Personne savedP1 = personneDAO.createPersonne(p1); //on demande à sauvegarder l'objet en base
+		System.out.println("savedP1=" + savedP1.toString());
 	}
 	
 	public static void testCrud() {
