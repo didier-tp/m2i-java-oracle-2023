@@ -1,5 +1,6 @@
 package tp;
 
+import java.lang.reflect.Field;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,8 +18,22 @@ public class MyApp {
 		//testConnectionJdbc();
 		//testCrudJdbc();
 		//testEnum();
-		testDate();
+		//testDate();
+		testIntrospection() ;
 	}
+	
+	public static void testIntrospection() {
+		try {
+			Class<?> c = Class.forName("tp.entity.Personne");
+			Field[] fields  = c.getDeclaredFields();
+			System.out.println("liste attributs:");
+			for(Field f : fields) {
+				System.out.println("\t" + f.getName() + " de type=" + f.getType().getSimpleName());
+			}
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    }
 	
 	public static void testDate() {
 		Date date = new Date(); //en version java.util
