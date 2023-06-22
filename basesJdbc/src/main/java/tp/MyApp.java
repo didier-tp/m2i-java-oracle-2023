@@ -1,5 +1,8 @@
 package tp;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import tp.dao.PersonneDAO;
@@ -12,7 +15,48 @@ public class MyApp {
 	public static void main(String[] args) {
 		//testCrud();
 		//testConnectionJdbc();
-		testCrudJdbc();
+		//testCrudJdbc();
+		//testEnum();
+		testDate();
+	}
+	
+	public static void testDate() {
+		Date date = new Date(); //en version java.util
+		System.out.println("date (aujourd'hui)=" + date);
+		//en exercice : avec SimpleDateFormat (page 106)
+		//afficher la date au format international "2023-06-22" 
+		//et au format francais "22/06/2023"
+		SimpleDateFormat dateFormatUs = new SimpleDateFormat("yyyy-MM-dd");
+		SimpleDateFormat dateFormatFr = new SimpleDateFormat("dd/MM/yyyy");
+		System.out.println("today (us): " + dateFormatUs.format(date) );
+		System.out.println("aujourdhui (fr): " + dateFormatFr.format(date) );
+		
+		//dans le sens inverse :
+		String dateOnAmarcheSurLaLune_fr = "21/07/1969";
+		try {
+			Date dateOnAmarcheSurLaLune = dateFormatFr.parse(dateOnAmarcheSurLaLune_fr);
+			System.out.println("first step on  moon (us): " + dateFormatUs.format(dateOnAmarcheSurLaLune) );
+		} catch (ParseException e) {
+				e.printStackTrace();
+		}
+		
+	}
+	
+	
+	public static void testEnum() {
+		Personne p1 = new Personne(null,"alex" , "Therieur");
+		//V1 (de type String) : on ne contrôle pas trop les valeurs possibles:
+		//p1.setNationalite("francais"); //ou bien "francaise" ou bien "french" ou bien "martien"
+		
+		System.out.println("nationalité par défaut de p1 = " + p1.getNationalite());
+		
+		//V2 (de type enum Nationalite):
+		//p1.setNationalite(Personne.Nationalite.FRANCAIS);
+		
+		
+		p1.setNationalite(Personne.Nationalite.ANGLAIS);
+		
+		System.out.println("nationalité de p1 = " + p1.getNationalite());
 	}
 	
 	public static void testConnectionJdbc() {
