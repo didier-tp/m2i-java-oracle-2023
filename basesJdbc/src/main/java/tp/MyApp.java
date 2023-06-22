@@ -28,6 +28,13 @@ public class MyApp {
 		Personne p1 = new Personne(null,"alex" , "Therieur");//id encore inconnu
 		Personne savedP1 = personneDAO.createPersonne(p1); //on demande à sauvegarder l'objet en base
 		System.out.println("savedP1=" + savedP1.toString());
+		
+		//recherche liste personnes pour vérifier:
+		List<Personne> personnes = personneDAO.rechercherToutesPersonnes();
+		System.out.println("personnes:");
+		for(Personne p : personnes) {
+			System.out.println(("\t" + p));
+		}
 	}
 	
 	public static void testCrud() {

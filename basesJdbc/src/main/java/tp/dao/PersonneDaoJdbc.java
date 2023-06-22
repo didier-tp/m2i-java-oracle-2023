@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -78,8 +79,25 @@ public class PersonneDaoJdbc implements PersonneDAO {
 
 	@Override
 	public List<Personne> rechercherToutesPersonnes() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Personne> listePersonnes = new ArrayList<>();
+		try( Connection cn = this.etablirConnexion() ) {
+			Statement st = cn.createStatement();
+			String reqSql = "SELECT * FROM personne";
+			ResultSet rs = st.executeQuery(reqSql);
+			while(rs.next()){
+				Integer id = rs.getInt("id");
+				String nom = rs.getString("nom"); // récupérer la valeur de la colonne "nom"
+				String prenom = rs.getString("prenom");
+				Personne p = new Personne(id,prenom,nom);
+				listePersonnes.add(p);
+			}
+			rs.close();
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	    //finally/close automatique avec try(with_resource_autocloasable) 
+		return listePersonnes;
 	}
 
 	@Override
