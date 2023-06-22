@@ -3,13 +3,20 @@ package tp;
 import java.util.List;
 
 import tp.dao.PersonneDAO;
+import tp.dao.PersonneDaoJdbc;
 import tp.dao.PersonneDaoSimu;
 import tp.entity.Personne;
 
 public class MyApp {
 
 	public static void main(String[] args) {
-		testCrud();
+		//testCrud();
+		testConnectionJdbc();
+	}
+	
+	public static void testConnectionJdbc() {
+		PersonneDaoJdbc personneDaoJdbc = new PersonneDaoJdbc();
+		System.out.println("connexion etablie=" + personneDaoJdbc.etablirConnexion());
 	}
 	
 	public static void testCrud() {

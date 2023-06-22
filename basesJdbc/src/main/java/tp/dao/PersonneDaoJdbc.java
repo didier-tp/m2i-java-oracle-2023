@@ -3,6 +3,7 @@ package tp.dao;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -32,8 +33,20 @@ public class PersonneDaoJdbc implements PersonneDAO {
 
 	@Override
 	public Personne createPersonne(Personne p) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		try( Connection cn = this.etablirConnexion() ) {
+			Statement st = cn.createStatement();
+			String reqSql = "INSERT INTO personne(prenom,nom) VALUES(' " 
+			                  + p.getPrenom() + "' , '" + p.getNom() + "')" ;
+			int nbLignesAffectees = st.executeUpdate(reqSql);
+			System.out.println("nb lignes inserees : " + nbLignesAffectees);
+			st.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		//finally/close automatique avec try(with_resource_autocloasable) 
+		
+		return p; //code temporaire (à améliorer)
 	}
 
 	@Override
