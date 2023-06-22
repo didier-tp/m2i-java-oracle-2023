@@ -19,7 +19,8 @@ public class MyApp {
 		//testCrudJdbc();
 		//testEnum();
 		//testDate();
-		testIntrospection() ;
+		//testIntrospection() ;
+		testIntrospection2() ;
 	}
 	
 	public static void testIntrospection() {
@@ -31,6 +32,23 @@ public class MyApp {
 				System.out.println("\t" + f.getName() + " de type=" + f.getType().getSimpleName());
 			}
 		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
+    }
+	
+	public static void testIntrospection2() {
+		try {
+			Personne p1 = new Personne(1,"alex" , "Therieur");
+			Class<?> c = p1.getClass();
+			Field[] fields  = c.getDeclaredFields();
+			System.out.println("liste attributs:");
+			for(Field f : fields) {
+				f.setAccessible(true);//pour acceder au attributs privés
+				String fieldValue= f.get(p1)==null?null:f.get(p1).toString();
+				System.out.println("\t" + f.getName() + " de type=" + f.getType().getSimpleName() 
+						           + " de valeur " + fieldValue);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
     }
