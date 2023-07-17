@@ -1,7 +1,7 @@
 package com.inetum.mbean;
 
-import jakarta.annotation.ManagedBean;
-import jakarta.enterprise.context.RequestScoped;
+import jakarta.faces.bean.ManagedBean;
+import jakarta.faces.bean.RequestScoped;
 
 @ManagedBean
 @RequestScoped
