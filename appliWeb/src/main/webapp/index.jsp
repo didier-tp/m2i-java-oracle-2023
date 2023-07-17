@@ -7,6 +7,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-    ok , index.jsp 
+    <h2>ok , index.jsp </h2>
+    <a href="CalculServlet">CalculServlet</a> <br/>
 </body>
 </html>
