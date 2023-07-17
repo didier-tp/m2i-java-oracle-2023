@@ -1,12 +1,18 @@
 package tp.entity;
 
 public class Personne {
+	public enum Nationalite { FRANCAIS , ANGLAIS , ALLEMAND, ESPAGNOL , ITALIEN };
+	
 	private  Integer id; //pk/id (pk=primary key)
 	private  String prenom;
 	private  String nom;
 	
+	private Nationalite nationalite; //V2 avec enum
+	//private String nationalite; //V1 avec String , V2 avec enum
+	                            //avec get/set avec Nationalité
 	public Personne() {
 		super();
+		this.nationalite = Nationalite.FRANCAIS;
 	}
 
 	public Personne(Integer id, String prenom, String nom) {
@@ -14,6 +20,7 @@ public class Personne {
 		this.id = id;
 		this.prenom = prenom;
 		this.nom = nom;
+		this.nationalite = Nationalite.FRANCAIS;
 	}
 
 	@Override
@@ -39,6 +46,16 @@ public class Personne {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	public Nationalite getNationalite() {
+		return nationalite;
+	}
+
+	public void setNationalite(Nationalite nationalite) {
+		this.nationalite = nationalite;
+	}
+
+	
 	
 	
 	
