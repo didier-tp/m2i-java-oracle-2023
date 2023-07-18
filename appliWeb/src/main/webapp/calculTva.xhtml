@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/common.xhtml">
+	
+	<ui:define name="content">
+	    <h:messages /> <!--  affiche eventuels messages d'erreurs -->
+   		<hr/>
+   		<h:form>
+       		 <label>ht:</label> <h:inputText value="#{calculTva.ht}" /> <br/>
+       		   <label>tauxTva:</label> 
+       		    <!--<h:inputText value="#{calculTva.tauxTva}" />% -->
+       		    <h:selectOneMenu value="#{calculTva.tauxTva}">
+       		        <f:selectItem itemValue="0.0" itemLabel="0% (exonéré)"/>
+					<f:selectItem itemValue="5.0" itemLabel="5%"/>
+					<f:selectItem itemValue="10.0" itemLabel="10%"/>
+					<f:selectItem itemValue="20.0" itemLabel="20% (normal)"/>
+				</h:selectOneMenu>
+       		    <br/>
+       		 <h:commandButton  value="calculer tva et ttc" action="#{calculTva.calculerTvaEtTtc}"/>
+       </h:form>
+       <hr/>
+       tva:  <h:outputText value="#{calculTva.tva}" /> <br/>
+       ttc:  <h:outputText value="#{calculTva.ttc}" /> <br/>
+	</ui:define>
+	
+</ui:composition>
+</html>
