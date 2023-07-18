@@ -1,5 +1,9 @@
 @charset "UTF-8";
 
-error {
+.error {
 	color: red;
+}
+
+.footer{
+	background-color:rgb(64, 0, 128);width:100%;color:white
 }
