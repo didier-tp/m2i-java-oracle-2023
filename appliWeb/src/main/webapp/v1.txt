@@ -1,4 +1,11 @@
+ v1: avec bouton
  <!-- 
        		 <h:commandButton  value="selectionner categorie" 
        		                   action="#{produitMBean.selectionnerCategorie}"/>
        		     -->
+       		     
+       		     
+V2 sans bouton et sans ajax : onchange="submit()"
+
+v3 avec ajax
+       		     

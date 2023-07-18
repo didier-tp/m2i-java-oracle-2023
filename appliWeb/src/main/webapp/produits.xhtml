@@ -15,10 +15,11 @@
    		<hr/>
    		<h:form>
        		 <label>categorie:</label>
-       		 <h:selectOneMenu value="#{produitMBean.categorie}" onchange="submit()"
+       		 <h:selectOneMenu value="#{produitMBean.categorie}" 
        		    valueChangeListener="#{produitMBean.onSelectionnerCategorie}">
        		    <f:selectItems value="#{produitMBean.categoriesSelectionnables}"
        		                   var="c" itemValue="#{c}" itemLabel="#{c}"/>
+       		        <f:ajax event="change" render="tableau" />
        		 </h:selectOneMenu>
        		 <br/>
        		
@@ -27,7 +28,7 @@
        **<br/>**<br/>**<br/>
        **<br/>**<br/>**<br/>
        <hr/>
-       <h:dataTable value="#{produitMBean.produits}" var="p"
+       <h:dataTable id="tableau" value="#{produitMBean.produits}" var="p"
                     border="1">
            <h:column>
                <f:facet name="header">

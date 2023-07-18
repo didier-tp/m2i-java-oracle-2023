@@ -44,7 +44,6 @@ public class ProduitMBean {
 	
 	//pour variante sans bouton de déclenchement:
 	public void onSelectionnerCategorie(ValueChangeEvent event) {
-		    //System.out.println("onSelectionnerCategorie appelee ...");
 		    this.categorie = (String) event.getNewValue();
 			this.produits = mapCategorieProduits.get(categorie);
 	}
