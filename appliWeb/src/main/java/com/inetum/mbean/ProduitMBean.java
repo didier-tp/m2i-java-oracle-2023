@@ -65,6 +65,14 @@ public class ProduitMBean {
 	public void setCategorie(String categorie) {
 		this.categorie = categorie;
 	}
+
+	public List<String> getCategoriesSelectionnables() {
+		return categoriesSelectionnables;
+	}
+
+	public void setCategoriesSelectionnables(List<String> categoriesSelectionnables) {
+		this.categoriesSelectionnables = categoriesSelectionnables;
+	}
 	
 	
 

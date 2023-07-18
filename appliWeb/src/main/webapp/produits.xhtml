@@ -14,8 +14,14 @@
 	    <h:messages /> <!--  affiche eventuels messages d'erreurs -->
    		<hr/>
    		<h:form>
-       		 <label>categorie:</label> ... <br/>
-       		 
+       		 <label>categorie:</label>
+       		 <h:selectOneMenu value="#{produitMBean.categorie}">
+       		    <f:selectItems value="#{produitMBean.categoriesSelectionnables}"
+       		                   var="c" itemValue="#{c}" itemLabel="#{c}"/>
+       		 </h:selectOneMenu>
+       		 <br/>
+       		 <h:commandButton  value="selectionner categorie" 
+       		                   action="#{produitMBean.selectionnerCategorie}"/>
        </h:form>
        <hr/>
        <h:dataTable value="#{produitMBean.produits}" var="p"
