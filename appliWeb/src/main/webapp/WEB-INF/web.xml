@@ -12,6 +12,12 @@
 		<param-name>facelets.DEVELOPMENT</param-name>
 		<param-value>true</param-value>
 	</context-param>
+	
+	<error-page>
+		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<location>/index.jsp</location>
+		<!-- ou vers /welcome.jsf ou … -->
+	</error-page>
 
 
 </web-app>
