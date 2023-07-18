@@ -15,14 +15,17 @@
    		<hr/>
    		<h:form>
        		 <label>categorie:</label>
-       		 <h:selectOneMenu value="#{produitMBean.categorie}">
+       		 <h:selectOneMenu value="#{produitMBean.categorie}" onchange="submit()"
+       		    valueChangeListener="#{produitMBean.onSelectionnerCategorie}">
        		    <f:selectItems value="#{produitMBean.categoriesSelectionnables}"
        		                   var="c" itemValue="#{c}" itemLabel="#{c}"/>
        		 </h:selectOneMenu>
        		 <br/>
-       		 <h:commandButton  value="selectionner categorie" 
-       		                   action="#{produitMBean.selectionnerCategorie}"/>
+       		
        </h:form>
+       **<br/>**<br/>**<br/>
+       **<br/>**<br/>**<br/>
+       **<br/>**<br/>**<br/>
        <hr/>
        <h:dataTable value="#{produitMBean.produits}" var="p"
                     border="1">

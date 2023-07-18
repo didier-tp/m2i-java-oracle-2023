@@ -1,0 +1,4 @@
+ <!-- 
+       		 <h:commandButton  value="selectionner categorie" 
+       		                   action="#{produitMBean.selectionnerCategorie}"/>
+       		     -->

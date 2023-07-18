@@ -9,6 +9,7 @@ import com.inetum.data.Produit;
 
 import jakarta.faces.bean.ManagedBean;
 import jakarta.faces.bean.SessionScoped;
+import jakarta.faces.event.ValueChangeEvent;
 
 @ManagedBean
 //@ApplicationScoped //attention: partagé par tous les utilisateurs si @ApplicationScoped
@@ -35,9 +36,17 @@ public class ProduitMBean {
 		mapCategorieProduits.put("DVD", listeDvd);
 	}
 	
+	//pour variante avec bouton de déclenchement:
 	public String selectionnerCategorie() {
 		this.produits = mapCategorieProduits.get(categorie);
 		return null;//rester sur même page
+	}
+	
+	//pour variante sans bouton de déclenchement:
+	public void onSelectionnerCategorie(ValueChangeEvent event) {
+		    //System.out.println("onSelectionnerCategorie appelee ...");
+		    this.categorie = (String) event.getNewValue();
+			this.produits = mapCategorieProduits.get(categorie);
 	}
 	
 	private List<Produit> produits ;
