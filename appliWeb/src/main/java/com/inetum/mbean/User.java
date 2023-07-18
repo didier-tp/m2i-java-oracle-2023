@@ -20,6 +20,7 @@ public class User {
 			this.isConnected = true;
 			suite = "user"; //pour demnder à naviguer vers user.xhtml/jsp/jsf
 		}else {
+			this.isConnected = false;
 			FacesContext.getCurrentInstance().addMessage(null,
 					new FacesMessage("login fail" , "wrong password"));
 		}
