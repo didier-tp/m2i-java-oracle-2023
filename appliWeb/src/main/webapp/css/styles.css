@@ -5,7 +5,7 @@
 }
 
 .footer{
-	background-color:rgb(0, 0, 128);width:100%;color:white
+	background-color:navy;width:100%;color:white
 }
 
 .footer > a{
@@ -13,5 +13,6 @@
 }
 
 .header{
-	background-color:rgb(0, 0, 128);width:100%;color:white
+	width:100%;font-size:36px;line-height:48px;
+	background-color:navy;color:white
 }
