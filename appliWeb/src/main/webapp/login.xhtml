@@ -13,8 +13,9 @@
 	<ui:define name="content">
 	    <h:messages showDetail="true" /> <!--  affiche eventuels messages d'erreurs -->
    		<hr/>
-   		<h:form>
-       		 <label>username:</label> <h:inputText value="#{user.username}" /> <br/>
+   		<h:form >
+       		 <label>username:</label> <h:inputText value="#{user.username}" label="username"
+       		         required="true" /> <br/>
        		 <label>password:</label> <h:inputText value="#{user.password}" /> <br/>
        		 <h:commandButton  value="login" action="#{user.login}"/>
        </h:form>

@@ -14,7 +14,7 @@
 	</context-param>
 	
 	<error-page>
-		<exception-type>javax.faces.application.ViewExpiredException</exception-type>
+		<exception-type>jakarta.faces.application.ViewExpiredException</exception-type>
 		<location>/index.jsp</location>
 		<!-- ou vers /welcome.jsf ou … -->
 	</error-page>

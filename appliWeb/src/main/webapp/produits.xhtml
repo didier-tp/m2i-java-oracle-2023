@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<ui:composition template="/templates/common.xhtml">
+
+    <ui:define name="title">liste de produits</ui:define>
+	
+	<ui:define name="content">
+	    <h:messages /> <!--  affiche eventuels messages d'erreurs -->
+   		<hr/>
+   		<h:form>
+       		 <label>categorie:</label> ... <br/>
+       		 
+       </h:form>
+       <hr/>
+       <h:dataTable value="#{produitMBean.produits}" var="p"
+                    border="1">
+           <h:column>
+               <f:facet name="header">
+					<f:verbatim>ref</f:verbatim>
+				</f:facet>
+               <h:outputText value="#{p.ref}" />
+           </h:column>
+           <h:column>
+                <f:facet name="header">
+					<f:verbatim>label</f:verbatim>
+				</f:facet>
+               <h:outputText value="#{p.label}" />
+           </h:column>
+           <h:column>
+                <f:facet name="header">
+					<f:verbatim>prix</f:verbatim>
+				</f:facet>
+               <h:outputText value="#{p.prix}" />
+           </h:column>
+       </h:dataTable>
+       
+       
+	</ui:define>
+	
+</ui:composition>
+</html>
