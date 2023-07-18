@@ -10,5 +10,8 @@
 <body>
   <a href="CalculServlet">CalculServlet</a> <br/>
   <a href="welcome.jsf">welcome (partie JSF)</a> <br/>
+  <a href="calcul.jsf">calcul.jsf </a> <br/>
+  <a href="calculTva.jsf">calculTva.jsf </a> <br/>
+  <a href="login.jsf">login.jsf </a> <br/>
 </body>
 </html>

@@ -9,11 +9,14 @@
 <ui:composition template="/templates/common.xhtml">
 	
 	<ui:define name="content">
-    <h2>welcome </h2>
-    <!-- calcul.jsf (calcul.jsp ou calcul.xhtml en passant par FacesServlet de jsf) -->
-    <a href="calcul.jsf">calcul.jsf </a> <br/>
-    <a href="calculTva.jsf">calculTva.jsf </a> <br/>
-    <a href="login.jsf">login.jsf </a> <br/>
+	    <h:messages /> <!--  affiche eventuels messages d'erreurs -->
+   		<hr/>
+   		<h:form>
+       		 <label>username:</label> <h:inputText value="#{user.username}" /> <br/>
+       		 <label>password:</label> <h:inputText value="#{user.password}" /> <br/>
+       		 <h:commandButton  value="login" action="#{user.login}"/>
+       </h:form>
+       
 	</ui:define>
 	
 </ui:composition>
