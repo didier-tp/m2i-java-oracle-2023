@@ -5,9 +5,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 // bientot import jakarta.persistence.Entity;
 
 @Entity
+@NamedQuery(name = "Employe.findByPrenom", 
+            query = "SELECT e FROM Employe e WHERE e.prenom= ?1")
 //@Table(name="employe")
 public class Employe {
 	

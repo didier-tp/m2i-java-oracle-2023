@@ -27,10 +27,25 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye {
 	
 	@Override
 	public List<Employe> findByPrenom(String prenom) {
-		return entityManager
+		/*return entityManager
 				.createQuery("SELECT e FROM Employe e WHERE e.prenom= :prenomCherche", 
 						     Employe.class)
 				.setParameter("prenomCherche",prenom)
+				.getResultList();
+		*/
+		
+		/*
+		return entityManager
+				.createQuery("SELECT e FROM Employe e WHERE e.prenom= ?1 ", 
+						     Employe.class)
+				.setParameter(1,prenom)//pour valeur de ?1
+				//.setParameter(2,nom) //pour valeur de ?2
+				.getResultList();
+		*/
+		
+		return entityManager
+				.createNamedQuery("Employe.findByPrenom",Employe.class)
+				.setParameter(1,prenom)//pour valeur de ?1
 				.getResultList();
 	}
 
