@@ -12,6 +12,7 @@ http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 		<!-- indiquer liste des classes avec @Entity (facultatif) -->
 		<class>com.inetum.appliSpringJpa.entity.Employe</class>
+		<class>com.inetum.appliSpringJpa.entity.Compte</class>
 		<!-- configurer d'une façon ou d'une autre une connexion à la base de données -->
 		<!-- aujourd'hui via des propriétés spécifiques Hibernate -->
 		<properties>

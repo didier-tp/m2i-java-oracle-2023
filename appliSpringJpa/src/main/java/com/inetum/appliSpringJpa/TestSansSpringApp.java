@@ -6,7 +6,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+import com.inetum.appliSpringJpa.dao.DaoCompteJpaSansSpring;
 import com.inetum.appliSpringJpa.dao.DaoEmployeJpaSansSpring;
+import com.inetum.appliSpringJpa.entity.Compte;
 import com.inetum.appliSpringJpa.entity.Employe;
 
 // classe de démarrage de l'application (sans utiliser spring)
@@ -19,7 +21,8 @@ public class TestSansSpringApp {
 		EntityManager entityManager = emf.createEntityManager();
 		
 		testDaoEmploye(entityManager);
-		testDaoCompte(entityManager);
+		testDaoCompteCrud(entityManager);
+		testDaoCompteQueries(entityManager);
 		
 		entityManager.close();
 		emf.close();
@@ -69,8 +72,23 @@ public class TestSansSpringApp {
 		
 	}
 	
-    public static void testDaoCompte(EntityManager entityManager) {
+    public static void testDaoCompteCrud(EntityManager entityManager) {
 		
+	}
+    
+    public static void testDaoCompteQueries(EntityManager entityManager) {
+    	DaoCompteJpaSansSpring daoCompteJpa = new DaoCompteJpaSansSpring();
+    	daoCompteJpa.setEntityManager(entityManager);
+    	daoCompteJpa.insert(new Compte(null,"compte_A" , 50.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_B" , 80.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_C" , 250.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_D" , 540.0));
+    			
+		List<Compte> comptesAvecSoldeMini100 = daoCompteJpa.findBySoldeMini(100.0);
+		System.err.println("comptesAvecSoldeMini100="+comptesAvecSoldeMini100);
+		
+		List<Compte> comptesAvecSoldeMaxi100 = daoCompteJpa.findBySoldeMaxi(100.0);
+		System.err.println("comptesAvecSoldeMaxi100="+comptesAvecSoldeMaxi100);
 	}
 	
 	
