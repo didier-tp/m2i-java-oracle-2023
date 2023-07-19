@@ -7,5 +7,19 @@
        		     
 V2 sans bouton et sans ajax : onchange="submit()"
 
-v3 avec ajax
+<h:selectOneMenu value="#{produitMBean.categorie}" onchange="submit()"
+       		    valueChangeListener="#{produitMBean.onSelectionnerCategorie}">
+       		    <f:selectItems value="#{produitMBean.categoriesSelectionnables}"
+       		                   var="c" itemValue="#{c}" itemLabel="#{c}"/>
+       		        
+       		 </h:selectOneMenu>
+
+v3 avec ajax:
+
+<h:selectOneMenu value="#{produitMBean.categorie}" 
+       		    valueChangeListener="#{produitMBean.onSelectionnerCategorie}">
+       		    <f:selectItems value="#{produitMBean.categoriesSelectionnables}"
+       		                   var="c" itemValue="#{c}" itemLabel="#{c}"/>
+       		        <f:ajax event="change" render="tableau" />
+       		 </h:selectOneMenu>
        		     

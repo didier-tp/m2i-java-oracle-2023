@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence version="2.2"
+	xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
+	<persistence-unit name="appliSpringJpa"
+		transaction-type="RESOURCE_LOCAL">
+		<description>configuration JPA , base de données , ...</description>
+		<!-- on précise ici la technologie choisie pour coder/implementer JPA Hibernate 
+			(ou OpenJpa ou EclipseLink) -->
+		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<!-- indiquer liste des classes avec @Entity (facultatif) -->
+		<class>com.inetum.appliSpringJpa.entity.Employe</class>
+		<!-- configurer d'une façon ou d'une autre une connexion à la base de données -->
+		<!-- aujourd'hui via des propriétés spécifiques Hibernate -->
+		<properties>
+		    <property name="hibernate.hbm2ddl.auto" value="create"/>
+			<property name="hibernate.dialect"
+				value="org.hibernate.dialect.MariaDB10Dialect" />
+				<!--  org.hibernate.dialect.MySQL8Dialect  -->
+			<!-- <property name="hibernate.show_sql" value="true"/> -->
+			<!--  com.mysql.cj.jdbc.Driver -->
+			<property name="javax.persistence.jdbc.driver"
+				value="org.mariadb.jdbc.Driver" />
+			<property name="javax.persistence.jdbc.url"
+				value="jdbc:mariadb://localhost:3306/Base2QuiVaBien?createDatabaseIfNotExist=true" />
+			<property name="javax.persistence.jdbc.user" value="root" />
+			<property name="javax.persistence.jdbc.password" value="root" />
+		</properties>
+	</persistence-unit>
+</persistence>
