@@ -29,16 +29,16 @@
 			<scope>test</scope>
 		</dependency>
 		
-<!--		<dependency>-->
-<!--    		<groupId>mysql</groupId>-->
-<!--    		<artifactId>mysql-connector-java</artifactId>-->
-<!--    		<version>8.0.28</version>-->
-<!--		</dependency>-->
-		
 		<dependency>
-    		<groupId>org.mariadb.jdbc</groupId>
-    		<artifactId>mariadb-java-client</artifactId>
+    		<groupId>mysql</groupId>
+    		<artifactId>mysql-connector-java</artifactId>
+    		<version>8.0.28</version>
 		</dependency>
+		
+<!--		<dependency>-->
+<!--    		<groupId>org.mariadb.jdbc</groupId>-->
+<!--    		<artifactId>mariadb-java-client</artifactId>-->
+<!--		</dependency>-->
 	</dependencies>
 
 	<build>

@@ -1,5 +1,6 @@
 package com.inetum.appliSpringJpa.entity;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -19,11 +20,13 @@ public class Employe {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long numero;
 	
-	//@Column(name="prenom" , length=256)
+	@Column(name="prenom" , length=64)
 	private String prenom;
 	
 	
 	private String nom;
+	
+	private String email;
 	
 	
 	
@@ -61,6 +64,15 @@ public class Employe {
 	public void setNom(String nom) {
 		this.nom = nom;
 	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
 	
 	
 
