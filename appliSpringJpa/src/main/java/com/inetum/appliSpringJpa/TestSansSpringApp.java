@@ -11,12 +11,21 @@ import com.inetum.appliSpringJpa.entity.Employe;
 
 // classe de démarrage de l'application (sans utiliser spring)
 public class TestSansSpringApp {
+	
 	public static void main(String[] args) {
 		EntityManagerFactory emf = Persistence.createEntityManagerFactory("appliSpringJpa");
        //NB: appliSpringJpa= name du persistent-unit configuré dans META-INF/persistence.xml
 		
 		EntityManager entityManager = emf.createEntityManager();
 		
+		testDaoEmploye(entityManager);
+		testDaoCompte(entityManager);
+		
+		entityManager.close();
+		emf.close();
+	}
+	
+	public static void testDaoEmploye(EntityManager entityManager) {
 		DaoEmployeJpaSansSpring daoEmployeJpa = new DaoEmployeJpaSansSpring();
 		daoEmployeJpa.setEntityManager(entityManager);
 		
@@ -58,7 +67,12 @@ public class TestSansSpringApp {
 		List<Employe> employesAyantPrenomJean = daoEmployeJpa.findByPrenom("jean");
 		System.err.println("employesAyantPrenomJean="+employesAyantPrenomJean);
 		
-		entityManager.close();
-		emf.close();
 	}
+	
+    public static void testDaoCompte(EntityManager entityManager) {
+		
+	}
+	
+	
+	
 }
