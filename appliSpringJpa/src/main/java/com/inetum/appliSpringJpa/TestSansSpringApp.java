@@ -48,6 +48,16 @@ public class TestSansSpringApp {
 		for (Employe emp : employes) {
 			System.out.println(emp);
 		}
+		
+		daoEmployeJpa.insert(new Employe(null,"luc" , "SkuWalker"));
+		daoEmployeJpa.insert(new Employe(null,"luc" , "yLucke"));
+		
+		daoEmployeJpa.insert(new Employe(null,"jean" , "Aimare"));
+		daoEmployeJpa.insert(new Employe(null,"jean" , "Bon"));
+		
+		List<Employe> employesAyantPrenomJean = daoEmployeJpa.findByPrenom("jean");
+		System.err.println("employesAyantPrenomJean="+employesAyantPrenomJean);
+		
 		entityManager.close();
 		emf.close();
 	}

@@ -24,6 +24,15 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye {
 	public List<Employe> findAll() {
 		return entityManager.createQuery("SELECT e FROM Employe e", Employe.class).getResultList();
 	}
+	
+	@Override
+	public List<Employe> findByPrenom(String prenom) {
+		return entityManager
+				.createQuery("SELECT e FROM Employe e WHERE e.prenom= :prenomCherche", 
+						     Employe.class)
+				.setParameter("prenomCherche",prenom)
+				.getResultList();
+	}
 
 	@Override
 	public Employe insert(Employe emp) {
@@ -73,5 +82,7 @@ public class DaoEmployeJpaSansSpring implements DaoEmploye {
 		}
 
 	}
+
+	
 
 }

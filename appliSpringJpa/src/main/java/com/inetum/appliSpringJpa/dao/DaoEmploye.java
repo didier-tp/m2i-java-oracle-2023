@@ -13,7 +13,7 @@ import com.inetum.appliSpringJpa.entity.Employe;
 public interface DaoEmploye {
      Employe findById(Long numero);
      List<Employe> findAll();
-     //....
+     List<Employe> findByPrenom(String prenom);
      Employe insert(Employe emp); //en retour employe avec numero auto_incrémenté
      void update(Employe emp);
      void deleteById(Long num);
