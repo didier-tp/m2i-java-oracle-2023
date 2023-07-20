@@ -12,6 +12,7 @@ import com.inetum.appliSpringJpa.entity.Compte;
 
 public interface DaoCompte {
      Compte findById(Long numero);
+     Compte findCompteWithOperationsById(Long numero);
      List<Compte> findAll();
      List<Compte> findBySoldeMini(double soldeMini);
      List<Compte> findBySoldeMaxi(double soldeMaxi);

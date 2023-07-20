@@ -46,7 +46,7 @@ public class TestOperationDao {
     	logger.debug("op1CompteARelu=" + op1CompteARelu);
     	assertEquals(-3.2 , op1CompteARelu.getMontant() , 0.00001);
     	
-    	Compte compteARelu = daoCompteJpa.findById(compteA.getNumero());
+    	Compte compteARelu = daoCompteJpa.findCompteWithOperationsById(compteA.getNumero());
     	
     	logger.debug("operations du compteA:");
     	for(Operation op : compteARelu.getOperations() ) {

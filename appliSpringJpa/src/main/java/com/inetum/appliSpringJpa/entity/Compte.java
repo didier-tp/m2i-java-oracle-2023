@@ -29,8 +29,8 @@ public class Compte {
 	
 	private Double solde;
 	
-	//@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
-	@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
+	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
 	private List<Operation> operations; //+get/set
 	
 	

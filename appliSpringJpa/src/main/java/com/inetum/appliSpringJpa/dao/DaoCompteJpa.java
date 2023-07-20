@@ -9,10 +9,25 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 
 import com.inetum.appliSpringJpa.entity.Compte;
+import com.inetum.appliSpringJpa.entity.Operation;
 
 @Repository //pour cette classe de DAO soit prise en charge par Spring
 @Transactional //pour demander commit/rollback automatiques
 public class DaoCompteJpa implements DaoCompte {
+	
+	@Override
+	public Compte findCompteWithOperationsById(Long numero) {
+		// solution1 (bidouille) :
+		Compte compte = entityManager.find(Compte.class, numero);
+		for(Operation op : compte.getOperations()) {
+			//boucle for à vide sur les opartions en mode lazy
+			//pour que ça déclenche des petits select qui remontent
+			//tout de suite les valeurs en mémoire
+			//avec la fin de la transaction  et avant entityManager.close() de Spring ou autre
+			//===> ça évite LazyInitailisationException
+		}
+		return compte;
+	}
 	
 	//NB: @PersistenceContext permet d'initialiser l'objet technique
 	//entityManager à partir d'une configuration
@@ -67,5 +82,7 @@ public class DaoCompteJpa implements DaoCompte {
 			Compte compteAsupprimer = entityManager.find(Compte.class, num);
 			entityManager.remove(compteAsupprimer);
 	}
+
+	
 
 }

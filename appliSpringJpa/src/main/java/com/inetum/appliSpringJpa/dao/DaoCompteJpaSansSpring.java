@@ -87,4 +87,11 @@ public class DaoCompteJpaSansSpring implements DaoCompte {
 		
 	}
 
+
+	@Override
+	public Compte findCompteWithOperationsById(Long numero) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }
