@@ -73,7 +73,36 @@ public class TestSansSpringApp {
 	}
 	
     public static void testDaoCompteCrud(EntityManager entityManager) {
+    	DaoCompteJpaSansSpring daoCompteJpa = new DaoCompteJpaSansSpring();
+    	daoCompteJpa.setEntityManager(entityManager);
+    	Compte cpt1 = new Compte(null, "compteXyz", 60.0);
+    	Compte cpt1Sauvegarde = daoCompteJpa.insert(cpt1);
+		Long numCpt1 = cpt1Sauvegarde.getNumero();
+		System.err.println("numero auto_incrementé de cpt1Sauvegarde:" 
+		                 + numCpt1);
 		
+		Compte cpt1Relu = daoCompteJpa.findById(numCpt1);
+		System.err.println("cpt1Relu=" + cpt1Relu);
+		
+		//modif en mémoire
+		cpt1Relu.setLabel("compte_Xyz_qui_va_bien");
+		cpt1Relu.setSolde(80.0);
+		
+		//update en base:
+		daoCompteJpa.update(cpt1Relu);
+		
+		Compte cpt1ReRelu = daoCompteJpa.findById(numCpt1);
+		System.err.println("cpt1ReRelu apres mise à jour=" + cpt1ReRelu);
+		
+		daoCompteJpa.deleteById(numCpt1);
+		Compte cpt1ReReReluQuiExistePlus = daoCompteJpa.findById(numCpt1);
+		System.err.println("cpt1ReReReluQuiExistePlus apres suppression=" 
+		        + cpt1ReReReluQuiExistePlus);//normalement null
+		
+		List<Compte> comptes = daoCompteJpa.findAll();
+		for (Compte cpt : comptes) {
+			System.err.println(cpt);
+		}
 	}
     
     public static void testDaoCompteQueries(EntityManager entityManager) {
