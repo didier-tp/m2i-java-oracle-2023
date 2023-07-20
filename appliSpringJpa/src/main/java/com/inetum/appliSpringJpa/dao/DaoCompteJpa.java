@@ -15,6 +15,15 @@ import com.inetum.appliSpringJpa.entity.Operation;
 @Transactional //pour demander commit/rollback automatiques
 public class DaoCompteJpa implements DaoCompte {
 	
+	//NB: @PersistenceContext permet d'initialiser l'objet technique
+		//entityManager à partir d'une configuration
+		// src/main/resources/META-INF/persistence.xml
+		// ou bien config spring équivalente dans src/main/resources/application.properties
+		@PersistenceContext
+		private EntityManager entityManager;
+
+		
+	
 	@Override
 	public Compte findCompteWithOperationsById(Long numero) {
 		/*
@@ -37,13 +46,6 @@ public class DaoCompteJpa implements DaoCompte {
 				.getSingleResult();
 	}
 	
-	//NB: @PersistenceContext permet d'initialiser l'objet technique
-	//entityManager à partir d'une configuration
-	// src/main/resources/META-INF/persistence.xml
-	// ou bien config spring équivalente dans src/main/resources/application.properties
-	@PersistenceContext
-	private EntityManager entityManager;
-
 	
 
 

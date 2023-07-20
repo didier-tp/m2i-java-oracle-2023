@@ -7,6 +7,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 // bientot import jakarta.persistence.Entity;
@@ -18,9 +20,13 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "Compte.findBySoldeMaxi", 
             query = "SELECT c FROM Compte c WHERE c.solde<= ?1")
 @NamedQuery(name = "Compte.findCompteWithOperationsById", 
-        query = "SELECT c FROM Compte c JOIN FETCH c.operations op WHERE c.numero = ?1")
+        query = "SELECT c FROM Compte c LEFT JOIN FETCH c.operations op WHERE c.numero = ?1")
 public class Compte {
 
+	/*
+	 NB: dans une query JPQL le mot clef fetch permet de remonter tous les 
+	 éléments de la collection en mémoire (un peu comme un "eager" sur demande)
+	 */
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -35,6 +41,9 @@ public class Compte {
 	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
 	private List<Operation> operations; //+get/set
 	
+	@ManyToOne()
+	@JoinColumn(name = "num_client")
+	private Client client;//+get/set
 	
 	
 
@@ -93,6 +102,20 @@ public class Compte {
 	public void setOperations(List<Operation> operations) {
 		this.operations = operations;
 	}
+
+
+
+	public Client getClient() {
+		return client;
+	}
+
+
+
+	public void setClient(Client client) {
+		this.client = client;
+	}
+	
+	
 	
 	
 	
