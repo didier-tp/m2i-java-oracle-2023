@@ -74,3 +74,7 @@ create table compte (numero bigint not null auto_increment, label varchar(255), 
 create table employe (numero bigint not null auto_increment, email varchar(255), nom varchar(255), prenom varchar(64), primary key (numero)) engine=InnoDB;
 create table operation (id_op bigint not null auto_increment, date date, label varchar(255), montant double precision, num_compte bigint, primary key (id_op)) engine=InnoDB;
 alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte (numero);
+create table compte (numero bigint not null auto_increment, label varchar(255), solde double precision, primary key (numero)) engine=InnoDB;
+create table employe (numero bigint not null auto_increment, email varchar(255), nom varchar(255), prenom varchar(64), primary key (numero)) engine=InnoDB;
+create table operation (id_op bigint not null auto_increment, date date, label varchar(255), montant double precision, num_compte bigint, primary key (id_op)) engine=InnoDB;
+alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte (numero);
