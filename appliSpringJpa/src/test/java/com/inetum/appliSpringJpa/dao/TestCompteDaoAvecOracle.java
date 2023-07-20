@@ -9,13 +9,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.inetum.appliSpringJpa.entity.Compte;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
-public class TestCompteDao {
+@ActiveProfiles({"oracle"})
+public class TestCompteDaoAvecOracle {
 	
-	Logger logger = LoggerFactory.getLogger(TestCompteDao.class);
+	Logger logger = LoggerFactory.getLogger(TestCompteDaoAvecOracle.class);
 	
 	@Autowired //pour initialisation daoCompte
 	//qui va référencer un composant Spring existant compatible
