@@ -19,6 +19,7 @@ public class Compte {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long numero;
 	
 	private String label;

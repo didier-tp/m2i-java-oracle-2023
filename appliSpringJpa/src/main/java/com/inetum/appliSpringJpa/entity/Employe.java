@@ -21,6 +21,7 @@ public class Employe {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	//@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	private Long numero;
 	
 	@Column(name="prenom" , length=64)

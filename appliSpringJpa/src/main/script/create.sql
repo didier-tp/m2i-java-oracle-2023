@@ -1,2 +1,14 @@
 create table compte (numero bigint not null auto_increment, label varchar(255), solde double precision, primary key (numero)) engine=InnoDB;
 create table employe (numero bigint not null auto_increment, email varchar(255), nom varchar(255), prenom varchar(64), primary key (numero)) engine=InnoDB;
+create sequence hibernate_sequence start with 1 increment by 1;
+create table compte (numero number(19,0) not null, label varchar2(255), solde double precision, primary key (numero));
+create sequence hibernate_sequence start with 1 increment by 1;
+create table compte (numero number(19,0) not null, label varchar2(255), solde double precision, primary key (numero));
+create sequence hibernate_sequence start with 1 increment by 1;
+create table compte (numero number(19,0) not null, label varchar2(255), solde double precision, primary key (numero));
+create table employe (numero number(19,0) not null, email varchar2(255), nom varchar2(255), prenom varchar2(64), primary key (numero));
+create sequence hibernate_sequence start with 1 increment by 1;
+create table compte (numero number(19,0) not null, label varchar2(255), solde double precision, primary key (numero));
+create table employe (numero number(19,0) not null, email varchar2(255), nom varchar2(255), prenom varchar2(64), primary key (numero));
+create table compte (numero bigint not null auto_increment, label varchar(255), solde double precision, primary key (numero)) engine=InnoDB;
+create table employe (numero bigint not null auto_increment, email varchar(255), nom varchar(255), prenom varchar(64), primary key (numero)) engine=InnoDB;
