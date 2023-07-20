@@ -8,6 +8,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -20,10 +22,12 @@ public class Operation {
 	
 	private Double montant;
 	private String label;
+	
+	@Temporal(TemporalType.DATE)
 	private Date date;
 	
 	@ManyToOne //Many Operation To one Compte
-	  @JoinColumn(name = "numCompte")
+	  @JoinColumn(name = "num_compte")
 	private Compte compte;
 	
 	//+get/set , toString() , constructeurs

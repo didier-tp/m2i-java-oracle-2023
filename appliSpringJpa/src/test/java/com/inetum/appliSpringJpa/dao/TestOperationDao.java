@@ -27,12 +27,31 @@ public class TestOperationDao {
 	@Test
 	public void testCompteEtOperation() {
 		Compte compteA = daoCompteJpa.insert(new Compte(null,"compte_A" , 50.0));
+		Compte compteB = daoCompteJpa.insert(new Compte(null,"compte_B" , 70.0));
+		
     	Operation op1CompteA = daoOperationJpa.insert(
     		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteA));
     	
+    	Operation op1CompteB = daoOperationJpa.insert(
+        		new Operation(null,-5.2 , "achat gateaux" , new Date() , compteB));
+    	
+    	Operation op2CompteA = daoOperationJpa.insert(
+        		new Operation(null,-13.2 , "achat jouet" , new Date() , compteA));
+        	
+        	Operation op2CompteB = daoOperationJpa.insert(
+            		new Operation(null,-1.2 , "orange" , new Date() , compteB));
+    	
     	Operation op1CompteARelu = daoOperationJpa.findById(op1CompteA.getIdOp());
+    	
     	logger.debug("op1CompteARelu=" + op1CompteARelu);
     	assertEquals(-3.2 , op1CompteARelu.getMontant() , 0.00001);
+    	
+    	Compte compteARelu = daoCompteJpa.findById(compteA.getNumero());
+    	
+    	logger.debug("operations du compteA:");
+    	for(Operation op : compteARelu.getOperations() ) {
+    		logger.debug("\t" + op.toString());
+    	}
 
 	}
 	

@@ -1,11 +1,14 @@
 package com.inetum.appliSpringJpa.entity;
 
-import javax.persistence.Column;
+import java.util.List;
+
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 // bientot import jakarta.persistence.Entity;
 
 @Entity
@@ -25,6 +28,9 @@ public class Compte {
 	private String label;
 	
 	private Double solde;
+	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
+	private List<Operation> operations; //+get/set
 	
 	
 	
@@ -71,6 +77,18 @@ public class Compte {
 
 	public void setSolde(Double solde) {
 		this.solde = solde;
+	}
+
+
+
+	public List<Operation> getOperations() {
+		return operations;
+	}
+
+
+
+	public void setOperations(List<Operation> operations) {
+		this.operations = operations;
 	}
 	
 	
