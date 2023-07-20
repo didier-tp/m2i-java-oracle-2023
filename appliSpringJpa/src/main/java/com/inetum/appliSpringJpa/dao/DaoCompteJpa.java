@@ -17,6 +17,7 @@ public class DaoCompteJpa implements DaoCompte {
 	
 	@Override
 	public Compte findCompteWithOperationsById(Long numero) {
+		/*
 		// solution1 (bidouille) :
 		Compte compte = entityManager.find(Compte.class, numero);
 		for(Operation op : compte.getOperations()) {
@@ -27,6 +28,13 @@ public class DaoCompteJpa implements DaoCompte {
 			//===> ça évite LazyInitailisationException
 		}
 		return compte;
+		*/
+		
+		//solution 2 (avec query spécifique):
+		return entityManager
+				.createNamedQuery("Compte.findCompteWithOperationsById",Compte.class)
+				.setParameter(1,numero)//pour valeur de ?1
+				.getSingleResult();
 	}
 	
 	//NB: @PersistenceContext permet d'initialiser l'objet technique

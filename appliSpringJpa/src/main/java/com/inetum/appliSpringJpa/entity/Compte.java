@@ -17,6 +17,8 @@ import javax.persistence.OneToMany;
             query = "SELECT c FROM Compte c WHERE c.solde>= ?1")
 @NamedQuery(name = "Compte.findBySoldeMaxi", 
             query = "SELECT c FROM Compte c WHERE c.solde<= ?1")
+@NamedQuery(name = "Compte.findCompteWithOperationsById", 
+        query = "SELECT c FROM Compte c JOIN FETCH c.operations op WHERE c.numero = ?1")
 public class Compte {
 
 	
