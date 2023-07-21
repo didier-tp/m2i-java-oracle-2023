@@ -10,7 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 // bientot import jakarta.persistence.Entity;
@@ -50,10 +51,17 @@ public class Compte {
 		this.operations.add(op);
 	}
 	
+	/*
 	@ManyToOne()
 	@JoinColumn(name = "numero_client")
 	private Client client;//+get/set
+	*/
 	
+	@ManyToMany
+	@JoinTable(name = "Compte_Client",
+	          joinColumns = {@JoinColumn(name = "num_compte")},
+	          inverseJoinColumns = {@JoinColumn(name = "num_client")})
+	private List<Client> clients; //+get/set
 	
 
 	public Compte(Long numero, String label, Double solde) {
