@@ -93,6 +93,17 @@ public class DaoCompteJpa implements DaoCompte {
 			entityManager.remove(compteAsupprimer);
 	}
 
+
+
+
+	@Override
+	public List<Compte> findComptesOfClient(Long numClient) {
+		return entityManager
+				.createNamedQuery("Compte.findComptesOfClient",Compte.class)
+				.setParameter(1,numClient)//pour valeur de ?1
+				.getResultList();
+	}
+
 	
 
 }

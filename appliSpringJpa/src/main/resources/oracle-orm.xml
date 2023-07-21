@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<entity-mappings
+        xmlns="http://java.sun.com/xml/ns/persistence/orm"
+        version="2.0">
+
+    <description>Override Annotations for oacle sequence generated values</description>
+
+    
+
+    <entity class="com.inetum.appliSpringJpa.entity.Compte" 
+            access="FIELD" metadata-complete="false">
+        <attributes>
+            <id name="numero">
+                <generated-value strategy="SEQUENCE" />
+            </id>
+        </attributes>
+    </entity>
+    
+</entity-mappings>    

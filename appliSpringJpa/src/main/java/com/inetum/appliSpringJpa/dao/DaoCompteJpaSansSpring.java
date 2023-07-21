@@ -94,4 +94,11 @@ public class DaoCompteJpaSansSpring implements DaoCompte {
 		return null;
 	}
 
+
+	@Override
+	public List<Compte> findComptesOfClient(Long numClient) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

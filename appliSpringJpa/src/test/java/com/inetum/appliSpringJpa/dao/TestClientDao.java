@@ -3,6 +3,8 @@ package com.inetum.appliSpringJpa.dao;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.List;
+
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,11 +44,22 @@ public class TestClientDao {
 		compteC.setClient(clientY); //compteC associé au clientY
     	compteC = daoCompteJpa.insert(compteC); //sauvegardé
     	
+    	//V1: Si relation bi-directionnelle (codée dans les deux sens: @ManyToOne et @OneToMany):
     	//Client clientXRelu = daoClientJpa.findById(clientX.getNumero());//with lazy exception
     	Client clientXRelu = daoClientJpa.findClientWithComptesById(clientX.getNumero());
     	logger.debug("clientXRelu="+clientXRelu);
     	logger.debug("comptes de clientXRelu="+clientXRelu.getComptes());
     	assertTrue(clientXRelu.getComptes().size()==2);
+    	
+    	//V2: Si relation uni-directionnelle (codée que dans le sens principal: @ManyToOne ):
+    	Client clientXReluV2 = daoClientJpa.findById(clientX.getNumero());
+    	logger.debug("clientXReluV2="+clientXReluV2);
+    	assertEquals("jean" ,clientXReluV2.getPrenom() );
+    
+    	List<Compte> comptesDuClientX = daoCompteJpa.findComptesOfClient(clientXReluV2.getNumero());
+    	logger.debug("comptesDuClientX="+comptesDuClientX);
+    	assertTrue(comptesDuClientX.size()==2);
+    	
     	
     	Client clientYRelu = daoClientJpa.findClientWithComptesById(clientY.getNumero());
     	logger.debug("clientYRelu="+clientYRelu);
