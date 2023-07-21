@@ -23,6 +23,13 @@ public class DaoClientJpa implements DaoClient {
 	public Client findById(Long numero) {
 		return entityManager.find(Client.class, numero);
 	}
+	
+	@Override
+	public Client findClientWithComptesById(Long numero) {
+		return entityManager.createNamedQuery("Client.findClientWithComptesById",Client.class)
+				.setParameter(1, numero)
+				.getSingleResult();
+	}
 
 	@Override
 	public List<Client> findAll() {

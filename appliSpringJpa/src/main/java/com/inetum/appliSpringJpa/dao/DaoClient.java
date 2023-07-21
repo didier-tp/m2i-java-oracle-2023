@@ -14,6 +14,7 @@ import com.inetum.appliSpringJpa.entity.Client;
 
 public interface DaoClient {
      Client findById(Long numero);
+     Client findClientWithComptesById(Long numero);
      List<Client> findAll();
      Client insert(Client c); //en retour client avec numero auto_incrémenté
      void update(Client c);
