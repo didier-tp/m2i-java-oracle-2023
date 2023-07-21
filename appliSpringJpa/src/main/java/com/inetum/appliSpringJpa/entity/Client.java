@@ -8,9 +8,9 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 // bientot import jakarta.persistence.Entity;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 
 @Entity
 @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
@@ -34,7 +34,8 @@ public class Client {
 	
 	private String nom;
 	
-	@OneToMany(fetch = FetchType.LAZY , mappedBy = "client")
+	//@OneToMany(fetch = FetchType.LAZY , mappedBy = "client")
+	@ManyToMany(fetch = FetchType.LAZY , mappedBy = "clients")
 	private List<Compte> comptes;//+get/set
 	
 	

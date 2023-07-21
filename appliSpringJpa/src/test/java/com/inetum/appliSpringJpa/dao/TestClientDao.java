@@ -32,16 +32,20 @@ public class TestClientDao {
 		
 		
 		Compte compteA = new Compte(null,"compte_A" , 50.0); //à enregistrer
-		compteA.setClient(clientX); //compteA associé au clientX
+		compteA.getClients().add(clientX); //V2 @ManyToMany
+		//compteA.setClient(clientX); //compteA associé au clientX , V1 @ManyToOne
     	compteA = daoCompteJpa.insert(compteA); //sauvegardé
     			
     	Compte compteB = new Compte(null,"compte_B" , 70.0); //à enregistrer
     	compteB = daoCompteJpa.insert(compteB); //sauvegardé
-    	compteB.setClient(clientX); //compteB associé au clientX
+    	//compteB.setClient(clientX); //compteB associé au clientX , V1 @ManyToOne
+    	compteB.getClients().add(clientX); //V2 @ManyToMany
+    	compteB.getClients().add(clientY); //V2 @ManyToMany
     	daoCompteJpa.update(compteB);//liasion sauvegardée
     	
     	Compte compteC = new Compte(null,"compte_C" , 80.0); //à enregistrer
-		compteC.setClient(clientY); //compteC associé au clientY
+		//compteC.setClient(clientY); //compteC associé au clientY, V1 @ManyToOne
+    	compteC.getClients().add(clientY); //V2 @ManyToMany
     	compteC = daoCompteJpa.insert(compteC); //sauvegardé
     	
     	//V1: Si relation bi-directionnelle (codée dans les deux sens: @ManyToOne et @OneToMany):
@@ -51,6 +55,7 @@ public class TestClientDao {
     	logger.debug("comptes de clientXRelu="+clientXRelu.getComptes());
     	assertTrue(clientXRelu.getComptes().size()==2);
     
+    	
     	//V2: Si relation uni-directionnelle (codée que dans le sens principal: @ManyToOne ):
     	Client clientXReluV2 = daoClientJpa.findById(clientX.getNumero());
     	logger.debug("clientXReluV2="+clientXReluV2);
@@ -65,7 +70,7 @@ public class TestClientDao {
     	logger.debug("clientYRelu="+clientYRelu);
     	assertEquals("axelle" ,clientYRelu.getPrenom() );
     	logger.debug("comptes de clientYRelu="+clientYRelu.getComptes());
-    	assertTrue(clientYRelu.getComptes().size()==1);
+    	assertTrue(clientYRelu.getComptes().size()==2);
     	
 
 	}

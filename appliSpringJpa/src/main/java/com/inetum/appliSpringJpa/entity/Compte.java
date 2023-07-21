@@ -25,7 +25,8 @@ import javax.persistence.OneToMany;
 @NamedQuery(name = "Compte.findCompteWithOperationsById", 
         query = "SELECT c FROM Compte c LEFT JOIN FETCH c.operations op WHERE c.numero = ?1")
 @NamedQuery(name="Compte.findComptesOfClient" ,
-             query="SELECT c FROM Compte c WHERE c.client.numero = ?1")
+               query="SELECT c FROM Compte c LEFT JOIN c.clients cli WHERE  cli.numero = ?1")
+//             query="SELECT c FROM Compte c WHERE c.client.numero = ?1")
 public class Compte {
 
 	/*
@@ -61,7 +62,7 @@ public class Compte {
 	@JoinTable(name = "Compte_Client",
 	          joinColumns = {@JoinColumn(name = "num_compte")},
 	          inverseJoinColumns = {@JoinColumn(name = "num_client")})
-	private List<Client> clients; //+get/set
+	private List<Client> clients = new ArrayList<>(); //+get/set
 	
 
 	public Compte(Long numero, String label, Double solde) {
@@ -125,6 +126,18 @@ public class Compte {
 
 
 
+	public List<Client> getClients() {
+		return clients;
+	}
+
+
+
+	public void setClients(List<Client> clients) {
+		this.clients = clients;
+	}
+
+
+/*
 	public Client getClient() {
 		return client;
 	}
@@ -134,6 +147,8 @@ public class Compte {
 	public void setClient(Client client) {
 		this.client = client;
 	}
+	*/
+	
 	
 	
 	
