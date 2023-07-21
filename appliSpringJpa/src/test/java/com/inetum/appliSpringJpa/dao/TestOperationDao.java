@@ -1,6 +1,7 @@
 package com.inetum.appliSpringJpa.dao;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Date;
 
@@ -23,6 +24,35 @@ public class TestOperationDao {
 	
 	@Autowired 
 	private DaoOperation daoOperationJpa;
+	
+	@Test
+	public void testSensSecondaire() {
+		
+		/*
+		//sens des liaisons qui ne marche pas bien (pas bien enregistré)
+		Compte compteAA = new Compte(null,"compte_AA" , 50.0);
+		Operation op1 = new Operation(null,-3.2 , "achat cahier" , new Date());
+		op1.setCompte(compteAA); compteAA.addOperation(op1);
+		Operation op2 = new Operation(null,-3.2 , "achat cahier" , new Date() , compteAA);
+		compteAA.addOperation(op2);
+		daoCompteJpa.insert(compteAA);//sauvegarde demandée du coté mappedBy=
+		                              //CA NE MARCHE PAS BIEN SAUF SI CASCADE
+		*/
+		
+		Compte compteAA = daoCompteJpa.insert(new Compte(null,"compte_AA" , 50.0));
+		Operation op1 = new Operation(null,-3.2 , "achat cahier" , new Date());
+		op1.setCompte(compteAA);
+		daoOperationJpa.insert(op1);//sauvegarde demandée du principal (pas de mappebBy)
+		                            //CA MARCHE TRES TRES TRES TRES TRES BIEN
+		
+		Operation op2 = new Operation(null,-3.2 , "achat cahier" , new Date() , compteAA);
+		daoOperationJpa.insert(op2);
+		
+		Compte compteAARelu = daoCompteJpa.findCompteWithOperationsById(compteAA.getNumero());
+		assertTrue(compteAARelu.getOperations().size()==2);
+
+	}
+	
 	
 	@Test
 	public void testCompteEtOperation() {

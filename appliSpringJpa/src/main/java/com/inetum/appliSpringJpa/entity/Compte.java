@@ -1,7 +1,9 @@
 package com.inetum.appliSpringJpa.entity;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -39,12 +41,17 @@ public class Compte {
 	
 	private Double solde;
 	
-	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte")
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte" , cascade = CascadeType.ALL)
 	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
 	private List<Operation> operations; //+get/set
 	
+	public void addOperation(Operation op) {
+		if(this.operations == null) this.operations = new ArrayList<>();
+		this.operations.add(op);
+	}
+	
 	@ManyToOne()
-	@JoinColumn(name = "num_client")
+	@JoinColumn(name = "numero_client")
 	private Client client;//+get/set
 	
 	
@@ -64,10 +71,13 @@ public class Compte {
 
 
 
+
 	@Override
 	public String toString() {
 		return "Compte [numero=" + numero + ", label=" + label + ", solde=" + solde + "]";
 	}
+
+
 
 	public Long getNumero() {
 		return numero;

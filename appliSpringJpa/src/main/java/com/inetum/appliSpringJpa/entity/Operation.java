@@ -44,11 +44,18 @@ public class Operation {
 		this.date = date;
 		this.compte = compte;
 	}
+	
+	public Operation(Long idOp, Double montant, String label, Date date) {
+		this(idOp,montant,label,date,null);
+	}
+
+	
+
+	
 
 	@Override
 	public String toString() {
-		return "Operation [idOp=" + idOp + ", montant=" + montant + ", label=" + label + ", date=" + date + ", compte="
-				+ compte + "]";
+		return "Operation [idOp=" + idOp + ", montant=" + montant + ", label=" + label + ", date=" + date + "]";
 	}
 
 	public Long getIdOp() {

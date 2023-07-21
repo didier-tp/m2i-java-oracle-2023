@@ -50,7 +50,7 @@ public class TestClientDao {
     	logger.debug("clientXRelu="+clientXRelu);
     	logger.debug("comptes de clientXRelu="+clientXRelu.getComptes());
     	assertTrue(clientXRelu.getComptes().size()==2);
-    	
+    
     	//V2: Si relation uni-directionnelle (codée que dans le sens principal: @ManyToOne ):
     	Client clientXReluV2 = daoClientJpa.findById(clientX.getNumero());
     	logger.debug("clientXReluV2="+clientXReluV2);
