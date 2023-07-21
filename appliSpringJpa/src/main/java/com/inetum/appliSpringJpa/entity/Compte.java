@@ -59,7 +59,7 @@ public class Compte {
 	*/
 	
 	@ManyToMany
-	@JoinTable(name = "Compte_Client",
+	@JoinTable(name = "compte_client",
 	          joinColumns = {@JoinColumn(name = "num_compte")},
 	          inverseJoinColumns = {@JoinColumn(name = "num_client")})
 	private List<Client> clients = new ArrayList<>(); //+get/set
