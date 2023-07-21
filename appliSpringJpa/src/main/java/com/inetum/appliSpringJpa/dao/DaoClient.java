@@ -12,11 +12,7 @@ import com.inetum.appliSpringJpa.entity.Client;
  * et throws RuntimeException implicites
  */
 
-public interface DaoClient {
-     Client findById(Long numero);
+public interface DaoClient extends DaoGeneric<Client,Long> {    
      Client findClientWithComptesById(Long numero);
-     List<Client> findAll();
-     Client insert(Client c); //en retour client avec numero auto_incrémenté
-     void update(Client c);
-     void deleteById(Long num);
+     //findAll() , deleteById() , ... héritées de DaoGeneric
 }

@@ -10,14 +10,10 @@ import com.inetum.appliSpringJpa.entity.Compte;
  * et throws RuntimeException implicites
  */
 
-public interface DaoCompte {
-     Compte findById(Long numero);
+public interface DaoCompte extends DaoGeneric<Compte,Long> {
      Compte findCompteWithOperationsById(Long numero);
      List<Compte> findComptesOfClient(Long numClient);
-     List<Compte> findAll();
      List<Compte> findBySoldeMini(double soldeMini);
      List<Compte> findBySoldeMaxi(double soldeMaxi);
-     Compte insert(Compte cpt); //en retour compte avec numero auto_incrémenté
-     void update(Compte cpt);
-     void deleteById(Long cpt);
+     //findAll() , deleteById() , ... héritées de DaoGeneric
 }
