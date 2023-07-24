@@ -13,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 
 import com.inetum.appliSpringJpa.entity.Client;
 import com.inetum.appliSpringJpa.entity.Compte;
+import com.inetum.appliSpringJpa.entity.Personne;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
 public class TestClientDao {
@@ -25,8 +26,15 @@ public class TestClientDao {
 	@Autowired 
 	private DaoClient daoClientJpa;
 	
+	@Autowired 
+	private DaoPersonne daoPersonneJpa;
+	
 	@Test
 	public void testClientEtCompte() {
+		
+		Personne pers1 = daoPersonneJpa.insert(new Personne(null,"luc" , "SkyWalker"  ));
+		logger.debug("pers1=" + pers1);
+		
 		Client clientX = daoClientJpa.insert(new Client(null,"jean" , "Aimare"));
 		Client clientY = daoClientJpa.insert(new Client(null,"axelle" , "Aire"));
 		

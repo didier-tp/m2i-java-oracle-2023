@@ -24,7 +24,7 @@ public class Client extends Personne{
 	
 	@Override
 	public String toString() {
-		return "Employe " + super.toString();
+		return "Client " + super.toString();
 	}
 
 	public Client() {
