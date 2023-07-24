@@ -34,5 +34,4 @@ public class DaoClientJpa extends DaoGenericJpa<Client,Long> implements DaoClien
 	}
 
 	
-
 }

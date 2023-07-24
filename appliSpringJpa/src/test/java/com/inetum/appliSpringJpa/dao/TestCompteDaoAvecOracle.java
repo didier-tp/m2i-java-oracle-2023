@@ -24,7 +24,7 @@ public class TestCompteDaoAvecOracle {
 	//avec l'interface DaoCompte (DaoCompteJpa avec@Repository)
 	private DaoCompte daoCompteJpa;
 	
-	//@Test
+	@Test
 	public void testQueries() {
 		daoCompteJpa.insert(new Compte(null,"compte_A" , 50.0));
     	daoCompteJpa.insert(new Compte(null,"compte_B" , 80.0));
