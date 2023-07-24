@@ -496,3 +496,8 @@ drop table compte cascade constraints;
 drop table compte_client cascade constraints;
 drop table employe cascade constraints;
 drop table operation cascade constraints;
+drop table client cascade constraints;
+drop table compte cascade constraints;
+drop table compte_client cascade constraints;
+drop table employe cascade constraints;
+drop table operation cascade constraints;

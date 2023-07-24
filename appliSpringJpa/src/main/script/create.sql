@@ -446,3 +446,11 @@ create table operation (id_op number(19,0) generated as identity, date date, lab
 alter table compte_client add constraint FKbhxsypvlnd3a5ahku5beo1ams foreign key (num_client) references client;
 alter table compte_client add constraint FKtdijggku081be8w75ypgg3wai foreign key (num_compte) references compte;
 alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte;
+create table client (numero number(19,0) generated as identity, nom varchar2(255 char), prenom varchar2(64 char), primary key (numero));
+create table compte (numero number(19,0) generated as identity, label varchar2(255 char), solde double precision, primary key (numero));
+create table compte_client (num_compte number(19,0) not null, num_client number(19,0) not null);
+create table employe (numero number(19,0) generated as identity, email varchar2(255 char), nom varchar2(255 char), prenom varchar2(64 char), primary key (numero));
+create table operation (id_op number(19,0) generated as identity, date date, label varchar2(255 char), montant double precision, num_compte number(19,0), primary key (id_op));
+alter table compte_client add constraint FKbhxsypvlnd3a5ahku5beo1ams foreign key (num_client) references client;
+alter table compte_client add constraint FKtdijggku081be8w75ypgg3wai foreign key (num_compte) references compte;
+alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte;

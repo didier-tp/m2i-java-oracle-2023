@@ -14,7 +14,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.inetum.appliSpringJpa.entity.Compte;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
-@ActiveProfiles({"oracle"})
+@ActiveProfiles({"oracle"}) //application-oracle.properties
 public class TestCompteDaoAvecOracle {
 	
 	Logger logger = LoggerFactory.getLogger(TestCompteDaoAvecOracle.class);
