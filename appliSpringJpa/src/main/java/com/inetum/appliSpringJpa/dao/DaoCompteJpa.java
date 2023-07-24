@@ -109,9 +109,18 @@ public class DaoCompteJpa implements DaoCompte {
 
 	@Override
 	public void trouverEtDebiter(Long numCompte, double montantDebit) {
+		//le @Transaction fait que les mécanismes de spring/jpa/hibernate
+		//créent si nécessaire entityManager et transaction (en début de fonction)
 		Compte comptePersistant = entityManager.find(Compte.class, numCompte);
 		comptePersistant.setSolde(comptePersistant.getSolde() - 20.0);
-
+		//en fin de fonction , le @Transaction fait que les mécanismes de spring/jpa/hibernate
+		//ferment automatiquement transaction et entityManager (avec des variantes ...)
+		
+		//lorsque spring déclenche automatique entityManager.getTransaction().commit()
+		//(selon la demande @Transactional),
+		//le .commit() déclenche automatiquement entityManager.flush()
+		//qui déclenche un .update/.merge automatique sur tous les objets persistants
+		//modifiés en mémoire
 	}
 
 	

@@ -37,7 +37,7 @@ public class TestCompteDao {
 		Compte compteCcEncoreRelu = daoCompteJpa.findById(compteCc.getNumero());
 		logger.debug("compteCcEncoreRelu="+compteCcEncoreRelu);
 		
-		Compte compteCc2 = daoCompteJpa.insert(new Compte(null,"compte_Cc" , 50.0));
+		Compte compteCc2 = daoCompteJpa.insert(new Compte(null,"compte_Cc2" , 50.0));
 		Compte compteCc2ReluDetache = daoCompteJpa.findById(compteCc2.getNumero());
 		logger.debug("compteCc2ReluDetache="+compteCc2ReluDetache);
 		//retirer 20 euros à l'état persistant:
