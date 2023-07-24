@@ -11,10 +11,10 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import com.inetum.appliSpringJpa.entity.Adresse;
 import com.inetum.appliSpringJpa.entity.Client;
 import com.inetum.appliSpringJpa.entity.Compte;
 import com.inetum.appliSpringJpa.entity.Personne;
-import com.inetum.appliSpringJpa.entity.Personne.EtatPersonne;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
 public class TestClientDao {
@@ -38,7 +38,10 @@ public class TestClientDao {
 		
 		Client clientX = new Client(null,"jean" , "Aimare");
 		clientX.setEtat(Personne.EtatPersonne.ENDORMIE);
+		
+		clientX.setAdressePrincipale(new Adresse(null,"12 rue Aile" , "75012" , "Pari_ci"));
 		clientX = daoClientJpa.insert(clientX);
+		
 		Client clientY = daoClientJpa.insert(new Client(null,"axelle" , "Aire"));
 		
 		
@@ -65,6 +68,7 @@ public class TestClientDao {
     	logger.debug("clientXRelu="+clientXRelu);
     	logger.debug("comptes de clientXRelu="+clientXRelu.getComptes());
     	assertTrue(clientXRelu.getComptes().size()==2);
+    	assertEquals("75012",clientXRelu.getAdressePrincipale().getCodePostal());
     
     	
     	//V2: Si relation uni-directionnelle (codée que dans le sens principal: @ManyToOne ):

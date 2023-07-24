@@ -2,12 +2,14 @@ package com.inetum.appliSpringJpa.entity;
 
 import java.util.List;
 
-import javax.persistence.DiscriminatorValue;
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
 // bientot import jakarta.persistence.Entity;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToOne;
 
 @Entity
 @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
@@ -21,6 +23,10 @@ public class Client extends Personne{
 	//@OneToMany(fetch = FetchType.LAZY , mappedBy = "client")
 	@ManyToMany(fetch = FetchType.LAZY , mappedBy = "clients")
 	private List<Compte> comptes;//+get/set
+	
+	@OneToOne(optional = true , cascade = CascadeType.ALL) //null si adresse inconnue
+	@JoinColumn(name = "idAdresse" , unique = true)
+	private Adresse adressePrincipale; //+get/set
 	
 	
 	private String telephone="0102030405"; //numero de téléphone par défaut
@@ -55,6 +61,14 @@ public class Client extends Personne{
 
 	public void setTelephone(String telephone) {
 		this.telephone = telephone;
+	}
+
+	public Adresse getAdressePrincipale() {
+		return adressePrincipale;
+	}
+
+	public void setAdressePrincipale(Adresse adressePrincipale) {
+		this.adressePrincipale = adressePrincipale;
 	}
 
 	
