@@ -101,4 +101,11 @@ public class DaoCompteJpaSansSpring implements DaoCompte {
 		return null;
 	}
 
+
+	@Override
+	public void trouverEtDebiter(Long numCompte, double montantDebit) {
+		// TODO Auto-generated method stub
+		
+	}
+
 }

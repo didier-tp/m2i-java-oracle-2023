@@ -16,4 +16,5 @@ public interface DaoCompte extends DaoGeneric<Compte,Long> {
      List<Compte> findBySoldeMini(double soldeMini);
      List<Compte> findBySoldeMaxi(double soldeMaxi);
      //findAll() , deleteById() , ... héritées de DaoGeneric
+     void trouverEtDebiter(Long numCompte,double montantDebit);
 }

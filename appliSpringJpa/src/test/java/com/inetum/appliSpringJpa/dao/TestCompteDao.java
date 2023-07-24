@@ -23,6 +23,32 @@ public class TestCompteDao {
 	private DaoCompte daoCompteJpa;
 	
 	@Test
+	public void experimentationPersistantDetache() {
+		//création d'un compte avec solde initial = 50
+		
+		//relire le compte pour modifier aussitôt son solde en mémoire avec "-20 euros"
+		//à l'état détaché et à l'état persistant
+		
+		Compte compteCc = daoCompteJpa.insert(new Compte(null,"compte_Cc" , 50.0));
+		Compte compteCcReluDetache = daoCompteJpa.findById(compteCc.getNumero());
+		logger.debug("compteCcReluDetache="+compteCcReluDetache);
+		//retirer 20 euros à l'état détaché:
+		compteCcReluDetache.setSolde(compteCcReluDetache.getSolde() - 20);
+		Compte compteCcEncoreRelu = daoCompteJpa.findById(compteCc.getNumero());
+		logger.debug("compteCcEncoreRelu="+compteCcEncoreRelu);
+		
+		Compte compteCc2 = daoCompteJpa.insert(new Compte(null,"compte_Cc" , 50.0));
+		Compte compteCc2ReluDetache = daoCompteJpa.findById(compteCc2.getNumero());
+		logger.debug("compteCc2ReluDetache="+compteCc2ReluDetache);
+		//retirer 20 euros à l'état persistant:
+		daoCompteJpa.trouverEtDebiter(compteCc2.getNumero(), 20); 
+		Compte compteCc2EncoreRelu = daoCompteJpa.findById(compteCc2.getNumero());
+		logger.debug("compteCc2EncoreRelu="+compteCc2EncoreRelu);
+		
+		
+	}
+	
+	@Test
 	public void testQueries() {
 		daoCompteJpa.insert(new Compte(null,"compte_A" , 50.0));
     	daoCompteJpa.insert(new Compte(null,"compte_B" , 80.0));

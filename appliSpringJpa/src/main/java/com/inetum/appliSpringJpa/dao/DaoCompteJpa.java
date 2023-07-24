@@ -104,6 +104,16 @@ public class DaoCompteJpa implements DaoCompte {
 				.getResultList();
 	}
 
+
+
+
+	@Override
+	public void trouverEtDebiter(Long numCompte, double montantDebit) {
+		Compte comptePersistant = entityManager.find(Compte.class, numCompte);
+		comptePersistant.setSolde(comptePersistant.getSolde() - 20.0);
+
+	}
+
 	
 
 }
