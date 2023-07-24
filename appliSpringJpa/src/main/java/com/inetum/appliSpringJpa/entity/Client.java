@@ -23,6 +23,9 @@ public class Client extends Personne{
 	private List<Compte> comptes;//+get/set
 	
 	
+	private String telephone="0102030405"; //numero de téléphone par défaut
+	
+	
 	@Override
 	public String toString() {
 		return "Client " + super.toString();
@@ -44,6 +47,14 @@ public class Client extends Personne{
 
 	public void setComptes(List<Compte> comptes) {
 		this.comptes = comptes;
+	}
+
+	public String getTelephone() {
+		return telephone;
+	}
+
+	public void setTelephone(String telephone) {
+		this.telephone = telephone;
 	}
 
 	

@@ -5,6 +5,8 @@ import javax.persistence.DiscriminatorColumn;
 import javax.persistence.DiscriminatorType;
 import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -13,9 +15,16 @@ import javax.persistence.InheritanceType;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
+//@Inheritance(strategy = InheritanceType.JOINED)
 @DiscriminatorColumn(name="typePersonne" , discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "Personne") //valeur pour colonne "typePersonne"
 public class Personne {
+	
+		public enum EtatPersonne { ENDORMIE, REVEILLEE };
+		
+		//@Enumerated(EnumType.ORDINAL)
+		@Enumerated(EnumType.STRING)
+		private EtatPersonne etat = EtatPersonne.REVEILLEE; //+get/set 
 	
 			
 		@Id
@@ -76,6 +85,16 @@ public class Personne {
 
 		public void setNom(String nom) {
 			this.nom = nom;
+		}
+
+
+		public EtatPersonne getEtat() {
+			return etat;
+		}
+
+
+		public void setEtat(EtatPersonne etat) {
+			this.etat = etat;
 		}
 		
 		
