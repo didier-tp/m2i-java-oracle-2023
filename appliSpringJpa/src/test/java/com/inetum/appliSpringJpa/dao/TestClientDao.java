@@ -43,7 +43,8 @@ public class TestClientDao {
 		clientX = daoClientJpa.insert(clientX);
 		
 		Client clientY = daoClientJpa.insert(new Client(null,"axelle" , "Aire"));
-		
+		clientY.setAdressePrincipale(new Adresse(null,"12 rueZé" , "75012" , "Paris"));
+		daoClientJpa.update(clientY);
 		
 		Compte compteA = new Compte(null,"compte_A" , 50.0); //à enregistrer
 		compteA.getClients().add(clientX); //V2 @ManyToMany
