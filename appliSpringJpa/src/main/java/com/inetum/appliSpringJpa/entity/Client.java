@@ -13,7 +13,8 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = "Client.findAll", query = "SELECT c FROM Client c")
 @NamedQuery(name = "Client.findClientWithComptesById", 
 query = "SELECT c FROM Client c LEFT JOIN FETCH c.comptes cpt WHERE c.numero = ?1")
-@DiscriminatorValue(value = "Client") //valeur pour colonne "typePersonne"
+//@DiscriminatorValue(value = "Client") //valeur pour colonne "typePersonne" 
+//valeur par défaut = "Client" nom de la classe courante 
 public class Client extends Personne{
 	
 	

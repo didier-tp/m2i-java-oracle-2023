@@ -1,6 +1,5 @@
 package com.inetum.appliSpringJpa.entity;
 
-import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.NamedQuery;
 // bientot import jakarta.persistence.Entity;
@@ -9,7 +8,8 @@ import javax.persistence.NamedQuery;
 @NamedQuery(name = "Employe.findByPrenom", 
             query = "SELECT e FROM Employe e WHERE e.prenom= ?1")
 //@Table(name="employe")
-@DiscriminatorValue(value = "Employe") //valeur pour colonne "typePersonne"
+//@DiscriminatorValue(value = "Employe") //valeur pour colonne "typePersonne"
+//valeur par défaut = "Employe" nom de la classe courante 
 public class Employe extends Personne{
 	
 	

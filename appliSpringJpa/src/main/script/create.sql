@@ -489,3 +489,10 @@ create table personne (type_personne varchar(31) not null, numero bigint not nul
 alter table compte_client add constraint FKd7bi8a3nb8urkipsj0ug5lkdm foreign key (num_client) references personne (numero);
 alter table compte_client add constraint FKtdijggku081be8w75ypgg3wai foreign key (num_compte) references compte (numero);
 alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte (numero);
+create table compte (numero bigint not null auto_increment, label varchar(255), solde double precision, primary key (numero)) engine=InnoDB;
+create table compte_client (num_compte bigint not null, num_client bigint not null) engine=InnoDB;
+create table operation (id_op bigint not null auto_increment, date date, label varchar(255), montant double precision, num_compte bigint, primary key (id_op)) engine=InnoDB;
+create table personne (type_personne varchar(31) not null, numero bigint not null auto_increment, nom varchar(255), prenom varchar(64), email varchar(255), primary key (numero)) engine=InnoDB;
+alter table compte_client add constraint FKd7bi8a3nb8urkipsj0ug5lkdm foreign key (num_client) references personne (numero);
+alter table compte_client add constraint FKtdijggku081be8w75ypgg3wai foreign key (num_compte) references compte (numero);
+alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte (numero);
