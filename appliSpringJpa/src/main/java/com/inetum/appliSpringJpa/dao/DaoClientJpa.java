@@ -32,6 +32,13 @@ public class DaoClientJpa extends DaoGenericJpa<Client,Long> implements DaoClien
 				.setParameter(1, numero)
 				.getSingleResult();
 	}
-
+	
+	/*
+	public Client insert(Client cli) {
+		entityManager.persist(cli);
+		entityManager.persist(cli.getAdressePrincipale());
+		return cli;
+	}
+     */
 	
 }

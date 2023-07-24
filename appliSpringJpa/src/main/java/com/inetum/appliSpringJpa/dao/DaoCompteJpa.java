@@ -123,6 +123,6 @@ public class DaoCompteJpa implements DaoCompte {
 		//modifiés en mémoire
 	}
 
-	
+
 
 }

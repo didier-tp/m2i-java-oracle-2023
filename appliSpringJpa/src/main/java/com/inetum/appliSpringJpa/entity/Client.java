@@ -28,6 +28,9 @@ public class Client extends Personne{
 	@JoinColumn(name = "idAdresse" , unique = true)
 	private Adresse adressePrincipale; //+get/set
 	
+	@OneToOne(optional = true , mappedBy="client" )
+	private AdresseDePersonne adressePrincipaleV2; //+get/set
+	
 	
 	private String telephone="0102030405"; //numero de téléphone par défaut
 	
@@ -70,6 +73,16 @@ public class Client extends Personne{
 	public void setAdressePrincipale(Adresse adressePrincipale) {
 		this.adressePrincipale = adressePrincipale;
 	}
+
+	public AdresseDePersonne getAdressePrincipaleV2() {
+		return adressePrincipaleV2;
+	}
+
+	public void setAdressePrincipaleV2(AdresseDePersonne adressePrincipaleV2) {
+		this.adressePrincipaleV2 = adressePrincipaleV2;
+	}
+	
+	
 
 	
 
