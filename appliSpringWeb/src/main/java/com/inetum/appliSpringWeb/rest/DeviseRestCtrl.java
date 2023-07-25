@@ -11,9 +11,11 @@ import com.inetum.appliSpringWeb.dto.Devise;
 @RequestMapping(value="/api-devise/devise" , headers="Accept=application/json")
 public class DeviseRestCtrl {
 	
-@RequestMapping(value="/{codeDevise}" , method=RequestMethod.GET)
-public Devise getDeviseByCode(@PathVariable("codeDevise") String code) {
-	return new Devise(code,"devise",1.1);
-}
+	@RequestMapping(value="/{codeDevise}" , method=RequestMethod.GET)
+	public Devise getDeviseByCode(@PathVariable("codeDevise") String code) {
+		Devise devise = new Devise(code,"devise",1.1);
+		devise.setChange(1.01);
+		return devise;
+	}
 
 }

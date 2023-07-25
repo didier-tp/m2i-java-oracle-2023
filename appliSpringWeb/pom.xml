@@ -28,11 +28,20 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 		
+		
 		<dependency>
     		<groupId>org.projectlombok</groupId>
     		<artifactId>lombok</artifactId>
    			 <scope>provided</scope>
 		</dependency>
+		<!-- 
+		pour que lombok fonctionne bien dans eclipse:
+		 1. lancer (via double click ou autre) 
+		 C:\Users\Administrateur\.m2\repository\org\projectlombok\lombok\1.18.28\lombok...jar
+		 2. spécifier le chemin menant à eclipse
+		 3. "install/update"  eclipse.ini mis à jour
+		 4. redémarrer eclipse et clean ..
+		-->
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
