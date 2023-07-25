@@ -60,6 +60,14 @@
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
+		
+		<!-- spring-boot-devtools permet de redemarrer l'appli springBoot
+		     en phase de dev des que que code java a changé -->
+		 <dependency>
+        	<groupId>org.springframework.boot</groupId>
+        	<artifactId>spring-boot-devtools</artifactId>
+    	</dependency>
+		
 	</dependencies>
 
 	<build>
