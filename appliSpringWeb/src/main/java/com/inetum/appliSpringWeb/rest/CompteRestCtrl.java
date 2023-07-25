@@ -30,12 +30,13 @@ public class CompteRestCtrl {
 	
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
-	public ResponseEntity<Compte> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
+	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
 	    Compte compte = daoCompteJpa.findById(numeroCompte);
 	    if(compte!=null)
 	    	return new ResponseEntity<Compte>(compte, HttpStatus.OK);
 	    else
-	    	return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
+	    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
+	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte
