@@ -28,6 +28,8 @@ public class InitDataSet {
 	public void initData() {
 		daoCompteJpa.insert(new Compte(null,"compte_Aa" , 70.0));
     	daoCompteJpa.insert(new Compte(null,"compte_Bb" , 80.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_Cc" , -70.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_Dd" , -80.0));
 	}
 
 }

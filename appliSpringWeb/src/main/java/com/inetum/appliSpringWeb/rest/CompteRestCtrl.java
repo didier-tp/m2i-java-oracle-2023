@@ -1,9 +1,12 @@
 package com.inetum.appliSpringWeb.rest;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
@@ -23,5 +26,23 @@ public class CompteRestCtrl {
 	public Compte getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
 	    return daoCompteJpa.findById(numeroCompte);
 	}
+	
+	//exemple de fin d'URL: ./api-bank/compte
+	//                      ./api-bank/compte?soldeMini=0
+	@GetMapping("" )
+	public List<Compte> getComptes(
+			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
+		if(soldeMini==null)
+			return daoCompteJpa.findAll();
+		else
+			return daoCompteJpa.findBySoldeMini(soldeMini);
+	}
+	
+	
+	
+	
+	
+	
+	
 
 }

@@ -25,7 +25,7 @@ public abstract class DaoGenericJpa<E,PK> implements DaoGeneric<E,PK> {
 
 	@Override
 	public List<E> findAll() {
-		return getEntityManager().createQuery("SELECT  FROM " + entityClass.getSimpleName(),
+		return getEntityManager().createQuery("FROM " + entityClass.getSimpleName(),
 				entityClass)
 	            .getResultList();
 	}
