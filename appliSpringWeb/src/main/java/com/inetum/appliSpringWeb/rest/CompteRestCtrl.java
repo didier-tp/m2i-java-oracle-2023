@@ -3,6 +3,8 @@ package com.inetum.appliSpringWeb.rest;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,8 +30,12 @@ public class CompteRestCtrl {
 	
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
-	public Compte getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-	    return daoCompteJpa.findById(numeroCompte);
+	public ResponseEntity<Compte> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
+	    Compte compte = daoCompteJpa.findById(numeroCompte);
+	    if(compte!=null)
+	    	return new ResponseEntity<Compte>(compte, HttpStatus.OK);
+	    else
+	    	return new ResponseEntity<Compte>(HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte
