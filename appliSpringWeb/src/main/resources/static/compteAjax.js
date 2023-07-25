@@ -1,5 +1,7 @@
 window.onload=function(){
+	
 	let wsUrl = "./api-bank/compte";
+	
 	makeAjaxGetRequest(wsUrl,function(responseJson){
 		let comptesJs = JSON.parse(responseJson);
 		console.log("comptesJs="+comptesJs);
