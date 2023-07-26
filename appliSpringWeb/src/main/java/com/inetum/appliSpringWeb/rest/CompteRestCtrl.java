@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -62,8 +63,22 @@ public class CompteRestCtrl {
 		return compteEnregistreEnBase; //on retourne le compte avec clef primaire auto_incrémentée
 	}
 	
+	//exemple de fin d'URL: ./api-bank/compte
+	//appelé en mode PUT avec dans la partie invisible "body" de la requête:
+	// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 }
+	@PutMapping("" )
+	public ResponseEntity<?> putCompteToUpdate(@RequestBody Compte compte) {
+		    Long numCompteToUpdate = compte.getNumero();
+		    Compte compteQuiDevraitExister = daoCompteJpa.findById(numCompteToUpdate);
+		    if(compteQuiDevraitExister==null)
+		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
+ 			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
+			daoCompteJpa.update(compte);
+			return new ResponseEntity<Compte>(compte , HttpStatus.OK);
+	}
 	
-	//PUT , DELETE
+	
+	
 	
 	
 	
