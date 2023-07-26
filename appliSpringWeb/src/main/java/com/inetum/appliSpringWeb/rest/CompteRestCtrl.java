@@ -53,8 +53,7 @@ public class CompteRestCtrl {
 		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
 		    daoCompteJpa.deleteById(numeroCompte);
-		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,
-		    		                          HttpStatus.OK); 
+		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,HttpStatus.OK); 
 		    //ou bien
 		    //return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 		}
