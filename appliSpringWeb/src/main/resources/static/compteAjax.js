@@ -1,6 +1,22 @@
 window.onload=function(){
 	(document.getElementById("btnRechercher"))
 	   .addEventListener("click",rechercherComptesSelonSoldeMini);
+	   
+	(document.getElementById("btnAjout"))
+	   .addEventListener("click",ajouterCompte);   
+}
+
+function ajouterCompte(){	
+	let label = (document.getElementById("inputLabel")).value;
+	let soldeInitial = (document.getElementById("inputSoldeInitial")).value;
+	let compteJs = { label : label,
+	                 solde : parseFloat(soldeInitial) };
+	let compteJson = JSON.stringify(compteJs) ;  
+	let wsUrl = "./api-bank/compte";   
+	makeAjaxPostRequest(wsUrl,compteJson,function (responseJson){
+		console.log("responseJson="+responseJson);
+		rechercherComptesSelonSoldeMini(); //pour rafraîchir le tableau avec nouveau compte ajouté
+	});         
 }
 	
 function rechercherComptesSelonSoldeMini(){	
