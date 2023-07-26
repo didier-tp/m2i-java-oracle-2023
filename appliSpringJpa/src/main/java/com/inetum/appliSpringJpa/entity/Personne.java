@@ -16,7 +16,7 @@ import javax.persistence.InheritanceType;
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 //@Inheritance(strategy = InheritanceType.JOINED)
-@DiscriminatorColumn(name="typePersonne" , discriminatorType = DiscriminatorType.STRING)
+@DiscriminatorColumn(name="type_personne" , discriminatorType = DiscriminatorType.STRING)
 @DiscriminatorValue(value = "Personne") //valeur pour colonne "typePersonne"
 public class Personne {
 	

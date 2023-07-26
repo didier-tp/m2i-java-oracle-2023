@@ -9,7 +9,7 @@ public class AppliSpringWebApplication {
 	public static void main(String[] args) {
 		//SpringApplication.run(AppliSpringWebApplication.class, args);
 		SpringApplication app = new SpringApplication(AppliSpringWebApplication.class);
-		//app.setAdditionalProfiles("oracle","profileComplementaireQueJaime") ;
+		app.setAdditionalProfiles("init", "oracle","profileComplementaireQueJaime") ;
 		app.run(args);
 		System.out.println("http://localhost:8080/appliSpringWeb");
 	}

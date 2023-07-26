@@ -5,6 +5,7 @@ import java.util.Date;
 import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
@@ -21,7 +22,7 @@ import com.inetum.appliSpringWeb.entity.Operation;
  */
 
 @Component
-//@Profile("init")
+@Profile("init")
 public class InitDataSet {
 	
 	@Autowired
