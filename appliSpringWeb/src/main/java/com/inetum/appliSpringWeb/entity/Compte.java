@@ -1,10 +1,15 @@
 package com.inetum.appliSpringWeb.entity;
 
+import java.util.List;
+
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -29,6 +34,9 @@ public class Compte {
 	
 	private Double solde;
 	
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte" , cascade = CascadeType.ALL)
+	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
+	private List<Operation> operations; //+get/set
 	
 	
 
