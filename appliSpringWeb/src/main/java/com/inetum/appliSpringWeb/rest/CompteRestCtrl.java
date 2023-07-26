@@ -64,15 +64,26 @@ public class CompteRestCtrl {
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte
+	//ou bien               ./api-bank/compte/5
 	//appelé en mode PUT avec dans la partie invisible "body" de la requête:
 	// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 }
-	@PutMapping("" )
-	public ResponseEntity<?> putCompteToUpdate(@RequestBody Compte compte) {
-		    Long numCompteToUpdate = compte.getNumero();
-		    Compte compteQuiDevraitExister = daoCompteJpa.findById(numCompteToUpdate);
+	//ou bien {  "label" : "compte5QueJaime" , "solde" : 150.0 }
+	@PutMapping({"" , "/{numeroCompte}" })
+	public ResponseEntity<?> putCompteToUpdate(@RequestBody Compte compte , 
+			      @PathVariable(value="numeroCompte",required = false ) Long numeroCompte) {
+		
+		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compte.getNumero();
+		   
+		    
+		    Compte compteQuiDevraitExister = 
+		    		   numCompteToUpdate!=null ? daoCompteJpa.findById(numCompteToUpdate) : null;
+		    
 		    if(compteQuiDevraitExister==null)
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
  			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
+		    
+		    if(compte.getNumero()==null)
+		    	compte.setNumero(numCompteToUpdate);
 			daoCompteJpa.update(compte);
 			return new ResponseEntity<Compte>(compte , HttpStatus.OK);
 	}
