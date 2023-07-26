@@ -8,6 +8,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -50,8 +52,18 @@ public class CompteRestCtrl {
 			return daoCompteJpa.findBySoldeMini(soldeMini);
 	}
 	
+	//exemple de fin d'URL: ./api-bank/compte
+	//appelé en mode POST avec dans la partie invisible "body" de la requête:
+	// { "numero" : null , "label" : "compteQuiVaBien" , "solde" : 50.0 }
+	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0 }
+	@PostMapping("" )
+	public Compte postCompte(@RequestBody Compte nouveauCompte) {
+		Compte compteEnregistreEnBase = daoCompteJpa.insert(nouveauCompte);
+		return compteEnregistreEnBase; //on retourne le compte avec clef primaire auto_incrémentée
+	}
 	
 	
+	//PUT , DELETE
 	
 	
 	

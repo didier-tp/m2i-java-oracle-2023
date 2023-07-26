@@ -91,8 +91,8 @@ public class TestClientDao {
     	
 
 	}
-	/*
-	@Test
+	
+	//@Test
 	public void testClientEtCompteV2AvecAdresseDePersonne() {
 		
 
@@ -118,7 +118,7 @@ public class TestClientDao {
 
 
 	}
-	*/
+	
 	
 	
 	
