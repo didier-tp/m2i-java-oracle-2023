@@ -28,7 +28,7 @@ public class Client extends Personne{
 	@JoinColumn(name = "idAdresse" , unique = true)
 	private Adresse adressePrincipale; //+get/set
 	
-	@OneToOne(optional = true , mappedBy="client" )
+	@OneToOne(optional = true , mappedBy="client" , cascade = CascadeType.ALL )
 	private AdresseDePersonne adressePrincipaleV2; //+get/set
 	
 	

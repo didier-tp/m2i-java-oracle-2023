@@ -92,30 +92,23 @@ public class TestClientDao {
 
 	}
 	
-	//@Test
+	@Test
 	public void testClientEtCompteV2AvecAdresseDePersonne() {
 		
 
 		Client clientX = new Client(null,"jean" , "Aimare");
 		clientX.setEtat(Personne.EtatPersonne.ENDORMIE);
-		AdresseDePersonne adrPers = new AdresseDePersonne(null,"12 rue Aile" , "75012" , "Pari_ci",clientX);
+		AdresseDePersonne adrPers = 
+				new AdresseDePersonne(null,"12 rue Aile" , "75012" , "Pari_ci",clientX);
 		clientX.setAdressePrincipaleV2(adrPers);
 		clientX = daoClientJpa.insert(clientX);
 		
-		
-		
-		
-    	
-    	//V1: Si relation bi-directionnelle (codée dans les deux sens: @ManyToOne et @OneToMany):
-    	//Client clientXRelu = daoClientJpa.findById(clientX.getNumero());//with lazy exception
+	
     	Client clientXRelu = daoClientJpa.findClientWithComptesById(clientX.getNumero());
     	logger.debug("clientXRelu="+clientXRelu);
     	logger.debug("comptes de clientXRelu="+clientXRelu.getComptes());
-    	assertTrue(clientXRelu.getComptes().size()==2);
-    	assertEquals("75012",clientXRelu.getAdressePrincipale().getCodePostal());
+    	assertEquals("75012",clientXRelu.getAdressePrincipaleV2().getCodePostal());
     
-    	
-
 
 	}
 	

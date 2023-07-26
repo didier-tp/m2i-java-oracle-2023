@@ -2,14 +2,15 @@ package com.inetum.appliSpringJpa.entity;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.MapsId;
 import javax.persistence.OneToOne;
-import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class AdresseDePersonne {
 	
 	@Id
-	//pas de @GeneratedValue ici mais @PrimaryKeyJoinColumn
+	//pas de @GeneratedValue ici mais @MapIds ou  @PrimaryKeyJoinColumn
 	//au dessus de .compte
 	private Long id;
 	
@@ -18,7 +19,9 @@ public class AdresseDePersonne {
 	private String ville;
 	
 	@OneToOne(optional=false)
-	@PrimaryKeyJoinColumn
+	//@PrimaryKeyJoinColumn
+	 @MapsId //mieux que @PrimaryKeyJoinColumn
+	   	@JoinColumn(name = "id")
 	private Client client;
 	
 	//...
