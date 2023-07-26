@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -33,6 +35,11 @@ public class Compte {
 	private String label;
 	
 	private Double solde;
+	
+	@JsonIgnore //pour demander à ignorer la liste des operations
+	            //lorsque l'objet courant de la classe Compte
+	            //sera automatiquement converti de java en json
+	            //AUTRE SOLUTION : n'utiliser que des DTO au niveau des webServices REST
 	
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte" , cascade = CascadeType.ALL)
 	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")

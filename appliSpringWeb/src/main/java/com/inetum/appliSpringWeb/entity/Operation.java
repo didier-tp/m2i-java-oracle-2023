@@ -11,6 +11,8 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -31,6 +33,7 @@ public class Operation {
 	@Temporal(TemporalType.DATE)
 	private Date date;
 	
+	//@JsonIgnore
 	@ManyToOne //Many Operation To one Compte
 	  @JoinColumn(name = "num_compte")
 	private Compte compte;
