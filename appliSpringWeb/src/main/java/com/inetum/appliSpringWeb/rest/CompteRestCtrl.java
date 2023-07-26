@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -42,6 +43,22 @@ public class CompteRestCtrl {
 	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 	}
 	
+	//exemple de fin d'URL: ./api-bank/compte/1
+	//à déclencher en mode DELETE
+	@DeleteMapping("/{numeroCompte}" )
+	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
+		    Compte compteAsupprimer = daoCompteJpa.findById(numeroCompte);
+		    if(compteAsupprimer==null)
+		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
+		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
+		    
+		    daoCompteJpa.deleteById(numeroCompte);
+		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,
+		    		                          HttpStatus.OK); 
+		    //ou bien
+		    //return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
+		}
+	
 	//exemple de fin d'URL: ./api-bank/compte
 	//                      ./api-bank/compte?soldeMini=0
 	@GetMapping("" )
@@ -74,7 +91,6 @@ public class CompteRestCtrl {
 		
 		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compte.getNumero();
 		   
-		    
 		    Compte compteQuiDevraitExister = 
 		    		   numCompteToUpdate!=null ? daoCompteJpa.findById(numCompteToUpdate) : null;
 		    
