@@ -38,7 +38,7 @@ public class InitDataSet {
 		Operation op1CompteA = daoOperationJpa.insert(
 	    		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteAa));
 		
-    	daoCompteJpa.insert(new Compte(null,"compte_Bb" , 80.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_Bbb" , 80.0));
     	daoCompteJpa.insert(new Compte(null,"compte_Cc" , -70.0));
     	daoCompteJpa.insert(new Compte(null,"compte_Dd" , -80.0));
     	daoCompteJpa.insert(new Compte(null,"compte_EEe" , 20.0));
