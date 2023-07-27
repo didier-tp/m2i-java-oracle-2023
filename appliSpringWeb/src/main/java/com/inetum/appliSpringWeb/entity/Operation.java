@@ -21,7 +21,7 @@ import lombok.Setter;
 
 @Entity
 @Getter @Setter @NoArgsConstructor
-@Table(name="TOperation")
+@Table(name="Operation")
 public class Operation {
 	
 	@Id
