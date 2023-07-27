@@ -103,11 +103,21 @@ public class TestClientDao {
 		clientX.setAdressePrincipaleV2(adrPers);
 		clientX = daoClientJpa.insert(clientX);
 		
+		Client clientY = new Client(null,"jean" , "PeuPlu");
+		clientX.setEtat(Personne.EtatPersonne.REVEILLEE);
+		AdresseDePersonne adrPers2 = 
+				new AdresseDePersonne(null,"12 rue xy" , "75010" , "Paris",clientY);
+		clientY.setAdressePrincipaleV2(adrPers2);
+		clientY = daoClientJpa.insert(clientY);
+		
 	
     	Client clientXRelu = daoClientJpa.findClientWithComptesById(clientX.getNumero());
     	logger.debug("clientXRelu="+clientXRelu);
-    	logger.debug("comptes de clientXRelu="+clientXRelu.getComptes());
     	assertEquals("75012",clientXRelu.getAdressePrincipaleV2().getCodePostal());
+    	
+    	Client clientYRelu = daoClientJpa.findClientWithComptesById(clientY.getNumero());
+    	logger.debug("clientYRelu="+clientYRelu);
+    	assertEquals("75010",clientYRelu.getAdressePrincipaleV2().getCodePostal());
     
 
 	}
