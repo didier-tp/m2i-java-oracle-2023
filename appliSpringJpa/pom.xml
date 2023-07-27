@@ -40,13 +40,13 @@
     		<artifactId>ojdbc11</artifactId>
     		<!-- <version>21.5.0.0</version> -->
 		</dependency>
-
 		
-<!--		<dependency>-->
-<!--    		<groupId>org.mariadb.jdbc</groupId>-->
-<!--    		<artifactId>mariadb-java-client</artifactId>-->
-<!--		</dependency>-->
-
+		<dependency>
+			<!-- driver jdbc pour base h2 -->
+			<groupId>com.h2database</groupId>
+			<artifactId>h2</artifactId>
+			<!-- pas de scope=test aujourd'hui -->
+		</dependency>
 
 	
 	</dependencies>

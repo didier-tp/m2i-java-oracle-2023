@@ -23,6 +23,29 @@ public class Operation {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long idOp;
 	
+	/*
+	 NB: strategy = GenerationType.IDENTITY convient bien à 
+	     H2,MYSQL/MariaDB,POSTGRESQL et ORACLE>=12 (Oracle12cDialect)
+	     
+	     strategy = GenerationType.SEQUENCE est obligatoire pour
+	     ORACLE<=11 (OracleDialect) , au lieu de préciser cela dans les 
+	     annotations de la classe entity.Operation.java , 
+	     on peut préciser cela dans le fichier 
+	     src/main/resources/oracle-orm.xml (configuration xml prioritaire sur config @...)
+	     avec spring.jpa.mapping-resources=oracle-orm.xml
+	     dans src/main/resources/application-oracle.properties (config d'un profile SpringBoot)
+	 */
+	
+	/*
+	@Id
+	@GeneratedValue(strategy = GenerationType.SEQUENCE , 
+            generator ="OPERATION_SEQ_GENERATOR")
+    @SequenceGenerator(name = "OPERATION_SEQ_GENERATOR", 
+                sequenceName = "OPERATION_SEQ",
+                initialValue = 100 , allocationSize=1 )
+	private Long idOp;
+	*/
+	
 	private Double montant;
 	private String label;
 	

@@ -11,8 +11,8 @@
             <id name="numero">
                 <column name="numero"/>
                 <generated-value strategy="SEQUENCE" 
-                                 generator="compte_generator"/>
-                <sequence-generator name="compte_generator" 
+                                 generator="COMPTE_SEQ_GENERATOR"/>
+                <sequence-generator name="COMPTE_SEQ_GENERATOR" 
                                     sequence-name="COMPTE_SEQ"
                                     allocation-size='1' />
             </id>
@@ -26,8 +26,8 @@
             <id name="idOp">
                 <column name="id_op"/>
                 <generated-value strategy="SEQUENCE" 
-                                 generator="operation_generator"/>
-                <sequence-generator name="operation_generator" 
+                                 generator="OPERATION_SEQ_GENERATOR"/>
+                <sequence-generator name="OPERATION_SEQ_GENERATOR" 
                                     sequence-name="OPERATION_SEQ"
                                     allocation-size='1'  />
             </id>
