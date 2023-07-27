@@ -187,3 +187,9 @@ alter table toperation add constraint FK2kfnv1krkqi53fw6ophhshq3n foreign key (n
 create table compte (numero number(19,0) generated as identity, label varchar2(255 char), solde double precision, primary key (numero));
 create table toperation (id_op number(19,0) generated as identity, date_op date, label varchar2(255 char), montant double precision, num_compte number(19,0), primary key (id_op));
 alter table toperation add constraint FK2kfnv1krkqi53fw6ophhshq3n foreign key (num_compte) references compte;
+create table compte (numero number(19,0) generated as identity, label varchar2(255 char), solde double precision, primary key (numero));
+create table toperation (id_op number(19,0) generated as identity, date_op date, label varchar2(255 char), montant double precision, num_compte number(19,0), primary key (id_op));
+alter table toperation add constraint FK2kfnv1krkqi53fw6ophhshq3n foreign key (num_compte) references compte;
+create table compte (numero number(19,0) generated as identity, label varchar2(255 char), solde double precision, primary key (numero));
+create table toperation (id_op number(19,0) generated as identity, date_op date, label varchar2(255 char), montant double precision, num_compte number(19,0), primary key (id_op));
+alter table toperation add constraint FK2kfnv1krkqi53fw6ophhshq3n foreign key (num_compte) references compte;

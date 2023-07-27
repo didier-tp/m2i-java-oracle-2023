@@ -163,3 +163,7 @@ drop table compte cascade constraints;
 drop table toperation cascade constraints;
 drop table compte cascade constraints;
 drop table toperation cascade constraints;
+drop table compte cascade constraints;
+drop table toperation cascade constraints;
+drop table compte cascade constraints;
+drop table toperation cascade constraints;
