@@ -41,7 +41,7 @@ public class InitDataSet {
     	daoCompteJpa.insert(new Compte(null,"compte_Bb" , 80.0));
     	daoCompteJpa.insert(new Compte(null,"compte_Cc" , -70.0));
     	daoCompteJpa.insert(new Compte(null,"compte_Dd" , -80.0));
-    	daoCompteJpa.insert(new Compte(null,"compte_EE" , 20.0));
+    	daoCompteJpa.insert(new Compte(null,"compte_EEe" , 20.0));
 	}
 
 }
