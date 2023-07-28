@@ -26,4 +26,11 @@ public class DaoCommandeJpa extends DaoGenericJpa<Commande,Long> implements DaoC
 		super(Commande.class);
 	}
 
+	@Override
+	public Commande findByIdwithAllLines(Long numero) {
+		return entityManager.createNamedQuery("Commande.findByIdwithAllLines",Commande.class)
+				.setParameter(1, numero)
+				.getSingleResult();
+	}
+
 }

@@ -12,6 +12,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.MapKey;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -21,6 +22,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
+@NamedQuery(name="Commande.findByIdwithAllLines",
+            query="SELECT cmde FROM Commande cmde LEFT JOIN FETCH cmde.mapLignesCommande ligne WHERE cmde.numero = ?1")
 @Getter @Setter @NoArgsConstructor
 public class Commande {
 	@Id

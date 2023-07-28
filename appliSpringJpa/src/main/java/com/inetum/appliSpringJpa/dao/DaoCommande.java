@@ -9,4 +9,5 @@ import com.inetum.appliSpringJpa.entity.Commande;
  */
 
 public interface DaoCommande extends DaoGeneric<Commande,Long> {
+	Commande findByIdwithAllLines(Long numero);
 }

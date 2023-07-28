@@ -41,7 +41,10 @@ public class LigneCommande {
 
 	@Override
 	public String toString() {
-		return "LigneCommande [pk=" + pk + ", commande=" + commande + ", produit=" + produit + ", quantite=" + quantite
+		return "LigneCommande [numLigne=" + pk.getNumLigne() 
+		                      + ", numCommande=" + pk.getNumCmde() 
+		                      + ", produit=" + produit + 
+		                      ", quantite=" + quantite
 				+ "]";
 	}
 	

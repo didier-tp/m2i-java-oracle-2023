@@ -1,13 +1,15 @@
 package com.inetum.appliSpringJpa.dao;
 
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import java.util.Date;
+import java.util.Map;
 
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.ActiveProfiles;
 
 import com.inetum.appliSpringJpa.entity.Commande;
 import com.inetum.appliSpringJpa.entity.LigneCommande;
@@ -22,8 +24,11 @@ public class TestCommandeDao {
 	@Autowired 
 	private DaoCommande daoCommandeJpa;
 	
+	/*
+	//pas absolument nécessaire si cascade
 	@Autowired 
 	private DaoLigneCommande daoLigneCommandeJpa;
+	*/
 	
 	@Autowired 
 	private DaoProduit daoProduitJpa;
@@ -47,7 +52,7 @@ public class TestCommandeDao {
 		
 		//V2 (avec Commande.addLigne(produit,qte):
 		Commande cmde1 = daoCommandeJpa.insert(new Commande(null,new Date() ));
-		cmde1.addLigne(produitA, 2); cmde1.addLigne(produitA, 1);
+		cmde1.addLigne(produitA, 2); cmde1.addLigne(produitB, 1);
 		daoCommandeJpa.update(cmde1);
 		
 		Commande cmde2 = daoCommandeJpa.insert(new Commande(null,new Date() ));
@@ -55,6 +60,20 @@ public class TestCommandeDao {
 		daoCommandeJpa.update(cmde2);
     		
 		logger.debug("liste commandes=" + daoCommandeJpa.findAll());
+		
+		Commande cmde1ReluWithAllLines = daoCommandeJpa.findByIdwithAllLines(cmde1.getNumero());
+		logger.debug("lignes_commandes de cmde1 " + cmde1ReluWithAllLines );
+		assertTrue(cmde1ReluWithAllLines.getMapLignesCommande().size()==2);
+		/*
+		for(Map.Entry<Integer,LigneCommande> 
+		      entryMap: cmde1ReluWithAllLines.getMapLignesCommande().entrySet()) {
+			logger.debug("\t" + entryMap.getValue().toString());
+		}
+		*/
+		for(Integer numLigne : cmde1ReluWithAllLines.getMapLignesCommande().keySet()) {
+		    logger.debug("\t" + 
+		      cmde1ReluWithAllLines.getMapLignesCommande().get(numLigne).toString());
+	    }
 		
 	}
 
