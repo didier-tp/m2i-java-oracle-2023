@@ -47,6 +47,12 @@
 			<artifactId>h2</artifactId>
 			<!-- pas de scope=test aujourd'hui -->
 		</dependency>
+		
+		<dependency>
+    		<groupId>org.projectlombok</groupId>
+    		<artifactId>lombok</artifactId>
+   			 <scope>provided</scope>
+		</dependency>
 
 	
 	</dependencies>
