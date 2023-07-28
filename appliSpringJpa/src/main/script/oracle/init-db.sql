@@ -47,36 +47,50 @@ create table adresse (id number(19,0) not null,
 					rue varchar2(32), 
 					ville varchar2(32), 
 					primary key (id));
+					
+CREATE OR REPLACE TRIGGER adresse_insert_trg
+BEFORE INSERT ON adresse FOR EACH ROW
+BEGIN
+  :new.id := adresse_seq.nextval ;
+END;
+/										
+					
 create table adresse_de_personne (id number(19,0) not null,
 					code_postal varchar2(16),
 					rue varchar2(32),
 					ville varchar2(32),
 					primary key (id));
+					
 create table compte (numero number(19,0) ,
 					label varchar2(32), 
 					solde double precision, 
 					primary key (numero));
-/*					
+
+					
 CREATE OR REPLACE TRIGGER compte_insert_trg
-BEFORE INSERT ON compte
-FOR EACH ROW
-WHEN (new.numero is null)
+BEFORE INSERT ON compte FOR EACH ROW
 BEGIN
-  SELECT compte_seq.NEXTVAL
-  INTO   :new.numero
-  FROM   dual;
+  :new.numero := compte_seq.nextval ;
 END;
-/					
-*/	
+/
 						
 create table compte_client (num_compte number(19,0) not null,
 					num_client number(19,0) not null);
+					
 create table operation (id_op number(19,0) not null,
 					date_op date, 
 					label varchar2(64), 
 					montant double precision, 
 					num_compte number(19,0), 
 					primary key (id_op));
+					
+CREATE OR REPLACE TRIGGER operation_insert_trg
+BEFORE INSERT ON operation FOR EACH ROW
+BEGIN
+  :new.id_op := operation_seq.nextval ;
+END;
+/
+					
 create table personne (type_personne varchar2(31) not null,
 					numero number(19,0) not null,
 					etat varchar2(16),
@@ -86,6 +100,13 @@ create table personne (type_personne varchar2(31) not null,
 					email varchar2(64),
 					id_adresse number(19,0),
 					primary key (numero));
+
+CREATE OR REPLACE TRIGGER personne_insert_trg
+BEFORE INSERT ON personne FOR EACH ROW
+BEGIN
+  :new.numero := personne_seq.nextval ;
+END;
+/					
 					
 /*
  création des contraintes relationnelles (fk --> pk valide) 
@@ -107,28 +128,25 @@ foreign key (num_compte) references compte;
 alter table personne add constraint FK16gp2enalx39031p3njj7l1xt 
 foreign key (id_adresse) references adresse;
 
+COMMIT;
+
 /*
  INSERT INTO .... VALUES ... (jeux de données)
  */
 
 INSERT INTO adresse(id,code_postal,rue,ville) 
 VALUES (1,'76000' ,'rue beauvoisine' , 'Rouen');
-
 INSERT INTO adresse(id,code_postal,rue,ville) 
-VALUES (2,'80000' ,'rue qui va bien' , 'Amiens');
+VALUES (null,'80000' ,'rue qui va bien' , 'Amiens');
 
 INSERT INTO personne(type_personne,numero,etat,prenom,nom,telephone,email,id_adresse) 
 VALUES ('Client' , 1 , 'ENDORMIE' , 'olie' ,'Condor','0102030405', null , 1 );
-
 INSERT INTO personne(type_personne,numero,etat,prenom,nom,telephone,email,id_adresse) 
 VALUES ('Client' , 2 , 'REVEILLEE' , 'luc' ,'SkyWalker','0201030405', null , 2 );
-
 INSERT INTO personne(type_personne,numero,etat,prenom,nom,telephone,email,id_adresse) 
 VALUES ('Employe' , 3 , 'REVEILLEE' , 'alex' ,'Therieur',null, 'ls@xy.com' , null);
-
 INSERT INTO personne(type_personne,numero,etat,prenom,nom,telephone,email,id_adresse) 
-VALUES ('Personne' , 4 , 'REVEILLEE' , 'alaix' ,'Therieur',null, null , null );
-
+VALUES ('Personne' , null , 'REVEILLEE' , 'alaix' ,'Therieur',null, null , null );
 
 INSERT INTO compte(numero,label,solde) 
 VALUES (1,'Compte_c1' , 50.0);
@@ -138,14 +156,15 @@ INSERT INTO compte(numero,label,solde)
 VALUES (3,'Compte_c3' , 70.0);
 INSERT INTO compte(numero,label,solde) 
 VALUES (4,'Compte_c4' , 80.0);
-INSERT INTO compte(label,solde) VALUES ('Compte_c5' , 100.0);
+INSERT INTO compte(numero,label,solde)
+VALUES (null,'Compte_c5' , 100.0);
 
 INSERT INTO operation(id_op,date_op,label,montant,num_compte) 
 VALUES (1,to_date('2023-07-27','yyyy-MM-dd') , 'achat1a' , -3.3 , 1);
 INSERT INTO operation(id_op,date_op,label,montant,num_compte) 
 VALUES (2,to_date('2023-07-28','yyyy-MM-dd') , 'achat1b' , -4.4 , 1);
 INSERT INTO operation(id_op,date_op,label,montant,num_compte) 
-VALUES (3,to_date('2023-07-28','yyyy-MM-dd') , 'achat2a' , -5.5 ,2)
+VALUES (null,to_date('2023-07-28','yyyy-MM-dd') , 'achat2a' , -5.5 ,2)
 
 INSERT INTO compte_client(num_compte,num_client) VALUES (1,1);
 INSERT INTO compte_client(num_compte,num_client) VALUES (2,1);
@@ -161,3 +180,5 @@ SELECT * FROM personne;
 SELECT * FROM compte;
 SELECT * FROM operation;
 SELECT * FROM compte_client;
+
+COMMIT;
