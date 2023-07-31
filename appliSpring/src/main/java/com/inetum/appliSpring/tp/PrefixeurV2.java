@@ -9,13 +9,12 @@ import org.springframework.stereotype.Component;
 //@Scope("singleton") //par défaut avec spring "objet/composant de traitement" 
 //créé en un seul exemplaire réutilisé
 //@Component("prefixeurV1QueJaime") //id spécifique "prefixeurV1QueJaime" 
-@Component//id par défaut = "prefixeurV1" 
+@Component//id par défaut = "prefixeurV2" 
 //(nom de la classe avec minuscule au début)
-@Profile("V1") //la classe courante sera prise en charge comme un composant Spring
-//que si le profil "V1" est activé au démarrage (main ou test unitaire)
-public class PrefixeurV1 implements Prefixeur {
+@Profile("V2")
+public class PrefixeurV2 implements Prefixeur {
 	
-	private String prefixe="**";
+	private String prefixe="##";
 
 	@Override
 	public String prefixer(String chaine) {

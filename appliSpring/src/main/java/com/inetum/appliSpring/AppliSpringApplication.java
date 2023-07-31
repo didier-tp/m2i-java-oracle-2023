@@ -9,7 +9,7 @@ import com.inetum.appliSpring.tp2.PresentateurBlague;
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
-		//testEncadreur();
+		testEncadreur();
 		testBlagues();
 	}
 	
@@ -24,6 +24,11 @@ public class AppliSpringApplication {
 	}
 		
 	public static void testEncadreur() {	
+		
+		//System.setProperty("spring.profiles.active", "V1,eventuelProfilComplementaire");
+		System.setProperty("spring.profiles.active", "V2,eventuelProfilComplementaire");
+		//ou bien java .... -Dspring.profiles.active=V1,... dans un .bat ou .sh
+		
 		AnnotationConfigApplicationContext springContext = new
 				AnnotationConfigApplicationContext(MySpringConfig.class);
 		//NB: dès la création de springContext via une configuration xml ou java

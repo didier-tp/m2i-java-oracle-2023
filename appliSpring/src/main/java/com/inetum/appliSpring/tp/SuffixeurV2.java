@@ -5,10 +5,10 @@ import org.springframework.stereotype.Component;
 
 
 @Component//id par défaut = "suffixeurV1" 
-@Profile("V1")
-public class SuffixeurV1 implements Suffixeur {
+@Profile("V2")
+public class SuffixeurV2 implements Suffixeur {
 	
-	private String suffixe="**";
+	private String suffixe="##";
 
 	@Override
 	public String suffixer(String chaine) {

@@ -28,4 +28,5 @@ public class GenerateurBlagueDrole implements GenerateurBlague {
 		return listeBlagues.get(indexAleatoire);
 	}
 
+	
 }
