@@ -1,13 +1,21 @@
 package com.inetum.appliSpring;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
-@SpringBootApplication
+import com.inetum.appliSpring.tp.Prefixeur;
+
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(AppliSpringApplication.class, args);
+		
+		
+		AnnotationConfigApplicationContext springContext = new
+				AnnotationConfigApplicationContext(MySpringConfig.class);
+		Prefixeur prefixeur = springContext.getBean(Prefixeur.class);
+		System.out.println("appliSpring démarrée");
+		System.out.println("chaine prefixee=" + prefixeur.prefixer("lundi"));
+		
+		springContext.close();
 	}
 
 }
