@@ -1,5 +1,7 @@
 package com.inetum.appliSpring;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
 import com.inetum.appliSpring.tp.Encadreur;
@@ -7,6 +9,8 @@ import com.inetum.appliSpring.tp.Prefixeur;
 import com.inetum.appliSpring.tp2.PresentateurBlague;
 
 public class AppliSpringApplication {
+	
+	private static Logger logger = LoggerFactory.getLogger(AppliSpringApplication.class);
 
 	public static void main(String[] args) {
 		testEncadreur();
@@ -14,6 +18,10 @@ public class AppliSpringApplication {
 	}
 	
 	public static void testBlagues() {	
+		
+		System.setProperty("spring.profiles.active", "V1,ProfileDrole,eventuelProfilComplementaire");
+		//System.setProperty("spring.profiles.active", "V2,ProfilePasDrole,eventuelProfilComplementaire");
+				
 		AnnotationConfigApplicationContext springContext = new
 				AnnotationConfigApplicationContext(MySpringConfig.class);
 				
@@ -25,8 +33,8 @@ public class AppliSpringApplication {
 		
 	public static void testEncadreur() {	
 		
-		//System.setProperty("spring.profiles.active", "V1,eventuelProfilComplementaire");
-		System.setProperty("spring.profiles.active", "V2,eventuelProfilComplementaire");
+		//System.setProperty("spring.profiles.active", "V1,ProfileDrole,eventuelProfilComplementaire");
+		System.setProperty("spring.profiles.active", "V2,ProfileDrole,eventuelProfilComplementaire");
 		//ou bien java .... -Dspring.profiles.active=V1,... dans un .bat ou .sh
 		
 		AnnotationConfigApplicationContext springContext = new
@@ -42,7 +50,7 @@ public class AppliSpringApplication {
 		Prefixeur prefixeur = springContext.getBean(Prefixeur.class);
 		//Prefixeur prefixeur = (Prefixeur) springContext.getBean("prefixeurV1");
 		
-		System.out.println("appliSpring démarrée");
+		logger.debug("appliSpring démarrée");
 		System.out.println("chaine prefixee=" + prefixeur.prefixer("lundi"));
 		
 		Encadreur encadreur = springContext.getBean(Encadreur.class);
