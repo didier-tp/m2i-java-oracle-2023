@@ -4,12 +4,23 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.inetum.appliSpring.tp.Encadreur;
 import com.inetum.appliSpring.tp.Prefixeur;
+import com.inetum.appliSpring.tp2.PresentateurBlague;
 
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
-		testEncadreur();
-		//testBlagues();
+		//testEncadreur();
+		testBlagues();
+	}
+	
+	public static void testBlagues() {	
+		AnnotationConfigApplicationContext springContext = new
+				AnnotationConfigApplicationContext(MySpringConfig.class);
+				
+		PresentateurBlague  presentateurBlague= springContext.getBean(PresentateurBlague.class);
+		presentateurBlague.presenterBlague();
+		
+		springContext.close();
 	}
 		
 	public static void testEncadreur() {	
