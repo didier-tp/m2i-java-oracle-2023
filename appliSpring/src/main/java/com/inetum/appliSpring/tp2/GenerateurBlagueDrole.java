@@ -3,11 +3,13 @@ package com.inetum.appliSpring.tp2;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 @Component
-@Profile("ProfileDrole")
+//@Profile("ProfileDrole")
+@Qualifier("Drole") //pouvant coexister à l'exécution
 public class GenerateurBlagueDrole implements GenerateurBlague {
 	
 	private List<String> listeBlagues = new ArrayList<>();

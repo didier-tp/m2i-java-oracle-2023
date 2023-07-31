@@ -13,19 +13,23 @@ public class AppliSpringApplication {
 	private static Logger logger = LoggerFactory.getLogger(AppliSpringApplication.class);
 
 	public static void main(String[] args) {
-		testEncadreur();
+		//testEncadreur();
 		testBlagues();
 	}
 	
 	public static void testBlagues() {	
 		
-		System.setProperty("spring.profiles.active", "V1,ProfileDrole,eventuelProfilComplementaire");
-		//System.setProperty("spring.profiles.active", "V2,ProfilePasDrole,eventuelProfilComplementaire");
+		System.setProperty("spring.profiles.active", "V1,eventuelProfilComplementaire");
+		//System.setProperty("spring.profiles.active", "V2,eventuelProfilComplementaire");
 				
 		AnnotationConfigApplicationContext springContext = new
 				AnnotationConfigApplicationContext(MySpringConfig.class);
 				
 		PresentateurBlague  presentateurBlague= springContext.getBean(PresentateurBlague.class);
+		//plusieurs appels pouvoir avoir une fois sur 2 blagues drôles ou pas
+		presentateurBlague.presenterBlague();
+		presentateurBlague.presenterBlague();
+		presentateurBlague.presenterBlague();
 		presentateurBlague.presenterBlague();
 		
 		springContext.close();
@@ -33,8 +37,8 @@ public class AppliSpringApplication {
 		
 	public static void testEncadreur() {	
 		
-		//System.setProperty("spring.profiles.active", "V1,ProfileDrole,eventuelProfilComplementaire");
-		System.setProperty("spring.profiles.active", "V2,ProfileDrole,eventuelProfilComplementaire");
+		//System.setProperty("spring.profiles.active", "V1,eventuelProfilComplementaire");
+		System.setProperty("spring.profiles.active", "V2,eventuelProfilComplementaire");
 		//ou bien java .... -Dspring.profiles.active=V1,... dans un .bat ou .sh
 		
 		AnnotationConfigApplicationContext springContext = new
