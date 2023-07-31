@@ -8,7 +8,11 @@ import com.inetum.appliSpring.tp.Prefixeur;
 public class AppliSpringApplication {
 
 	public static void main(String[] args) {
+		testEncadreur();
+		//testBlagues();
+	}
 		
+	public static void testEncadreur() {	
 		AnnotationConfigApplicationContext springContext = new
 				AnnotationConfigApplicationContext(MySpringConfig.class);
 		//NB: dès la création de springContext via une configuration xml ou java
