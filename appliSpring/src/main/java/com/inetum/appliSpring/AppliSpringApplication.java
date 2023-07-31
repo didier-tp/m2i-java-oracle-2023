@@ -2,6 +2,7 @@ package com.inetum.appliSpring;
 
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 
+import com.inetum.appliSpring.tp.Encadreur;
 import com.inetum.appliSpring.tp.Prefixeur;
 
 public class AppliSpringApplication {
@@ -23,6 +24,10 @@ public class AppliSpringApplication {
 		
 		System.out.println("appliSpring démarrée");
 		System.out.println("chaine prefixee=" + prefixeur.prefixer("lundi"));
+		
+		Encadreur encadreur = springContext.getBean(Encadreur.class);
+		System.out.println("chaine encadrée=" + encadreur.encadrer("bob"));
+		
 		
 		springContext.close();//arrêt/fermeture de Spring
 	}
