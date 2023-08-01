@@ -24,5 +24,8 @@ public interface DaoCompte extends JpaRepository<Compte,Long> {
 	//selon les conventions de nommage de SpringData (findBy...)
      List<Compte> findBySoldeGreaterThanEqual(double soldeMini); //ancien nom = findBySoldeMini
      List<Compte> findBySoldeLessThanEqual(double soldeMaxi);//ancien nom = findBySoldeMaxi
+     
+     //codé via @NamedQuery(name="Compte.findBySoldeMini")
+     List<Compte> findBySoldeMini(double soldeMini); 
     
 }

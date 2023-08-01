@@ -2,6 +2,7 @@ package com.inetum.appliSpringWeb.dao;
 
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.Date;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Operation;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
 @ActiveProfiles({"oracle"}) //pour prendre en compte application-oracle.properties
@@ -24,6 +26,28 @@ public class TestCompteDao {
 	//avec l'interface DaoCompte (DaoCompteJpa avec@Repository)
 	private DaoCompte daoCompteJpa;
 	
+	@Autowired
+	private DaoOperation daoOperationJpa;
+	
+	@Test 
+	public void testCompteAvecOperations() {
+         Compte compteAa = daoCompteJpa.save(new Compte(null,"compte_Aa" , 70.0));
+		
+		Operation op1CompteA = daoOperationJpa.save(
+	    		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteAa));
+		
+    	daoCompteJpa.save(new Compte(null,"compte_Bbb" , 80.0));
+    	
+    	//Compte compteARelu = daoCompteJpa.findById(compteAa.getNumero()).orElse(null);
+    	Compte compteARelu = daoCompteJpa.findByIdWithOperations(compteAa.getNumero()).orElse(null);
+    	logger.debug("compteARelu=" + compteARelu.toString());
+    	
+    	logger.debug("operations du compteARelu :");
+    	for(Operation op : compteARelu.getOperations()) {
+    		logger.debug("\t" + op.toString());
+    	}
+	}
+	
 	
 	@Test
 	public void testQueries() {
@@ -32,7 +56,8 @@ public class TestCompteDao {
     	daoCompteJpa.save(new Compte(null,"compte_C" , 250.0));
     	daoCompteJpa.save(new Compte(null,"compte_D" , 540.0));
     			
-		List<Compte> comptesAvecSoldeMini100 = daoCompteJpa.findBySoldeGreaterThanEqual(100.0);
+		//List<Compte> comptesAvecSoldeMini100 = daoCompteJpa.findBySoldeGreaterThanEqual(100.0);
+		List<Compte> comptesAvecSoldeMini100 = daoCompteJpa.findBySoldeMini(100.0);
 		assertTrue(comptesAvecSoldeMini100.size()>=2);
 		
 		logger.trace("comptesAvecSoldeMini100="+comptesAvecSoldeMini100);
