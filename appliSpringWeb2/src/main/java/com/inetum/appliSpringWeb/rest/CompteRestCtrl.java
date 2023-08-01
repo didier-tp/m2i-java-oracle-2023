@@ -47,8 +47,8 @@ public class CompteRestCtrl {
 	//à déclencher en mode DELETE
 	@DeleteMapping("/{numeroCompte}" )
 	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-		    Compte compteAsupprimer = daoCompteJpa.findById(numeroCompte).orElse(null);
-		    if(compteAsupprimer==null)
+		    
+		    if( !daoCompteJpa.existsById(numeroCompte))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
