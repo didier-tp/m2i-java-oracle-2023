@@ -1,0 +1,2 @@
+https://github.com/didier-tp/spring_nov2022
+partie AppliSpringSansSpringBoot
