@@ -22,7 +22,10 @@ import lombok.Setter;
 
 @NamedQuery(name = "Compte.findBySoldeMini", 
             query = "SELECT c FROM Compte c WHERE c.solde>= ?1")
-
+@NamedQuery(name = "Compte.findByIdWithOperations" ,
+		    query = "SELECT c FROM Compte c LEFT JOIN FETCH c.operations WHERE c.numero= ?1")
+//NB: le mot clef FETCH permet de remonter tout de suite en mémoire
+//les éléments de la collection des operations (même en mode LAZY imposé par spring-data)
 @Getter @Setter @NoArgsConstructor
 public class Compte {
 

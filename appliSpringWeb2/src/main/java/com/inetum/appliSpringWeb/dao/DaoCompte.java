@@ -1,6 +1,7 @@
 package com.inetum.appliSpringWeb.dao;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
@@ -27,5 +28,8 @@ public interface DaoCompte extends JpaRepository<Compte,Long> {
      
      //codé via @NamedQuery(name="Compte.findBySoldeMini")
      List<Compte> findBySoldeMini(double soldeMini); 
+     
+     //codé via @NamedQuery(name="Compte.findByIdWithOperations")
+     Optional<Compte> findByIdWithOperations(Long numCompte);
     
 }

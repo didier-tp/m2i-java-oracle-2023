@@ -35,8 +35,13 @@ public class TestCompteDao {
 		
 		Operation op1CompteA = daoOperationJpa.save(
 	    		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteAa));
+		Operation op2CompteA = daoOperationJpa.save(
+	    		new Operation(null,-3.3 , "achat gateau" , new Date() , compteAa));
 		
-    	daoCompteJpa.save(new Compte(null,"compte_Bbb" , 80.0));
+		Compte compteBb = daoCompteJpa.save(new Compte(null,"compte_Bbb" , 80.0));
+    	
+    	Operation op1CompteB = daoOperationJpa.save(
+	    		new Operation(null,-1.3 , "achat raisonnable" , new Date() , compteBb));
     	
     	//Compte compteARelu = daoCompteJpa.findById(compteAa.getNumero()).orElse(null);
     	Compte compteARelu = daoCompteJpa.findByIdWithOperations(compteAa.getNumero()).orElse(null);
