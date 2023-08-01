@@ -35,7 +35,7 @@ public class CompteRestCtrl {
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
 	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-	    Compte compte = daoCompteJpa.findById(numeroCompte);
+	    Compte compte = daoCompteJpa.findById(numeroCompte).orElse(null);
 	    if(compte!=null)
 	    	return new ResponseEntity<Compte>(compte, HttpStatus.OK);
 	    else
@@ -47,7 +47,7 @@ public class CompteRestCtrl {
 	//à déclencher en mode DELETE
 	@DeleteMapping("/{numeroCompte}" )
 	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-		    Compte compteAsupprimer = daoCompteJpa.findById(numeroCompte);
+		    Compte compteAsupprimer = daoCompteJpa.findById(numeroCompte).orElse(null);
 		    if(compteAsupprimer==null)
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
@@ -66,7 +66,7 @@ public class CompteRestCtrl {
 		if(soldeMini==null)
 			return daoCompteJpa.findAll();
 		else
-			return daoCompteJpa.findBySoldeMini(soldeMini);
+			return daoCompteJpa.findBySoldeGreaterThanEqual(soldeMini);
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte
@@ -75,7 +75,7 @@ public class CompteRestCtrl {
 	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0 }
 	@PostMapping("" )
 	public Compte postCompte(@RequestBody Compte nouveauCompte) {
-		Compte compteEnregistreEnBase = daoCompteJpa.insert(nouveauCompte);
+		Compte compteEnregistreEnBase = daoCompteJpa.save(nouveauCompte);
 		return compteEnregistreEnBase; //on retourne le compte avec clef primaire auto_incrémentée
 	}
 	
@@ -91,7 +91,7 @@ public class CompteRestCtrl {
 		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compte.getNumero();
 		   
 		    Compte compteQuiDevraitExister = 
-		    		   numCompteToUpdate!=null ? daoCompteJpa.findById(numCompteToUpdate) : null;
+		    		   numCompteToUpdate!=null ? daoCompteJpa.findById(numCompteToUpdate).orElse(null) : null;
 		    
 		    if(compteQuiDevraitExister==null)
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
@@ -99,7 +99,7 @@ public class CompteRestCtrl {
 		    
 		    if(compte.getNumero()==null)
 		    	compte.setNumero(numCompteToUpdate);
-			daoCompteJpa.update(compte);
+			daoCompteJpa.save(compte);
 			return new ResponseEntity<Compte>(compte , HttpStatus.OK);
 	}
 	

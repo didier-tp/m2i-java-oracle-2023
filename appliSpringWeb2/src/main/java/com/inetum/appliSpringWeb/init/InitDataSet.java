@@ -33,15 +33,15 @@ public class InitDataSet {
 	
 	@PostConstruct
 	public void initData() {
-		Compte compteAa = daoCompteJpa.insert(new Compte(null,"compte_Aa" , 70.0));
+		Compte compteAa = daoCompteJpa.save(new Compte(null,"compte_Aa" , 70.0));
 		
-		Operation op1CompteA = daoOperationJpa.insert(
+		Operation op1CompteA = daoOperationJpa.save(
 	    		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteAa));
 		
-    	daoCompteJpa.insert(new Compte(null,"compte_Bbb" , 80.0));
-    	daoCompteJpa.insert(new Compte(null,"compte_Cc" , -70.0));
-    	daoCompteJpa.insert(new Compte(null,"compte_Dd" , -80.0));
-    	daoCompteJpa.insert(new Compte(null,"compte_EEe" , 20.0));
+    	daoCompteJpa.save(new Compte(null,"compte_Bbb" , 80.0));
+    	daoCompteJpa.save(new Compte(null,"compte_Cc" , -70.0));
+    	daoCompteJpa.save(new Compte(null,"compte_Dd" , -80.0));
+    	daoCompteJpa.save(new Compte(null,"compte_EEe" , 20.0));
 	}
 
 }

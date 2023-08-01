@@ -33,13 +33,13 @@ public class VirementRestCtrl {
 		    */
 		    BeanUtils.copyProperties(virementRequest, virementResponse);
 		    try {
-				Compte compteDebiter = daoCompte.findById(virementRequest.getNumCompteDebit());
+				Compte compteDebiter = daoCompte.findById(virementRequest.getNumCompteDebit()).get();
 				compteDebiter.setSolde(compteDebiter.getSolde() - virementRequest.getMontant());
-				daoCompte.update(compteDebiter);
+				daoCompte.save(compteDebiter);
 				
-				Compte compteCrediter = daoCompte.findById(virementRequest.getNumCompteCredit());
+				Compte compteCrediter = daoCompte.findById(virementRequest.getNumCompteCredit()).get();
 				compteCrediter.setSolde(compteCrediter.getSolde() + virementRequest.getMontant());
-				daoCompte.update(compteCrediter);
+				daoCompte.save(compteCrediter);
 				
 				virementResponse.setStatus(true);
 				virementResponse.setMessage("virement bien effectué");
