@@ -1,5 +1,10 @@
 package com.inetum.appliSpring;
 
+import java.sql.Connection;
+import java.sql.SQLException;
+
+import javax.sql.DataSource;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.AnnotationConfigApplicationContext;
@@ -15,7 +20,27 @@ public class AppliSpringApplication {
 
 	public static void main(String[] args) {
 		//testEncadreur();
-		testBlagues();
+		//testBlagues();
+		testDataSource();
+	}
+	
+	public static void testDataSource() {	
+		
+		AnnotationConfigApplicationContext springContext = new
+				AnnotationConfigApplicationContext(DataSourceConfig.class);
+		
+		//DataSource ds = springContext.getBean(DataSource.class);
+		DataSource ds = (DataSource) springContext.getBean("myDataSource");
+		
+		try {
+			Connection cn = ds.getConnection();
+			//...requetes SQL...
+			System.out.println("connection ouverte=" + cn.toString());
+			cn.close();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		springContext.close();
 	}
 	
 	public static void testBlagues() {	
