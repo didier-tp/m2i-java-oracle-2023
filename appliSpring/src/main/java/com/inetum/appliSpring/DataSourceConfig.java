@@ -24,6 +24,18 @@ public class DataSourceConfig {
 	@Value("${db.password}")
 	private String dbPassword;
 	
+	/*
+	@Bean(name="myDataSource")
+	public DataSource dataSource() {
+		com.zaxxer.hikari.HikariDataSource dataSource = new com.zaxxer.hikari.HikariDataSource();
+		dataSource.setDriverClassName(jdbcDriver);
+		dataSource.setJdbcUrl(dbUrl);
+		dataSource.setUsername(dbUsername);
+		dataSource.setPassword(dbPassword);
+		return dataSource;
+	}*/
+	
+	
 	@Bean(name="myDataSource")
 	public DataSource dataSource() {
 		DriverManagerDataSource dataSource = new DriverManagerDataSource();
