@@ -17,8 +17,8 @@ public class PresentateurBlagueImpl implements PresentateurBlague {
 	
 	/*
 	@Autowired
-	public PresentateurBlagueImpl(GenerateurBlague @Qualifier("Drole") generateurBlagueDrole , 
-			                 GenerateurBlague @Qualifier("PasDrole") generateurBlaguePasDrole ) {
+	public PresentateurBlagueImpl(@Qualifier("Drole") GenerateurBlague  generateurBlagueDrole , 
+			                 @Qualifier("PasDrole") GenerateurBlague  generateurBlaguePasDrole ) {
 		this.generateurBlagueDrole = generateurBlagueDrole;
 		this.generateurBlaguePasDrole = generateurBlaguePasDrole;
 	}
