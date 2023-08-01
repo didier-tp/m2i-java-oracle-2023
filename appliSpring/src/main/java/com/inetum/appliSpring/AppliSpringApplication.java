@@ -6,6 +6,7 @@ import org.springframework.context.annotation.AnnotationConfigApplicationContext
 
 import com.inetum.appliSpring.tp.Encadreur;
 import com.inetum.appliSpring.tp.Prefixeur;
+import com.inetum.appliSpring.tp2.GenerateurBlague;
 import com.inetum.appliSpring.tp2.PresentateurBlague;
 
 public class AppliSpringApplication {
@@ -24,6 +25,13 @@ public class AppliSpringApplication {
 				
 		AnnotationConfigApplicationContext springContext = new
 				AnnotationConfigApplicationContext(MySpringConfig.class);
+		
+		//GenerateurBlague generateurBlague = springContext.getBean(GenerateurBlague.class);
+		//erreur car 2 versions possibles
+		
+		GenerateurBlague generateurBlague = 
+				(GenerateurBlague) springContext.getBean("generateurBlagueDrole");
+		//Rappel : id par defaut = nomClasse avec première lettre en minuscule
 				
 		PresentateurBlague  presentateurBlague= springContext.getBean(PresentateurBlague.class);
 		//plusieurs appels pouvoir avoir une fois sur 2 blagues drôles ou pas
