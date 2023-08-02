@@ -88,11 +88,17 @@ public class ServiceCompteImpl implements ServiceCompte {
 	@Override
 	public void debiterCompte(long numeroCompte, double montant, String message) {
 		Compte compteDeb = daoCompte.findById(numeroCompte).get();
-		compteDeb.setSolde(compteDeb.getSolde() - montant);
-		daoCompte.save(compteDeb); //.save() facultatif à l'état persistant (effet de @Transactional)
-		
-		Operation opDebit = daoOperation.save(
-	    		new Operation(null,-montant , message , new Date() , compteDeb));
+		double nouveauSoldeTheoriqueApresDebit = compteDeb.getSolde() - montant;
+		if(nouveauSoldeTheoriqueApresDebit >= Compte.getDecouvertAutorise()) {
+			compteDeb.setSolde(nouveauSoldeTheoriqueApresDebit);
+			daoCompte.save(compteDeb); //.save() facultatif à l'état persistant (effet de @Transactional)
+			
+			Operation opDebit = daoOperation.save(
+		    		new Operation(null,-montant , message , new Date() , compteDeb));
+		}else {
+			throw new BankException("solde insuffisant vis à vis du découvertAutorise=" +
+			  Compte.getDecouvertAutorise() + " pour effectuer un debit de " + montant);
+		}
 	}
 
 	@Override

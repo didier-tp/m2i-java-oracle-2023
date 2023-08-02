@@ -36,8 +36,8 @@ public class TestServiceCompte {
 	
 	@Test
 	public void testMauvaisTransfert() {
-		Compte cptA = serviceCompte.sauvegarderCompte(new Compte(null,"compteA" , 50.0));
-		Compte cptB = serviceCompte.sauvegarderCompte(new Compte(null,"compteB" , 100.0));
+		Compte cptA = serviceCompte.sauvegarderCompte(new Compte(null,"compteAa" , 50.0));
+		Compte cptB = serviceCompte.sauvegarderCompte(new Compte(null,"compteBb" , 100.0));
 		logger.trace("avant mauvais virement: cptA = " + cptA.getSolde() 
 		                           + " et cptB = " + cptB.getSolde());
 		try {
