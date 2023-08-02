@@ -55,7 +55,8 @@ public class ServiceCompteImpl implements ServiceCompte {
 			//et pas de "LazyException" à l'intérieur de la méthode du service
 		} catch (Exception e) {
 			//e.printStackTrace();
-			logger.error("echec virement" , e);
+			//logger.error("echec virement" , e);
+			logger.error("echec virement" + e.getMessage());
 			throw new BankException("echec virement" , e);
 		}
 	};

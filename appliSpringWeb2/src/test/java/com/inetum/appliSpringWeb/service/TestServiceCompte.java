@@ -54,5 +54,25 @@ public class TestServiceCompte {
 		assertEquals(cptA.getSolde()  , cptA_apres.getSolde() , 0.0001);
 		assertEquals(cptB.getSolde()  , cptB_apres.getSolde() , 0.0001);
 	}
+	
+	@Test
+	public void testTransfertAnnuleSiPasAssezArgent() {
+		Compte cptA = serviceCompte.sauvegarderCompte(new Compte(null,"compteAaa" , 50.0));
+		Compte cptB = serviceCompte.sauvegarderCompte(new Compte(null,"compteBbb" , 100.0));
+		logger.trace("avant virement sans assez argent: cptA = " + cptA.getSolde() 
+		                           + " et cptB = " + cptB.getSolde());
+		try {
+			serviceCompte.transferer(2000, cptA.getNumero(), cptB.getNumero()); 
+		} catch (Exception e) {
+			logger.trace("exception normale en cas de virement annulé "
+					     + e.getMessage());
+		}
+		Compte cptA_apres = serviceCompte.rechercherCompteParNumero(cptA.getNumero());
+		Compte cptB_apres = serviceCompte.rechercherCompteParNumero(cptB.getNumero());
+		logger.trace("apres virement sans assez argent: cptA_apres = " + cptA_apres.getSolde() 
+                                       + " et cptB_apres = " + cptB_apres.getSolde());
+		assertEquals(cptA.getSolde()  , cptA_apres.getSolde() , 0.0001);
+		assertEquals(cptB.getSolde()  , cptB_apres.getSolde() , 0.0001);
+	}
 
 }
