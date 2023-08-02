@@ -13,10 +13,11 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
-@ActiveProfiles({"oracle"}) //pour prendre en compte application-oracle.properties
+//@ActiveProfiles({"oracle"}) //pour prendre en compte application-oracle.properties
 public class TestCompteDao {
 	
 	Logger logger = LoggerFactory.getLogger(TestCompteDao.class);
@@ -28,6 +29,36 @@ public class TestCompteDao {
 	
 	@Autowired
 	private DaoOperation daoOperationJpa;
+	
+	@Autowired
+	private DaoCustomer daoCustomerJpa;
+	
+	@Test 
+	public void testComptesAvecCustomer() {
+		
+		Customer c1 = daoCustomerJpa.save(new Customer(null,"prenom1" , "nom1" , "pwd1"));
+		Customer c2 = daoCustomerJpa.save(new Customer(null,"prenom2" , "nom2" , "pwd2"));
+		
+		Compte compteAdeC1 = new Compte(null,"compteAdeC1" , 70.0);
+		compteAdeC1.setCustomer(c1);
+		Compte compteBdeC1 = new Compte(null,"compteBdeC1" , 80.0);
+		compteBdeC1.setCustomer(c1);
+		
+		compteAdeC1 = daoCompteJpa.save(compteAdeC1);
+		compteBdeC1 = daoCompteJpa.save(compteBdeC1);
+		
+		Compte compte1deC2 = new Compte(null,"compte1deC2" , 40.0);
+		compte1deC2.setCustomer(c2);
+		compte1deC2 = daoCompteJpa.save(compte1deC2);
+		
+		List<Compte> listeComptesDeC1 = daoCompteJpa.findByCustomerId(c1.getId());
+		assertTrue(listeComptesDeC1.size()==2);
+		logger.debug("comptes de c1 :");
+		for(Compte cpt : listeComptesDeC1) {
+    		logger.debug("\t" + cpt.toString());
+    	}
+		
+	}
 	
 	@Test 
 	public void testCompteAvecOperations() {

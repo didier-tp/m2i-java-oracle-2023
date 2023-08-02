@@ -21,10 +21,14 @@ public interface DaoCompte extends JpaRepository<Compte,Long> {
     .deleteById() 
     héritées de JpaRepository / CrudRepository
     */
-	//Les deux méthodes suivantes seront codées automatiquement (req SQL / JPAQL)
+	//Les trois méthodes suivantes seront codées automatiquement (req SQL / JPAQL)
 	//selon les conventions de nommage de SpringData (findBy...)
      List<Compte> findBySoldeGreaterThanEqual(double soldeMini); //ancien nom = findBySoldeMini
      List<Compte> findBySoldeLessThanEqual(double soldeMaxi);//ancien nom = findBySoldeMaxi
+     
+     List<Compte> findByCustomerId(Long idCustomer);//without NamedQuery
+     //findByCustomerId=findBy Customer Id , .customer exists in Compte.class , .id exists in Customer.class
+     //automatic query from method name = SELECT cpt FROM COMPTE cpt WHERE cpt.customer.id = ?1
      
      //codé via @NamedQuery(name="Compte.findBySoldeMini")
      List<Compte> findBySoldeMini(double soldeMini); 
