@@ -53,7 +53,6 @@ public class TestServiceCompte {
                                        + " et cptB_apres = " + cptB_apres.getSolde());
 		assertEquals(cptA.getSolde()  , cptA_apres.getSolde() , 0.0001);
 		assertEquals(cptB.getSolde()  , cptB_apres.getSolde() , 0.0001);
-		
 	}
 
 }

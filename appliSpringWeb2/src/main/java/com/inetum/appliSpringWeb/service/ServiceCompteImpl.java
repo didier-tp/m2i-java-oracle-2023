@@ -11,22 +11,29 @@ import com.inetum.appliSpringWeb.entity.Compte;
 
 //@Component
 @Service
-//@Transactional
+@Transactional //ici (sur une classe de Service) en tant que bonne pratique
 public class ServiceCompteImpl implements ServiceCompte {
 	
 	@Autowired
 	private DaoCompte daoCompte;
 
 	@Override
-	@Transactional
+	//@Transactional(propagation = Propagation.REQUIRED) //par défaut
+	//@Transactional()  //maintenant au dessus de la classe entière
 	public void transferer(double montant, long numCptDeb, long numCptCred) {
 		Compte compteDeb = daoCompte.findById(numCptDeb).get();
 		compteDeb.setSolde(compteDeb.getSolde() - montant);
-		daoCompte.save(compteDeb);
+		daoCompte.save(compteDeb); //.save() facultatif à l'état persistant
 		
 		Compte compteCred = daoCompte.findById(numCptCred).get();
 		compteCred.setSolde(compteCred.getSolde() + montant);
-		daoCompte.save(compteCred);
+		daoCompte.save(compteCred); //.save() facultatif à l'état persistant
+		
+		//si @Transaction sur classe de service (ce qui est le cas général , bonne pratique)
+		//toutes les entités remontées par les DAOs à coup de .findBy...()
+		//sont à l'état persistant(es)
+		//et donc .save() automatique en cas de transaction réussie (sans exception)
+		//et pas de "LazyException" à l'intérieur de la méthode du service
 	}
 
 	@Override
