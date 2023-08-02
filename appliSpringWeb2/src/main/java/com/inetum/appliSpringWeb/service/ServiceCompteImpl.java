@@ -115,14 +115,13 @@ public class ServiceCompteImpl implements ServiceCompte {
 
 	@Override
 	public Compte rechercherCompteAvecOperationsParNumero(long numeroCompte) {
-		// TODO Auto-generated method stub
-		return null;
+		return daoCompte.findByIdWithOperations(numeroCompte).orElse(null);
 	}
 
 	@Override
 	public List<Operation> operationsDuCompteQueJaime(long numeroCompte) {
-		// TODO Auto-generated method stub
-		return null;
+		Compte cpt =  daoCompte.findByIdWithOperations(numeroCompte).get();
+		return cpt.getOperations();
 	}
 
 }
