@@ -113,4 +113,16 @@ public class ServiceCompteImpl implements ServiceCompte {
 		
 	}
 
+	@Override
+	public Compte rechercherCompteAvecOperationsParNumero(long numeroCompte) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Operation> operationsDuCompteQueJaime(long numeroCompte) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Operation;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
 //@ActiveProfiles({"oracle"}) //pour prendre en compte application-oracle.properties
@@ -26,12 +27,17 @@ public class TestServiceCompte {
 		logger.trace("avant bon virement: cptA = " + cptA.getSolde() 
 		                           + " et cptB = " + cptB.getSolde());
 		serviceCompte.transferer(20, cptA.getNumero(), cptB.getNumero());
-		Compte cptA_apres = serviceCompte.rechercherCompteParNumero(cptA.getNumero());
-		Compte cptB_apres = serviceCompte.rechercherCompteParNumero(cptB.getNumero());
+		Compte cptA_apres = serviceCompte.rechercherCompteAvecOperationsParNumero(cptA.getNumero());
+		Compte cptB_apres = serviceCompte.rechercherCompteAvecOperationsParNumero(cptB.getNumero());
 		logger.trace("apres bon virement: cptA_apres = " + cptA_apres.getSolde() 
                                    + " et cptB_apres = " + cptB_apres.getSolde());
 		assertEquals(cptA.getSolde() - 20 , cptA_apres.getSolde() , 0.0001);
 		assertEquals(cptB.getSolde() + 20 , cptB_apres.getSolde() , 0.0001);
+		
+		logger.trace("pour le fun, on affiche la liste des operations de cptA_apres:");
+		for(Operation op : cptA_apres.getOperations()) {
+			logger.trace("\t" + op.toString());
+		}
 	}
 	
 	@Test
