@@ -41,7 +41,7 @@ public class TestServiceCompte {
 		logger.trace("avant mauvais virement: cptA = " + cptA.getSolde() 
 		                           + " et cptB = " + cptB.getSolde());
 		try {
-			serviceCompte.transferer(20, cptA.getNumero(), -2); 
+			serviceCompte.transferer(20, cptA.getNumero(), -2L); 
 			//-2 = numero d'un compte à créditer qui n'existe pas
 		} catch (Exception e) {
 			logger.trace("exception normale en cas de mauvais virement "

@@ -9,6 +9,8 @@ import com.inetum.appliSpringWeb.exception.BankException;
 //avec remontées d'exceptions (héritant de RuntimeException)
 public interface ServiceCompte {
 	//méthode spécifique au métier de la banque 
+	void debiterCompte(long numeroCompte , double montant , String message);
+	void crediterCompte(long numeroCompte , double montant , String message);
 	void transferer(double montant, long numCptDeb , long numCptCred) throws BankException;
 	//...
 	
