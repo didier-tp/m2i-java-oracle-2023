@@ -8,6 +8,7 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
 import lombok.Getter;
@@ -16,7 +17,8 @@ import lombok.Setter;
 
 @Entity
 
-
+@NamedQuery(name="Customer.findByIdWithComptes" ,
+            query="SELECT c FROM Customer c LEFT JOIN FETCH c.comptes WHERE c.id = ?1")
 @Getter @Setter @NoArgsConstructor
 public class Customer {
 	@Id
