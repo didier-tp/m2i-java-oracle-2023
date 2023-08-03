@@ -97,17 +97,16 @@ public class CompteRestCtrl {
 		
 		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compteDto.getNumero();
 		   
-		    Compte compteQuiDevraitExister = 
-		    		   numCompteToUpdate!=null ? daoCompteJpa.findById(numCompteToUpdate).orElse(null) : null;
-		    
-		    if(compteQuiDevraitExister==null)
+		   
+		    if(!serviceCompte.verifierExistanceCompte(numCompteToUpdate))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
  			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
-		    if(compte.getNumero()==null)
-		    	compte.setNumero(numCompteToUpdate);
-			daoCompteJpa.save(compte);
-			return new ResponseEntity<Compte>(compte , HttpStatus.OK);
+		    if(compteDto.getNumero()==null)
+		    	compteDto.setNumero(numCompteToUpdate);
+		    
+			serviceCompte.sauvegarderCompte(dtoConverter.compteDtoToCompte(compteDto));
+			return new ResponseEntity<CompteDto>(compteDto , HttpStatus.OK);
 	}
 	
 	
