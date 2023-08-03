@@ -77,12 +77,12 @@ public class ServiceCompteImpl implements ServiceCompte {
 	}
 
 	@Override
-	public void deleteById(long numeroCompte) {
+	public void deleteById(Long numeroCompte) {
 		daoCompte.deleteById(numeroCompte);
 	}
 
 	@Override
-	public boolean existById(long numeroCompte) {
+	public boolean existById(Long numeroCompte) {
 		return daoCompte.existsById(numeroCompte);
 	}
 
