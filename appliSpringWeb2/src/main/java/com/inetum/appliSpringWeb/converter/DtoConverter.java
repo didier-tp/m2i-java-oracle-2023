@@ -21,7 +21,8 @@ public class DtoConverter {
 		CompteDto compteDto = new CompteDto();
 		
 		compteDto.setNumero(entity.getNumero());
-		compteDto.setLabel(entity.getLabel());
+		//compteDto.setLabel(entity.getLabel());
+		compteDto.setLabel(entity.getLabel().toUpperCase());
 		compteDto.setSolde(entity.getSolde());
 		
 		//BeanUtils.copyProperties(entity, compteDto); //compact/écriture concise mais pas rapide
