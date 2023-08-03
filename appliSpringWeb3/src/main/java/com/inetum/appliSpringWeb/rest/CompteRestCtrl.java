@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.appliSpringWeb.converter.DtoConverter;
+import com.inetum.appliSpringWeb.converter.GenericConverter;
 import com.inetum.appliSpringWeb.dto.CompteDto;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.service.ServiceCompte;
@@ -42,9 +43,7 @@ public class CompteRestCtrl {
 	    Compte compte = serviceCompte.rechercherCompteParNumero(numeroCompte);
 	    if(compte!=null)
 	    	return new ResponseEntity<CompteDto>(
-	    			 dtoConverter.compteToCompteDto(compte), HttpStatus.OK); 
-	    	/*return new ResponseEntity<Compte>(
-	    			 compte, HttpStatus.OK);*/
+	    			 GenericConverter.map(compte,CompteDto.class), HttpStatus.OK); 
 	    else
 	    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
