@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.appliSpringWeb.converter.DtoConverter;
-import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dto.CompteDto;
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.service.ServiceCompte;
 
 @RestController
 @RequestMapping(value="/api-bank/compte" , headers="Accept=application/json")
@@ -32,14 +32,14 @@ public class CompteRestCtrl {
 	//NB: cette version 1 n'utilise pas encore les DTOs 
 	
 	@Autowired
-	private DaoCompte daoCompteJpa;
+	private ServiceCompte serviceCompte;
 	
 	private DtoConverter dtoConverter = new DtoConverter();
 	
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
 	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-	    Compte compte = daoCompteJpa.findById(numeroCompte).orElse(null);
+	    Compte compte = serviceCompte.rechercherCompteParNumero(numeroCompte);
 	    if(compte!=null)
 	    	return new ResponseEntity<CompteDto>(
 	    			 dtoConverter.compteToCompteDto(compte), HttpStatus.OK);
