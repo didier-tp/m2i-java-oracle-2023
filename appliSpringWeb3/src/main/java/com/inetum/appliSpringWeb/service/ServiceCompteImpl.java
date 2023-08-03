@@ -70,30 +70,15 @@ public class ServiceCompteImpl
 		}
 	};
 
-	@Override
-	public Compte searchById(Long numeroCompte) {
-		return daoCompte.findById(numeroCompte).orElse(null);
-	}
+	
 
 	@Override
 	public List<Compte> rechercherComptesDuClient(long numeroCustomer) {
 		return daoCompte.findByCustomerId(numeroCustomer);
 	}
 
-	@Override
-	public Compte saveOrUpdate(Compte compte) {
-		return daoCompte.save(compte);
-	}
+	
 
-	@Override
-	public void deleteById(Long numeroCompte) {
-		daoCompte.deleteById(numeroCompte);
-	}
-
-	@Override
-	public boolean existById(Long numeroCompte) {
-		return daoCompte.existsById(numeroCompte);
-	}
 
 	@Override
 	public void debiterCompte(long numeroCompte, double montant, String message) {
@@ -133,11 +118,7 @@ public class ServiceCompteImpl
 		return cpt.getOperations();
 	}
 
-	@Override
-	public List<Compte> searchAll() {
-		return daoCompte.findAll();
-	}
-
+	
 	@Override
 	public List<Compte> rechercherSelonSoldeMini(Double soldeMini) {
 		return daoCompte.findBySoldeGreaterThanEqual(soldeMini);
