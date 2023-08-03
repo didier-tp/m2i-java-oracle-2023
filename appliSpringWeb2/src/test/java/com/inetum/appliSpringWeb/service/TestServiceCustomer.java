@@ -58,17 +58,14 @@ public class TestServiceCustomer {
 	public void testSurPassword() {
 		Customer c1 = serviceCustomer.sauvegarderCustomer(
 				new Customer(null,"prenom1" , "nom1" , "pwd1"));
-		
 		boolean pwdNotOK = serviceCustomer.checkCustomerPassword(c1.getId(), "wrongPwd");
 		assertFalse(pwdNotOK);
 		boolean pwdOK = serviceCustomer.checkCustomerPassword(c1.getId(), "pwd1");
 		assertTrue(pwdOK);
-		
 		String resetPwd = serviceCustomer.resetCustomerPassword(c1.getId()); 
 		logger.trace("reset password =" + resetPwd);
 		pwdOK = serviceCustomer.checkCustomerPassword(c1.getId(), resetPwd);
 		assertTrue(pwdOK);
-		
 	}
 	
 	@Test
@@ -77,7 +74,6 @@ public class TestServiceCustomer {
 				new Customer(null,"jean" , "Bon" , "pwd1"));
 		Customer c1Bis = serviceCustomer.sauvegarderCustomer(
 				new Customer(null,"jean" , "Bon" , "pwd1Bis"));
-		
 		List<Customer> customers = serviceCustomer.rechercherCustomerSelonPrenomEtNom("jean" , "Bon");
 		assertTrue(customers.size()==2);
 		logger.trace("pour jean Bon, customers=" + customers);

@@ -21,8 +21,11 @@ public interface DaoCustomer extends JpaRepository<Customer,Long> {
     .deleteById() 
     héritées de JpaRepository / CrudRepository
     */
-	List<Customer> findByFirstnameAndLastname(String firstName, String lastName);//via convention nom de méthode
 	
-	Optional<Customer> findByIdWithComptes(Long customerId);//via @NamedQuery "Customer.findByIdWithComptes"
+	//via convention nom de méthode
+	List<Customer> findByFirstnameAndLastname(String firstName, String lastName);
+	
+	//via @NamedQuery "Customer.findByIdWithComptes"
+	Optional<Customer> findByIdWithComptes(Long customerId);
     
 }
