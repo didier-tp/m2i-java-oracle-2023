@@ -6,25 +6,22 @@ import org.springframework.data.repository.CrudRepository;
 
 public abstract class AbstractGenericService<E,ID,DTO> 
                         implements GenericService<E,ID,DTO> {
-	private CrudRepository<E,ID> dao=null ; //dao principal
-	
-	public AbstractGenericService(CrudRepository<E,ID> dao ) {
-		this.dao = dao;
-	}
+		
+	public abstract CrudRepository<E,ID> getDao(); //dao principal
 	
 	public E searchById(ID id) {
-		return dao.findById(id).orElse(null);
+		return getDao().findById(id).orElse(null);
 	}
 	public E saveOrUpdate(E entity) {
-		return dao.save(entity);
+		return getDao().save(entity);
 	}
 	public void deleteById(ID id) {
-		dao.deleteById(id);
+		getDao().deleteById(id);
 	}
 	public boolean existById(ID id) {
-		return dao.existsById(id);
+		return getDao().existsById(id);
 	}
 	public List<E> searchAll() {
-		return (List<E>) dao.findAll();
+		return (List<E>) getDao().findAll();
 	}
 }
