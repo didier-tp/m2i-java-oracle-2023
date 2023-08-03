@@ -36,4 +36,9 @@ public abstract class AbstractGenericService<E,ID,DTO>
 	public List<E> searchAll() {
 		return (List<E>) getDao().findAll();
 	}
+	
+	public List<DTO> searchAllDto() {
+		return GenericConverter.map(this.searchAll(), 
+                                    getDtoClass()); //ex: dtoClass = CompteDto.class
+	}
 }

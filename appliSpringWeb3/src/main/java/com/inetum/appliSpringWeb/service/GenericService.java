@@ -18,5 +18,5 @@ public interface GenericService<E,ID,DTO> {
     public void deleteById(ID id);
     public boolean existById(ID id);
     public List<E> searchAll();
-    //public List<DTO> searchAllDto();
+    public List<DTO> searchAllDto();
 }

@@ -70,7 +70,7 @@ public class CompteRestCtrl {
 	public List<CompteDto> getComptes(
 			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
 		if(soldeMini==null)
-			return dtoConverter.compteToCompteDto(serviceCompte.searchAll());
+			return serviceCompte.searchAllDto();
 		else
 			return dtoConverter.compteToCompteDto(
 					serviceCompte.rechercherSelonSoldeMini(soldeMini));
