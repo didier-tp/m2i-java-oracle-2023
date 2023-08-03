@@ -1,11 +1,17 @@
 package com.inetum.appliSpringWeb.converter;
 
-import org.springframework.beans.BeanUtils;
+import java.util.List;
 
 import com.inetum.appliSpringWeb.dto.CompteDto;
 import com.inetum.appliSpringWeb.entity.Compte;
 
 public class DtoConverter {
+	
+	public /*static*/ List<CompteDto> compteToCompteDto(List<Compte> entityList) {
+		return entityList.stream()
+				         .map((entity)->compteToCompteDto(entity))
+				         .toList();
+	}
 
 	public /*static*/ CompteDto compteToCompteDto(Compte entity) {
 		/*return new CompteDto(entity.getNumero() , 
@@ -27,5 +33,7 @@ public class DtoConverter {
 	                      dto.getLabel(),
 	                      dto.getSolde());
 	}
+	
+	
 
 }

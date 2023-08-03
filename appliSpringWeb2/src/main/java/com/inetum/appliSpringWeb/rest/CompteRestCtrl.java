@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
+import com.inetum.appliSpringWeb.dto.CompteDto;
 import com.inetum.appliSpringWeb.entity.Compte;
 
 @RestController
@@ -37,7 +38,7 @@ public class CompteRestCtrl {
 	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
 	    Compte compte = daoCompteJpa.findById(numeroCompte).orElse(null);
 	    if(compte!=null)
-	    	return new ResponseEntity<Compte>(compte, HttpStatus.OK);
+	    	return new ResponseEntity<CompteDto>(compte, HttpStatus.OK);
 	    else
 	    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
