@@ -7,10 +7,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dto.VirementRequest;
 import com.inetum.appliSpringWeb.dto.VirementResponse;
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.service.ServiceCompte;
 
 @RestController
 @RequestMapping(value="/api-bank/virement" , 
@@ -18,7 +18,7 @@ import com.inetum.appliSpringWeb.entity.Compte;
 public class VirementRestCtrl {
 	
 	@Autowired
-	private DaoCompte daoCompte;
+	private ServiceCompte serviceCompte;
 	
 	//exemple de fin d'URL: ./api-bank/virement
 	//appelé en mode POST avec dans la partie invisible "body" de la requête:
@@ -33,13 +33,9 @@ public class VirementRestCtrl {
 		    */
 		    BeanUtils.copyProperties(virementRequest, virementResponse);
 		    try {
-				Compte compteDebiter = daoCompte.findById(virementRequest.getNumCompteDebit()).get();
-				compteDebiter.setSolde(compteDebiter.getSolde() - virementRequest.getMontant());
-				daoCompte.save(compteDebiter);
-				
-				Compte compteCrediter = daoCompte.findById(virementRequest.getNumCompteCredit()).get();
-				compteCrediter.setSolde(compteCrediter.getSolde() + virementRequest.getMontant());
-				daoCompte.save(compteCrediter);
+		        serviceCompte.transferer(virementRequest.getMontant(), 
+		        		                 virementRequest.getNumCompteDebit(), 
+		        		                 virementRequest.getNumCompteCredit());
 				
 				virementResponse.setStatus(true);
 				virementResponse.setMessage("virement bien effectué");

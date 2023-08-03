@@ -110,11 +110,5 @@ public class CompteRestCtrl {
 			return new ResponseEntity<CompteDto>(compteDto , HttpStatus.OK);
 	}
 	
-	
-	
-	
-	
-	
-	
 
 }
