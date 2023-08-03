@@ -29,6 +29,11 @@ public class ServiceCompteImpl
 		return this.daoCompte;
 	}
 	
+	@Override
+	public Class<CompteDto> getDtoClass() {
+		return CompteDto.class;
+	}
+	
 	Logger logger = LoggerFactory.getLogger(ServiceCompteImpl.class);
 	
 	@Autowired
@@ -123,5 +128,9 @@ public class ServiceCompteImpl
 	public List<Compte> rechercherSelonSoldeMini(Double soldeMini) {
 		return daoCompte.findBySoldeGreaterThanEqual(soldeMini);
 	}
+
+
+
+	
 
 }

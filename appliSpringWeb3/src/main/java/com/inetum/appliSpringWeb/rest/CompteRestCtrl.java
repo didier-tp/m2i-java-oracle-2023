@@ -40,10 +40,10 @@ public class CompteRestCtrl {
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
 	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-	    Compte compte = serviceCompte.searchById(numeroCompte);
-	    if(compte!=null)
+	    CompteDto compteDto = serviceCompte.searchDtoById(numeroCompte);
+	    if(compteDto!=null)
 	    	return new ResponseEntity<CompteDto>(
-	    			 GenericConverter.map(compte,CompteDto.class), HttpStatus.OK); 
+	    			 compteDto, HttpStatus.OK); 
 	    else
 	    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
