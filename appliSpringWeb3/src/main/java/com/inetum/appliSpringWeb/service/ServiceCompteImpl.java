@@ -62,7 +62,7 @@ public class ServiceCompteImpl implements ServiceCompte {
 	};
 
 	@Override
-	public Compte rechercherCompteParNumero(long numeroCompte) {
+	public Compte searchById(Long numeroCompte) {
 		return daoCompte.findById(numeroCompte).orElse(null);
 	}
 
@@ -72,17 +72,17 @@ public class ServiceCompteImpl implements ServiceCompte {
 	}
 
 	@Override
-	public Compte sauvegarderCompte(Compte compte) {
+	public Compte saveOrUpdate(Compte compte) {
 		return daoCompte.save(compte);
 	}
 
 	@Override
-	public void supprimerCompte(long numeroCompte) {
+	public void deleteById(long numeroCompte) {
 		daoCompte.deleteById(numeroCompte);
 	}
 
 	@Override
-	public boolean verifierExistanceCompte(long numeroCompte) {
+	public boolean existById(long numeroCompte) {
 		return daoCompte.existsById(numeroCompte);
 	}
 
@@ -125,7 +125,7 @@ public class ServiceCompteImpl implements ServiceCompte {
 	}
 
 	@Override
-	public List<Compte> rechercherTout() {
+	public List<Compte> searchAll() {
 		return daoCompte.findAll();
 	}
 

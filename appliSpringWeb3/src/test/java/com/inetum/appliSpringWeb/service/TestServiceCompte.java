@@ -22,8 +22,8 @@ public class TestServiceCompte {
 	
 	@Test
 	public void testBonTransfert() {
-		Compte cptA = serviceCompte.sauvegarderCompte(new Compte(null,"compteA" , 50.0));
-		Compte cptB = serviceCompte.sauvegarderCompte(new Compte(null,"compteB" , 100.0));
+		Compte cptA = serviceCompte.saveOrUpdate(new Compte(null,"compteA" , 50.0));
+		Compte cptB = serviceCompte.saveOrUpdate(new Compte(null,"compteB" , 100.0));
 		logger.trace("avant bon virement: cptA = " + cptA.getSolde() 
 		                           + " et cptB = " + cptB.getSolde());
 		serviceCompte.transferer(20, cptA.getNumero(), cptB.getNumero());
@@ -42,8 +42,8 @@ public class TestServiceCompte {
 	
 	@Test
 	public void testMauvaisTransfert() {
-		Compte cptA = serviceCompte.sauvegarderCompte(new Compte(null,"compteAa" , 50.0));
-		Compte cptB = serviceCompte.sauvegarderCompte(new Compte(null,"compteBb" , 100.0));
+		Compte cptA = serviceCompte.saveOrUpdate(new Compte(null,"compteAa" , 50.0));
+		Compte cptB = serviceCompte.saveOrUpdate(new Compte(null,"compteBb" , 100.0));
 		logger.trace("avant mauvais virement: cptA = " + cptA.getSolde() 
 		                           + " et cptB = " + cptB.getSolde());
 		try {
@@ -53,8 +53,8 @@ public class TestServiceCompte {
 			logger.trace("exception normale en cas de mauvais virement "
 					     + e.getMessage());
 		}
-		Compte cptA_apres = serviceCompte.rechercherCompteParNumero(cptA.getNumero());
-		Compte cptB_apres = serviceCompte.rechercherCompteParNumero(cptB.getNumero());
+		Compte cptA_apres = serviceCompte.searchById(cptA.getNumero());
+		Compte cptB_apres = serviceCompte.searchById(cptB.getNumero());
 		logger.trace("apres mauvais virement: cptA_apres = " + cptA_apres.getSolde() 
                                        + " et cptB_apres = " + cptB_apres.getSolde());
 		assertEquals(cptA.getSolde()  , cptA_apres.getSolde() , 0.0001);
@@ -63,8 +63,8 @@ public class TestServiceCompte {
 	
 	@Test
 	public void testTransfertAnnuleSiPasAssezArgent() {
-		Compte cptA = serviceCompte.sauvegarderCompte(new Compte(null,"compteAaa" , 50.0));
-		Compte cptB = serviceCompte.sauvegarderCompte(new Compte(null,"compteBbb" , 100.0));
+		Compte cptA = serviceCompte.saveOrUpdate(new Compte(null,"compteAaa" , 50.0));
+		Compte cptB = serviceCompte.saveOrUpdate(new Compte(null,"compteBbb" , 100.0));
 		logger.trace("avant virement sans assez argent: cptA = " + cptA.getSolde() 
 		                           + " et cptB = " + cptB.getSolde());
 		try {
@@ -73,8 +73,8 @@ public class TestServiceCompte {
 			logger.trace("exception normale en cas de virement annulé "
 					     + e.getMessage());
 		}
-		Compte cptA_apres = serviceCompte.rechercherCompteParNumero(cptA.getNumero());
-		Compte cptB_apres = serviceCompte.rechercherCompteParNumero(cptB.getNumero());
+		Compte cptA_apres = serviceCompte.searchById(cptA.getNumero());
+		Compte cptB_apres = serviceCompte.searchById(cptB.getNumero());
 		logger.trace("apres virement sans assez argent: cptA_apres = " + cptA_apres.getSolde() 
                                        + " et cptB_apres = " + cptB_apres.getSolde());
 		assertEquals(cptA.getSolde()  , cptA_apres.getSolde() , 0.0001);

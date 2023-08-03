@@ -40,7 +40,7 @@ public class CompteRestCtrl {
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
 	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-	    Compte compte = serviceCompte.rechercherCompteParNumero(numeroCompte);
+	    Compte compte = serviceCompte.searchById(numeroCompte);
 	    if(compte!=null)
 	    	return new ResponseEntity<CompteDto>(
 	    			 GenericConverter.map(compte,CompteDto.class), HttpStatus.OK); 
@@ -54,11 +54,11 @@ public class CompteRestCtrl {
 	@DeleteMapping("/{numeroCompte}" )
 	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
 		    
-		    if( !serviceCompte.verifierExistanceCompte(numeroCompte))
+		    if( !serviceCompte.existById(numeroCompte))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
-		    serviceCompte.supprimerCompte(numeroCompte);
+		    serviceCompte.deleteById(numeroCompte);
 		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,HttpStatus.OK); 
 		    //ou bien
 		    //return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
@@ -70,7 +70,7 @@ public class CompteRestCtrl {
 	public List<CompteDto> getComptes(
 			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
 		if(soldeMini==null)
-			return dtoConverter.compteToCompteDto(serviceCompte.rechercherTout());
+			return dtoConverter.compteToCompteDto(serviceCompte.searchAll());
 		else
 			return dtoConverter.compteToCompteDto(
 					serviceCompte.rechercherSelonSoldeMini(soldeMini));
@@ -82,7 +82,7 @@ public class CompteRestCtrl {
 	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0 }
 	@PostMapping("" )
 	public CompteDto postCompte(@RequestBody CompteDto nouveauCompte) {
-		Compte compteEnregistreEnBase = serviceCompte.sauvegarderCompte(
+		Compte compteEnregistreEnBase = serviceCompte.saveOrUpdate(
 				              dtoConverter.compteDtoToCompte(nouveauCompte) );
 		//on retourne le compte avec clef primaire auto_incrémentée
 		return dtoConverter.compteToCompteDto(compteEnregistreEnBase); 
@@ -100,14 +100,14 @@ public class CompteRestCtrl {
 		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compteDto.getNumero();
 		   
 		   
-		    if(!serviceCompte.verifierExistanceCompte(numCompteToUpdate))
+		    if(!serviceCompte.existById(numCompteToUpdate))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
  			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
 		    if(compteDto.getNumero()==null)
 		    	compteDto.setNumero(numCompteToUpdate);
 		    
-			serviceCompte.sauvegarderCompte(dtoConverter.compteDtoToCompte(compteDto));
+			serviceCompte.saveOrUpdate(dtoConverter.compteDtoToCompte(compteDto));
 			return new ResponseEntity<CompteDto>(compteDto , HttpStatus.OK);
 	}
 	

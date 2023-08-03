@@ -37,12 +37,12 @@ public class TestServiceCustomer {
 		Compte compteBdeC1 = new Compte(null,"compteBdeC1" , 80.0);
 		compteBdeC1.setCustomer(c1);
 		
-		compteAdeC1 = serviceCompte.sauvegarderCompte(compteAdeC1);
-		compteBdeC1 = serviceCompte.sauvegarderCompte(compteBdeC1);
+		compteAdeC1 = serviceCompte.saveOrUpdate(compteAdeC1);
+		compteBdeC1 = serviceCompte.saveOrUpdate(compteBdeC1);
 		
 		Compte compte1deC2 = new Compte(null,"compte1deC2" , 40.0);
 		compte1deC2.setCustomer(c2);
-		compte1deC2 = serviceCompte.sauvegarderCompte(compte1deC2);
+		compte1deC2 = serviceCompte.saveOrUpdate(compte1deC2);
 		
 		Customer c1ReluAvecSesComptes = serviceCustomer.rechercherCustomerAvecComptesParNumero(c1.getId());
 		assertTrue(c1ReluAvecSesComptes.getComptes().size()==2);
