@@ -25,4 +25,6 @@ public interface ServiceCompte {
 	Compte sauvegarderCompte(Compte compte);
 	void supprimerCompte(long numeroCompte);
 	boolean verifierExistanceCompte(long numeroCompte);
+	List<Compte> rechercherTout();
+	List<Compte> rechercherSelonSoldeMini(Double soldeMini);
 }

@@ -29,7 +29,7 @@ import com.inetum.appliSpringWeb.service.ServiceCompte;
 @CrossOrigin(origins = "*" , methods = { RequestMethod.GET , RequestMethod.POST})
 public class CompteRestCtrl {
 	
-	//NB: cette version 1 n'utilise pas encore les DTOs 
+	//cette version 2 utilise  les DTOs 
 	
 	@Autowired
 	private ServiceCompte serviceCompte;
@@ -53,11 +53,11 @@ public class CompteRestCtrl {
 	@DeleteMapping("/{numeroCompte}" )
 	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
 		    
-		    if( !daoCompteJpa.existsById(numeroCompte))
+		    if( !serviceCompte.verifierExistanceCompte(numeroCompte))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
-		    daoCompteJpa.deleteById(numeroCompte);
+		    serviceCompte.supprimerCompte(numeroCompte);
 		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,HttpStatus.OK); 
 		    //ou bien
 		    //return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
@@ -69,9 +69,9 @@ public class CompteRestCtrl {
 	public List<Compte> getComptes(
 			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
 		if(soldeMini==null)
-			return daoCompteJpa.findAll();
+			return serviceCompte.rechercherTout();
 		else
-			return daoCompteJpa.findBySoldeGreaterThanEqual(soldeMini);
+			return serviceCompte.rechercherSelonSoldeMini(soldeMini);
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte
@@ -79,9 +79,11 @@ public class CompteRestCtrl {
 	// { "numero" : null , "label" : "compteQuiVaBien" , "solde" : 50.0 }
 	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0 }
 	@PostMapping("" )
-	public Compte postCompte(@RequestBody Compte nouveauCompte) {
-		Compte compteEnregistreEnBase = daoCompteJpa.save(nouveauCompte);
-		return compteEnregistreEnBase; //on retourne le compte avec clef primaire auto_incrémentée
+	public CompteDto postCompte(@RequestBody CompteDto nouveauCompte) {
+		Compte compteEnregistreEnBase = serviceCompte.sauvegarderCompte(
+				              dtoConverter.compteDtoToCompte(nouveauCompte) );
+		//on retourne le compte avec clef primaire auto_incrémentée
+		return dtoConverter.compteToCompteDto(compteEnregistreEnBase); 
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte
@@ -90,10 +92,10 @@ public class CompteRestCtrl {
 	// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 }
 	//ou bien {  "label" : "compte5QueJaime" , "solde" : 150.0 }
 	@PutMapping({"" , "/{numeroCompte}" })
-	public ResponseEntity<?> putCompteToUpdate(@RequestBody Compte compte , 
+	public ResponseEntity<?> putCompteToUpdate(@RequestBody CompteDto compteDto , 
 			      @PathVariable(value="numeroCompte",required = false ) Long numeroCompte) {
 		
-		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compte.getNumero();
+		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compteDto.getNumero();
 		   
 		    Compte compteQuiDevraitExister = 
 		    		   numCompteToUpdate!=null ? daoCompteJpa.findById(numCompteToUpdate).orElse(null) : null;

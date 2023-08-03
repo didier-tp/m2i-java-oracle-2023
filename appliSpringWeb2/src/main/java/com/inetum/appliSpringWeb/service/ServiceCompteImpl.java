@@ -124,4 +124,14 @@ public class ServiceCompteImpl implements ServiceCompte {
 		return cpt.getOperations();
 	}
 
+	@Override
+	public List<Compte> rechercherTout() {
+		return daoCompte.findAll();
+	}
+
+	@Override
+	public List<Compte> rechercherSelonSoldeMini(Double soldeMini) {
+		return daoCompte.findBySoldeGreaterThanEqual(soldeMini);
+	}
+
 }
