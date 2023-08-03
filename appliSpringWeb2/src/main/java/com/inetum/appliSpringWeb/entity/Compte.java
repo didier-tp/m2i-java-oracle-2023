@@ -56,7 +56,7 @@ public class Compte {
 		inverseJoinColumns={@JoinColumn(name="id_customer")})
 	private Customer customer;
 	
-	@JsonIgnore 
+	//@JsonIgnore 
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "compte" , cascade = CascadeType.ALL)
 	//@OneToMany(fetch = FetchType.EAGER, mappedBy = "compte")
 	private List<Operation> operations; //+get/set

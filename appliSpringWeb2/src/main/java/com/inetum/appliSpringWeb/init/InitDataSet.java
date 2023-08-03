@@ -9,8 +9,10 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
+import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;
 
 /*
@@ -31,9 +33,17 @@ public class InitDataSet {
 	@Autowired
 	private DaoOperation daoOperationJpa;
 	
+	@Autowired
+	private DaoCustomer daoCustomerJpa;
+	
 	@PostConstruct
 	public void initData() {
-		Compte compteAa = daoCompteJpa.save(new Compte(null,"compte_Aa" , 70.0));
+		
+		Customer customer1 = daoCustomerJpa.save(new Customer(null,"jean"  , "Aimare", "pwd1"));
+		
+		Compte compteAa = new Compte(null,"compte_Aa" , 70.0);
+		compteAa.setCustomer(customer1);
+		compteAa = daoCompteJpa.save(compteAa);
 		
 		Operation op1CompteA = daoOperationJpa.save(
 	    		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteAa));

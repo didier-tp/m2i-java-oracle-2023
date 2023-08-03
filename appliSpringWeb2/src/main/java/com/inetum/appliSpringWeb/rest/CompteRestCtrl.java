@@ -42,7 +42,9 @@ public class CompteRestCtrl {
 	    Compte compte = serviceCompte.rechercherCompteParNumero(numeroCompte);
 	    if(compte!=null)
 	    	return new ResponseEntity<CompteDto>(
-	    			 dtoConverter.compteToCompteDto(compte), HttpStatus.OK);
+	    			 dtoConverter.compteToCompteDto(compte), HttpStatus.OK); 
+	    	/*return new ResponseEntity<Compte>(
+	    			 compte, HttpStatus.OK);*/
 	    else
 	    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
 	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404

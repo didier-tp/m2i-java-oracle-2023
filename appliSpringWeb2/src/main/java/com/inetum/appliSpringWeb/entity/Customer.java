@@ -11,6 +11,8 @@ import javax.persistence.Id;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -29,6 +31,7 @@ public class Customer {
 	private String lastname;
 	private String password;
 	
+	@JsonIgnore
 	@OneToMany(fetch=FetchType.LAZY , mappedBy="customer")
 	private List<Compte> comptes=new ArrayList<>();
 	
