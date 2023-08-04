@@ -22,8 +22,11 @@ public interface GenericService<E,ID,DTO> {
     // possible mais pleins de variantes envisageables
     // et donc pas très adapté à une version générique
     
-    public void deleteById(ID id);
+    public void deleteById(ID id) throws NotFoundException;
+    
     public boolean existById(ID id);
+    void shouldExistById(ID id) throws NotFoundException;
+    
     public List<E> searchAll();
     public List<DTO> searchAllDto();
 }

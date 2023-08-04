@@ -66,6 +66,14 @@ public class CompteRestCtrl {
 	//à déclencher en mode DELETE
 	@DeleteMapping("/{numeroCompte}" )
 	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
+		    serviceCompte.deleteById(numeroCompte);//retournant NotFoundException
+		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,
+		    		                          HttpStatus.OK); 
+		}
+	
+	/*
+	@DeleteMapping("/{numeroCompte}" )
+	public ResponseEntity<?> deleteCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
 		    
 		    if( !serviceCompte.existById(numeroCompte))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
@@ -76,6 +84,7 @@ public class CompteRestCtrl {
 		    //ou bien
 		    //return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 		}
+	*/
 	
 	//exemple de fin d'URL: ./api-bank/compte
 	//                      ./api-bank/compte?soldeMini=0

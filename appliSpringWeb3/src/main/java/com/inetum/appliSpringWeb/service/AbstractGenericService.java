@@ -36,12 +36,22 @@ public abstract class AbstractGenericService<E,ID,DTO>
 		return getDao().save(entity);
 	}
 	
-	public void deleteById(ID id) {
+	public void deleteById(ID id) throws NotFoundException{
+		/*if(!(getDao().existsById(id))) 
+			throw new NotFoundException("no entity to delete for id=" + id);
+		*/
+		shouldExistById(id);
+		/*else*/
 		getDao().deleteById(id);
 	}
 	
 	public boolean existById(ID id) {
 		return getDao().existsById(id);
+	}
+	
+	public void shouldExistById(ID id) throws NotFoundException {
+		if(!(getDao().existsById(id))) 
+			throw new NotFoundException("no entity exists for id=" + id);
 	}
 	
 	public List<E> searchAll() {
