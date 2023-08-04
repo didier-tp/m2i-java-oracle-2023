@@ -5,19 +5,34 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
+import com.inetum.appliSpringWeb.dto.CustomerDto;
 import com.inetum.appliSpringWeb.entity.Customer;
 
 @Service
 @Transactional
-public class ServiceCustomerImpl implements ServiceCustomer {
+public class ServiceCustomerImpl 
+    extends AbstractGenericService<Customer, Long, CustomerDto>
+    implements ServiceCustomer {
+	
+	@Override
+	public CrudRepository<Customer, Long> getDao() {
+		return this.daoCustomer;
+	}
+
+	@Override
+	public Class<CustomerDto> getDtoClass() {
+		return CustomerDto.class;
+	}
 	
 	Logger logger = LoggerFactory.getLogger(ServiceCustomerImpl.class);
-
+	
+	
 	@Autowired
 	private DaoCustomer daoCustomer; //dao principal
 	
@@ -41,11 +56,7 @@ public class ServiceCustomerImpl implements ServiceCustomer {
 		return pwd;
 	}
 
-	@Override
-	public Customer rechercherCustomerParId(long idCustomer) {
-		return daoCustomer.findById(idCustomer).orElse(null);
-	}
-
+	
 	@Override
 	public Customer rechercherCustomerAvecComptesParNumero(long idCustomer) {
 		return daoCustomer.findByIdWithComptes(idCustomer).orElse(null);
@@ -57,18 +68,9 @@ public class ServiceCustomerImpl implements ServiceCustomer {
 	}
 
 	@Override
-	public Customer sauvegarderCustomer(Customer customer) {
+	public Customer saveOrUpdate(Customer customer) {
 		return daoCustomer.save(customer);
 	}
 
-	@Override
-	public void supprimerCustomer(long idCustomer) {
-		daoCustomer.deleteById(idCustomer);
-	}
-
-	@Override
-	public boolean verifierExistanceCustomer(long idCustomer) {
-		return daoCustomer.existsById(idCustomer);
-	}
-
+	
 }

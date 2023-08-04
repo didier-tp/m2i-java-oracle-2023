@@ -27,9 +27,9 @@ public class TestServiceCustomer {
 	
 	@Test
 	public void testCrudQueJaime() {
-		Customer c1 = serviceCustomer.sauvegarderCustomer(
+		Customer c1 = serviceCustomer.saveOrUpdate(
 				new Customer(null,"prenom1" , "nom1" , "pwd1"));
-		Customer c2 = serviceCustomer.sauvegarderCustomer(
+		Customer c2 = serviceCustomer.saveOrUpdate(
 				new Customer(null,"prenom2" , "nom2" , "pwd2"));
 		
 		Compte compteAdeC1 = new Compte(null,"compteAdeC1" , 70.0);
@@ -56,7 +56,7 @@ public class TestServiceCustomer {
 	
 	@Test
 	public void testSurPassword() {
-		Customer c1 = serviceCustomer.sauvegarderCustomer(
+		Customer c1 = serviceCustomer.saveOrUpdate(
 				new Customer(null,"prenom1" , "nom1" , "pwd1"));
 		boolean pwdNotOK = serviceCustomer.checkCustomerPassword(c1.getId(), "wrongPwd");
 		assertFalse(pwdNotOK);
@@ -70,9 +70,9 @@ public class TestServiceCustomer {
 	
 	@Test
 	public void testFindSpecifique() {
-		Customer c1 = serviceCustomer.sauvegarderCustomer(
+		Customer c1 = serviceCustomer.saveOrUpdate(
 				new Customer(null,"jean" , "Bon" , "pwd1"));
-		Customer c1Bis = serviceCustomer.sauvegarderCustomer(
+		Customer c1Bis = serviceCustomer.saveOrUpdate(
 				new Customer(null,"jean" , "Bon" , "pwd1Bis"));
 		List<Customer> customers = serviceCustomer.rechercherCustomerSelonPrenomEtNom("jean" , "Bon");
 		assertTrue(customers.size()==2);
