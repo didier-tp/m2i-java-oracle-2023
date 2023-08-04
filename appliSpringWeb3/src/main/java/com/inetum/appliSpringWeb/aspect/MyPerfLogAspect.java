@@ -30,7 +30,8 @@ public class MyPerfLogAspect {
 	
 	Logger logger = LoggerFactory.getLogger(MyPerfLogAspect.class);
 	
-	@Around("servicePointcut() || daoPointcut()")
+	//@Around("servicePointcut() || daoPointcut()")
+	@Around("servicePointcut()")
 	public Object doPerfLog(ProceedingJoinPoint pjp) throws Throwable {
 		logger.debug("<< trace == debut == " 
 	                + pjp.getSignature().toLongString() + " <<");
