@@ -36,7 +36,7 @@ public class CompteRestCtrl {
 	private ServiceCompte serviceCompte;
 	
 	private DtoConverter dtoConverter = new DtoConverter();
-	
+	/*
 	//exemple de fin d'URL: ./api-bank/compte/1
 	@GetMapping("/{numeroCompte}" )
 	public ResponseEntity<?> getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
@@ -48,6 +48,18 @@ public class CompteRestCtrl {
 	    	return new ResponseEntity<ApiError>(
 	    			           new ApiError(HttpStatus.NOT_FOUND ,"compte not found") ,
 	    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
+	}
+	*/
+	
+	//exemple de fin d'URL: ./api-bank/compte/1
+	@GetMapping("/{numeroCompte}" )
+	public CompteDto getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
+		    return serviceCompte.searchDtoById(numeroCompte);
+		    //en cas de numero de compte pas trouvé
+		    //l'exception "NotFoundException" remontée par l'appel à .searchDtoById(...)
+		    //est automatiquement gérée par RestResponseEntityExceptionHandler
+		    //et  celui ci construit et retourne automatiquement
+		    //un ResponseEntity<ApiError> avec le bon status http et le bon message
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte/1

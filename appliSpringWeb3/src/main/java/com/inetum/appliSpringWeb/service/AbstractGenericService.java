@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
 import com.inetum.appliSpringWeb.converter.GenericConverter;
+import com.inetum.appliSpringWeb.exception.NotFoundException;
 
 public abstract class AbstractGenericService<E,ID,DTO> 
                         implements GenericService<E,ID,DTO> {
@@ -16,10 +17,19 @@ public abstract class AbstractGenericService<E,ID,DTO>
 		return getDao().findById(id).orElse(null);
 	}
 	
+	/*
 	public DTO searchDtoById(ID id) {
 		E e = this.searchById(id);
 		return e==null?null:GenericConverter.map(e,getDtoClass());
 		//ex: dtoClass = CompteDto.class
+	}*/
+	
+	public DTO searchDtoById(ID id) throws NotFoundException {
+		E e = this.searchById(id);
+		if(e!=null) 
+			return GenericConverter.map(e,getDtoClass());
+		else 
+			throw new NotFoundException("entity not found for id=" + id);
 	}
 	
 	public E saveOrUpdate(E entity) {
