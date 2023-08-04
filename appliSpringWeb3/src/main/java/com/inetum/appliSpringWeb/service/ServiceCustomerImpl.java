@@ -67,10 +67,6 @@ public class ServiceCustomerImpl
 		return daoCustomer.findByFirstnameAndLastname(prenom, nom);
 	}
 
-	@Override
-	public Customer saveOrUpdate(Customer customer) {
-		return daoCustomer.save(customer);
-	}
-
+	
 	
 }

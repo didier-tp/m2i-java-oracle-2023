@@ -58,7 +58,7 @@ public class CustomerRestCtrl {
 		    			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
 		    
 		    serviceCustomer.deleteById(idCustomer);
-		    return new ResponseEntity<String>("{ \"done\" : \"compte deleted\"}" ,HttpStatus.OK); 
+		    return new ResponseEntity<String>("{ \"done\" : \"customer deleted\"}" ,HttpStatus.OK); 
 		    //ou bien
 		    //return new ResponseEntity<>(HttpStatus.NO_CONTENT); 
 		}
