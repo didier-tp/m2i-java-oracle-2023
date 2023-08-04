@@ -121,10 +121,12 @@ public class CompteRestCtrl {
 		
 		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compteDto.getNumero();
 		   
-		   
+		   /*
 		    if(!serviceCompte.existById(numCompteToUpdate))
 		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
  			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
+ 			*/
+		    serviceCompte.shouldExistById(numCompteToUpdate);//remonte NotFoundException si pas trouvé
 		    
 		    if(compteDto.getNumero()==null)
 		    	compteDto.setNumero(numCompteToUpdate);
