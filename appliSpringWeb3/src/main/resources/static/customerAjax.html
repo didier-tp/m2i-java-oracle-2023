@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>customerAjax</title>
+<script src="my_ajax_util.js"></script>
+<script src="customerAjax.js"></script>
+</head>
+<body>
+	
+	prenom: <input id="inputPrenom" /> <br/>
+	nom: <input id="inputNom" /> <br/>
+	password: <input id="inputPassword" /> <br/>
+	<button id="btnAjout">ajouter customer (post)</button>
+	<hr/>
+	
+	<button id="btnRechercher">rechercher customers</button>
+    <table border="1">
+	   <thead>
+		<tr><th>id</th><th>prenom</th><th>nom</th><th>password</th></tr>
+	   </thead>
+	   <tbody id="table_body">
+		   <!-- <tr><td>1</td><td>jean</td><td>Bon</td><td>pwd1</td></tr> -->
+	   </tbody>
+	</table>
+</body>
+</html>
