@@ -17,8 +17,9 @@ public abstract class AbstractGenericService<E,ID,DTO>
 	}
 	
 	public DTO searchDtoById(ID id) {
-		return GenericConverter.map(this.searchById(id), 
-				                    getDtoClass()); //ex: dtoClass = CompteDto.class
+		E e = this.searchById(id);
+		return e==null?null:GenericConverter.map(e,getDtoClass());
+		//ex: dtoClass = CompteDto.class
 	}
 	
 	public E saveOrUpdate(E entity) {
