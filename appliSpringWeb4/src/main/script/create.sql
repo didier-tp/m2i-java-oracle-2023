@@ -1838,3 +1838,12 @@ create table operation (id_op number(19,0) not null, date_op date, label varchar
 alter table compte_customer add constraint FK3iaf8jofis07oyiruv8qfpru3 foreign key (id_customer) references customer;
 alter table compte_customer add constraint FK48bmxf9kapujcstxgmlgunv6n foreign key (num_compte) references compte;
 alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte;
+create sequence compte_seq start with 1 increment by  1;
+create sequence operation_seq start with 1 increment by  1;
+create table compte (numero number(19,0) not null, label varchar2(255 char), solde double precision, primary key (numero));
+create table compte_customer (id_customer number(19,0), num_compte number(19,0) not null, primary key (num_compte));
+create table customer (id number(19,0) generated as identity, firstname varchar2(255 char), lastname varchar2(255 char), password varchar2(255 char), primary key (id));
+create table operation (id_op number(19,0) not null, date_op date, label varchar2(255 char), montant double precision, num_compte number(19,0), primary key (id_op));
+alter table compte_customer add constraint FK3iaf8jofis07oyiruv8qfpru3 foreign key (id_customer) references customer;
+alter table compte_customer add constraint FK48bmxf9kapujcstxgmlgunv6n foreign key (num_compte) references compte;
+alter table operation add constraint FKmesdd1k28dq0r18el7qmaayil foreign key (num_compte) references compte;

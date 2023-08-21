@@ -1,0 +1,35 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.mycontrib</groupId>
+  <artifactId>my-security-starter</artifactId>
+  <version>0.0.1-SNAPSHOT</version>
+  
+  <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <my-security.version>0.0.1-SNAPSHOT</my-security.version>
+        <spring-boot.version>2.7.5</spring-boot.version>
+    </properties>
+  
+  <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter</artifactId>
+            <version>${spring-boot.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mycontrib</groupId>
+            <artifactId>my-security-configure</artifactId>
+            <version>${project.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.mycontrib</groupId>
+            <artifactId>my-security</artifactId>
+            <version>${my-security.version}</version>
+        </dependency>
+
+    </dependencies>
+  
+</project>
