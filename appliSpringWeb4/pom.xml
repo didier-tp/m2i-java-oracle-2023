@@ -58,6 +58,7 @@
 			<groupId>com.h2database</groupId>
 			<artifactId>h2</artifactId>
 			<!-- pas de scope=test aujourd'hui -->
+			<version>2.2.220</version>
 		</dependency>
 
 		<dependency>
