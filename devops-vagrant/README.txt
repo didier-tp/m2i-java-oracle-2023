@@ -13,6 +13,8 @@ et tous les tests unitaires sont en @ActiveProfiles({"h2"})
 job "appliSpringWeb3FreeStyle"
 avec url git = https://github.com/didier-tp/m2i-java-oracle-2023
 et avec branche main plutot que master
-cicble maven de au niveau : clean package
+cible maven de au niveau : clean package
 et chemin menant au pom.xml = appliSpringWeb3/pom.xml
+----------
+job "appliSpringWeb3Pipeline"
 

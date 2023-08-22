@@ -12,7 +12,8 @@ Vagrant.configure("2") do |config|
 
   # Every Vagrant development environment requires a box. You can search for
   # boxes at https://vagrantcloud.com/search.
-  config.vm.box = "hashicorp/bionic64"
+  config.vm.box = "bento/ubuntu-22.04"
+  #hashicorp/bionic64 ou bien bento/ubuntu-22.04
 
   # Disable automatic box update checking. If you disable this, then
   # boxes will only be checked for updates when the user runs
@@ -66,7 +67,7 @@ Vagrant.configure("2") do |config|
   end
   #
   #config.vm.provision "shell", path: "xyz.sh"
-  config.vm.provision "shell", path:  "install-openjdk17-and-maven-on-ubuntu18.sh"
+  config.vm.provision "shell", path:  "install-openjdk17-and-maven-on-ubuntu.sh"
   
   #Install the plugin: vagrant plugin install vagrant-docker-compose
   config.vm.provision :docker
