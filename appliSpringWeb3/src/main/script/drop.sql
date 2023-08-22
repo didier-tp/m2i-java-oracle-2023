@@ -1386,3 +1386,7 @@ drop table customer cascade constraints;
 drop table operation cascade constraints;
 drop sequence compte_seq;
 drop sequence operation_seq;
+drop table if exists compte CASCADE ;
+drop table if exists compte_customer CASCADE ;
+drop table if exists customer CASCADE ;
+drop table if exists operation CASCADE ;

@@ -8,8 +8,8 @@ public class AppliSpringWebApplication {
 
 	public static void main(String[] args) {
 		
-		System.setProperty("spring.profiles.active", "oracle,init");
-		//System.setProperty("spring.profiles.active", "h2,init");
+		//System.setProperty("spring.profiles.active", "oracle,init");
+		System.setProperty("spring.profiles.active", "h2,init");
 		SpringApplication.run(AppliSpringWebApplication.class, args);
 		
 		/*
@@ -18,7 +18,7 @@ public class AppliSpringWebApplication {
 		app.run(args);
 		*/
 		
-		System.out.println("http://localhost:8080/appliSpringWeb");
+		System.out.println("http://localhost:8181/appliSpringWeb");
 	}
 
 }
