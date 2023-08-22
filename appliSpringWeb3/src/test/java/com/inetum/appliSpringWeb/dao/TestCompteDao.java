@@ -18,6 +18,7 @@ import com.inetum.appliSpringWeb.entity.Operation;
 
 @SpringBootTest // classe interprétée par JUnit et SpringBoot
 //@ActiveProfiles({"oracle"}) //pour prendre en compte application-oracle.properties
+@ActiveProfiles({"h2"}) //pour prendre en compte application-oracle.properties
 public class TestCompteDao {
 	
 	Logger logger = LoggerFactory.getLogger(TestCompteDao.class);
