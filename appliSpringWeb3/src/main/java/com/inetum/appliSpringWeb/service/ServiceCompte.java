@@ -3,6 +3,7 @@ package com.inetum.appliSpringWeb.service;
 import java.util.List;
 
 import com.inetum.appliSpringWeb.dto.CompteDto;
+import com.inetum.appliSpringWeb.dto.CompteDtoEx;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
@@ -19,6 +20,8 @@ public interface ServiceCompte extends GenericService<Compte,Long,CompteDto> {
 	//méthodes déléguées aux DAOs le CRUD:
 	//Compte searchById(long numeroCompte); //hérité de GenericService
 	//Compte saveOrUpdate(Compte compte);//hérité de GenericService
+	
+	CompteDtoEx searchDtoExByIdWithNumClient(long numeroCompte);
 	
 	Compte rechercherCompteAvecOperationsParNumero(long numeroCompte); //sans lazy exception
 	List<Operation> operationsDuCompteQueJaime(long numeroCompte);//ici ou bien sur dao operation

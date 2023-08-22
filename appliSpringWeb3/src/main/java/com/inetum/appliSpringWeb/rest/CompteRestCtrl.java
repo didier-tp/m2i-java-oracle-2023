@@ -18,8 +18,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.appliSpringWeb.converter.DtoConverter;
-import com.inetum.appliSpringWeb.dto.ApiError;
 import com.inetum.appliSpringWeb.dto.CompteDto;
+import com.inetum.appliSpringWeb.dto.CompteDtoEx;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.service.ServiceCompte;
 
@@ -60,6 +60,11 @@ public class CompteRestCtrl {
 		    //est automatiquement gérée par RestResponseEntityExceptionHandler
 		    //et  celui ci construit et retourne automatiquement
 		    //un ResponseEntity<ApiError> avec le bon status http et le bon message
+	}
+	
+	@GetMapping("/{numeroCompte}/withNumClient" )
+	public CompteDtoEx getCompteWithNumClientByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
+		    return serviceCompte.searchDtoExByIdWithNumClient(numeroCompte);
 	}
 	
 	//exemple de fin d'URL: ./api-bank/compte/1

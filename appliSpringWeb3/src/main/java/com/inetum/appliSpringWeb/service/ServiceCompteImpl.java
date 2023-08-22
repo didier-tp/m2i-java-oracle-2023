@@ -10,9 +10,11 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.inetum.appliSpringWeb.converter.DtoConverter;
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.dto.CompteDto;
+import com.inetum.appliSpringWeb.dto.CompteDtoEx;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
@@ -23,6 +25,8 @@ import com.inetum.appliSpringWeb.exception.BankException;
 public class ServiceCompteImpl 
     extends AbstractGenericService<Compte,Long,CompteDto>
     implements ServiceCompte {
+	
+	private DtoConverter dtoConverter = new DtoConverter();//for specific convert
 	
 	@Override
 	public CrudRepository<Compte,Long> getDao() {
@@ -127,6 +131,12 @@ public class ServiceCompteImpl
 	@Override
 	public List<Compte> rechercherSelonSoldeMini(Double soldeMini) {
 		return daoCompte.findBySoldeGreaterThanEqual(soldeMini);
+	}
+
+	@Override
+	public CompteDtoEx searchDtoExByIdWithNumClient(long numeroCompte) {
+		Compte entityCompte = searchById(numeroCompte);
+		return dtoConverter.compteToCompteDtoEx(entityCompte);
 	}
 
 
