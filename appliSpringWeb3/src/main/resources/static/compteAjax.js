@@ -1,4 +1,6 @@
 window.onload=function(){
+	rechercherClients(); //remplir liste deroulante avec clients existants
+	
 	(document.getElementById("btnRechercher"))
 	   .addEventListener("click",rechercherComptesSelonSoldeMini);
 	   
@@ -9,7 +11,8 @@ window.onload=function(){
 function ajouterCompte(){	
 	let label = (document.getElementById("inputLabel")).value;
 	let soldeInitial = (document.getElementById("inputSoldeInitial")).value;
-	let numeroClient = (document.getElementById("inputNumeroClient")).value;
+	//let numeroClient = (document.getElementById("inputNumeroClient")).value;
+	let numeroClient = (document.getElementById("selectNumeroClient")).value;
 	let compteJs = { label : label,
 	                 solde : parseFloat(soldeInitial) ,
 	                 numeroClient : parseInt(numeroClient)};
@@ -19,6 +22,24 @@ function ajouterCompte(){
 		console.log("responseJson="+responseJson);
 		rechercherComptesSelonSoldeMini(); //pour rafraîchir le tableau avec nouveau compte ajouté
 	});         
+}
+
+function rechercherClients(){	
+	let wsUrl = "./api-bank/customer";
+	makeAjaxGetRequest(wsUrl,function(responseJson){
+		let clientsJs = JSON.parse(responseJson);
+		console.log("clientsJs="+clientsJs);
+		
+		let selectElt = document.getElementById("selectNumeroClient");
+		//selectElt.innerHTML="";//vider la liste 
+		for(let client of clientsJs){
+			let option = document.createElement("option");
+			option.value=client.id;
+			option.innerHTML=JSON.stringify(client);
+			selectElt.appendChild(option);
+		}
+	});
+	
 }
 	
 function rechercherComptesSelonSoldeMini(){	
