@@ -52,9 +52,11 @@ public class CompteRestCtrl {
 	*/
 	
 	//exemple de fin d'URL: ./api-bank/compte/1
+	// ou ./api-bank/1?detailLevel=2
 	@GetMapping("/{numeroCompte}" )
-	public CompteDto getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte) {
-		    return serviceCompte.searchDtoById(numeroCompte);
+	public CompteDto getCompteByNumero(@PathVariable("numeroCompte") Long numeroCompte,
+			                           @RequestParam(value="detailLevel",required=false) Integer detailLevel) {
+		    return serviceCompte.searchDtoByIdWithDetailLevel(numeroCompte,detailLevel);
 		    //en cas de numero de compte pas trouvé
 		    //l'exception "NotFoundException" remontée par l'appel à .searchDtoById(...)
 		    //est automatiquement gérée par RestResponseEntityExceptionHandler

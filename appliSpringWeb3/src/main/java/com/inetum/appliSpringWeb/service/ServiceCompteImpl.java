@@ -15,9 +15,11 @@ import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.dto.CompteDto;
 import com.inetum.appliSpringWeb.dto.CompteDtoEx;
+import com.inetum.appliSpringWeb.dto.CompteDtoEx2;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
+import com.inetum.appliSpringWeb.exception.NotFoundException;
 
 //@Component
 @Service
@@ -135,11 +137,35 @@ public class ServiceCompteImpl
 
 	@Override
 	public CompteDtoEx searchDtoExByIdWithNumClient(long numeroCompte) {
-		Compte entityCompte = searchById(numeroCompte);
-		return dtoConverter.compteToCompteDtoEx(entityCompte);
+		return (CompteDtoEx) searchDtoByIdWithDetailLevel(numeroCompte,1);
 	}
 
+	@Override
+	public CompteDtoEx2 searchDtoEx2ByIdWithClientAndOperations(long numeroCompte) {
+		return (CompteDtoEx2) searchDtoByIdWithDetailLevel(numeroCompte,2);
+	}
+	
+	@Override
+	public CompteDto searchDtoByIdWithDetailLevel(long numeroCompte,Integer detailLevel)throws NotFoundException {
+		Compte entityCompte = searchById(numeroCompte);
+		if(entityCompte==null) 
+			throw new NotFoundException("no entity compte found with numero="+numeroCompte);
+		return convertWithDetailLevel(entityCompte,detailLevel);
+	}
+	
 
+	public CompteDto convertWithDetailLevel(Compte entityCompte,Integer detailLevel) {
+		if(detailLevel==null) detailLevel=0;
+		switch(detailLevel) {
+		    case 2:
+		    	return dtoConverter.compteToCompteDtoEx2(entityCompte);
+		    case 1:
+		    	return dtoConverter.compteToCompteDtoEx(entityCompte);
+			case 0:
+			default:
+				return dtoConverter.compteToCompteDto(entityCompte);
+		}
+	}
 
 	
 
