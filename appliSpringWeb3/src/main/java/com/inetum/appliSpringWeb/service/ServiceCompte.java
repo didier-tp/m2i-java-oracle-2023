@@ -22,6 +22,7 @@ public interface ServiceCompte extends GenericService<Compte,Long,CompteDto> {
 	//méthodes déléguées aux DAOs le CRUD:
 	//Compte searchById(long numeroCompte); //hérité de GenericService
 	//Compte saveOrUpdate(Compte compte);//hérité de GenericService
+	//CompteDto searchDtoById(long numeroCompte);//hérité de GenericService (detailLevel à 0)
 	public CompteDto searchDtoByIdWithDetailLevel(long numeroCompte,Integer detailLevel)throws NotFoundException ;
 	CompteDtoEx searchDtoExByIdWithNumClient(long numeroCompte)throws NotFoundException;
 	CompteDtoEx2 searchDtoEx2ByIdWithClientAndOperations(long numeroCompte)throws NotFoundException;
@@ -36,4 +37,6 @@ public interface ServiceCompte extends GenericService<Compte,Long,CompteDto> {
 	//boolean existById(Long numeroCompte);//hérité de GenericService
 	//List<Compte> searchAll();//hérité de GenericService
 	List<Compte> rechercherSelonSoldeMini(Double soldeMini);
+	
+	CompteDtoEx saveOrUpdateCompteDtoEx(CompteDtoEx compteDtoEx);
 }

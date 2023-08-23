@@ -105,34 +105,42 @@ public class CompteRestCtrl {
 					serviceCompte.rechercherSelonSoldeMini(soldeMini));
 	}
 	
+	/*
 	//exemple de fin d'URL: ./api-bank/compte
 	//appelé en mode POST avec dans la partie invisible "body" de la requête:
 	// { "numero" : null , "label" : "compteQuiVaBien" , "solde" : 50.0 }
-	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0 }
-	@PostMapping("" )
+	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0  }
+	@PostMapping("" ) //ANCIENNE VERSION sans CompteDtoEx et .numeroClient 
 	public CompteDto postCompte(@RequestBody CompteDto nouveauCompte) {
 		Compte compteEnregistreEnBase = serviceCompte.saveOrUpdate(
 				              dtoConverter.compteDtoToCompte(nouveauCompte) );
 		//on retourne le compte avec clef primaire auto_incrémentée
-		return dtoConverter.compteToCompteDto(compteEnregistreEnBase); 
+		return dtoConverter.compteToCompteDtoEx(compteEnregistreEnBase); 
 	}
+	*/
 	
+	//exemple de fin d'URL: ./api-bank/compte
+		//appelé en mode POST avec dans la partie invisible "body" de la requête:
+		// { "numero" : null , "label" : "compteQuiVaBien" , "solde" : 50.0 , "numeroClient" : 1}
+		// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0  , "numeroClient" : null}
+		@PostMapping("" ) //NOUVELLE VERSION avec CompteDtoEx et .numeroClient (éventuellement null)
+		public CompteDto postCompte(@RequestBody CompteDtoEx nouveauCompte) {
+		    //on s'appuie ici sur la méthode spécifique ci dessous du serviceCompte
+			return serviceCompte.saveOrUpdateCompteDtoEx(nouveauCompte);
+		}
+	
+	/*	
 	//exemple de fin d'URL: ./api-bank/compte
 	//ou bien               ./api-bank/compte/5
 	//appelé en mode PUT avec dans la partie invisible "body" de la requête:
 	// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 }
 	//ou bien {  "label" : "compte5QueJaime" , "solde" : 150.0 }
-	@PutMapping({"" , "/{numeroCompte}" })
+	@PutMapping({"" , "/{numeroCompte}" }) //ANCIENNE VERSION SANS DtoEx ni .numeroClient
 	public ResponseEntity<?> putCompteToUpdate(@RequestBody CompteDto compteDto , 
 			      @PathVariable(value="numeroCompte",required = false ) Long numeroCompte) {
 		
 		    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compteDto.getNumero();
 		   
-		   /*
-		    if(!serviceCompte.existById(numCompteToUpdate))
-		    	return new ResponseEntity<String>("{ \"err\" : \"compte not found\"}" ,
- 			           HttpStatus.NOT_FOUND); //NOT_FOUND = code http 404
- 			*/
 		    serviceCompte.shouldExistById(numCompteToUpdate);//remonte NotFoundException si pas trouvé
 		    
 		    if(compteDto.getNumero()==null)
@@ -141,6 +149,28 @@ public class CompteRestCtrl {
 			serviceCompte.saveOrUpdate(dtoConverter.compteDtoToCompte(compteDto));
 			return new ResponseEntity<CompteDto>(compteDto , HttpStatus.OK);
 	}
-	
+	*/
+		
+		//exemple de fin d'URL: ./api-bank/compte
+		//ou bien               ./api-bank/compte/5
+		//appelé en mode PUT avec dans la partie invisible "body" de la requête:
+		// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 , "numeroClient" : null}
+		//ou bien {  "label" : "compte5QueJaime" , "solde" : 150.0 , "numeroClient" : 1}
+		@PutMapping({"" , "/{numeroCompte}" }) //NOUVELLE VERSION AVEC DtoEx et .numeroClient
+		public ResponseEntity<?> putCompteToUpdate(@RequestBody CompteDtoEx compteDto , 
+				      @PathVariable(value="numeroCompte",required = false ) Long numeroCompte) {
+			
+			    Long numCompteToUpdate = numeroCompte!=null ? numeroCompte : compteDto.getNumero();
+			   
+			    serviceCompte.shouldExistById(numCompteToUpdate);//remonte NotFoundException si pas trouvé
+			    
+			    if(compteDto.getNumero()==null)
+			    	compteDto.setNumero(numCompteToUpdate);
+			    
+			    //on s'appuie ici sur la méthode spécifique ci dessous du serviceCompte
+				serviceCompte.saveOrUpdateCompteDtoEx(compteDto); 
+				
+				return new ResponseEntity<CompteDto>(compteDto , HttpStatus.OK);
+		}	
 
 }

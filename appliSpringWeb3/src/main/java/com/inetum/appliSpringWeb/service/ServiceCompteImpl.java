@@ -11,12 +11,15 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.appliSpringWeb.converter.DtoConverter;
+import com.inetum.appliSpringWeb.converter.GenericConverter;
 import com.inetum.appliSpringWeb.dao.DaoCompte;
+import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.dto.CompteDto;
 import com.inetum.appliSpringWeb.dto.CompteDtoEx;
 import com.inetum.appliSpringWeb.dto.CompteDtoEx2;
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
 import com.inetum.appliSpringWeb.exception.NotFoundException;
@@ -29,6 +32,9 @@ public class ServiceCompteImpl
     implements ServiceCompte {
 	
 	private DtoConverter dtoConverter = new DtoConverter();//for specific convert
+	
+	@Autowired
+	private DaoCustomer daoCustomer;//dao annexe/secondaire
 	
 	@Override
 	public CrudRepository<Compte,Long> getDao() {
@@ -165,6 +171,24 @@ public class ServiceCompteImpl
 			default:
 				return dtoConverter.compteToCompteDto(entityCompte);
 		}
+	}
+
+	@Override
+	public CompteDtoEx saveOrUpdateCompteDtoEx(CompteDtoEx compteDtoEx) {
+		// en entree : CompteDtoEx avec .numeroClient
+		// a transformer en compteEntity relié à customerEntity si .numeroClient pas null
+		Compte compteEntity = GenericConverter.map(compteDtoEx, Compte.class);
+		//Compte compteEntity = dtoConverter.compteDtoToCompte(compteDtoEx); //solution 2
+		if(compteDtoEx.getNumeroClient()!=null) {
+			Customer customerEntity = daoCustomer.findById(compteDtoEx.getNumeroClient()).get();
+			compteEntity.setCustomer(customerEntity);
+			
+		}
+		daoCompte.save(compteEntity); //NB: à ce moment là , 
+                                      //éventuelle auto_incr de compteEntity.numero
+		compteDtoEx.setNumero(compteEntity.getNumero());
+		return compteDtoEx; //on retourne le DtoEx sauvegardé
+		                    //avec la clef primaire éventuellement autoincrémenté
 	}
 
 	
