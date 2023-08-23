@@ -96,12 +96,14 @@ public class CompteRestCtrl {
 	//exemple de fin d'URL: ./api-bank/compte
 	//                      ./api-bank/compte?soldeMini=0
 	@GetMapping("" )
-	public List<CompteDto> getComptes(
+	public List<CompteDtoEx> getComptes(
 			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
 		if(soldeMini==null)
-			return serviceCompte.searchAllDto();
+			//return serviceCompte.searchAllDto();
+		    return serviceCompte.searchAllDtoEx();
 		else
-			return dtoConverter.compteToCompteDto(
+			//return dtoConverter.compteToCompteDto(
+			return dtoConverter.compteToCompteDtoEx(
 					serviceCompte.rechercherSelonSoldeMini(soldeMini));
 	}
 	

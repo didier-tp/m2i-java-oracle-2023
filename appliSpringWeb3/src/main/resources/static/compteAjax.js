@@ -9,8 +9,10 @@ window.onload=function(){
 function ajouterCompte(){	
 	let label = (document.getElementById("inputLabel")).value;
 	let soldeInitial = (document.getElementById("inputSoldeInitial")).value;
+	let numeroClient = (document.getElementById("inputNumeroClient")).value;
 	let compteJs = { label : label,
-	                 solde : parseFloat(soldeInitial) };
+	                 solde : parseFloat(soldeInitial) ,
+	                 numeroClient : parseInt(numeroClient)};
 	let compteJson = JSON.stringify(compteJs) ;  
 	let wsUrl = "./api-bank/compte";   
 	makeAjaxPostRequest(wsUrl,compteJson,function (responseJson){
@@ -35,6 +37,7 @@ function rechercherComptesSelonSoldeMini(){
 			(row.insertCell(0)).innerHTML = compte.numero;
 			(row.insertCell(1)).innerHTML = compte.label;
 			(row.insertCell(2)).innerHTML = compte.solde;
+			(row.insertCell(3)).innerHTML = compte.numeroClient;
 		}
 	});
 	

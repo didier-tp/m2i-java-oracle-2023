@@ -56,6 +56,12 @@ public class DtoConverter {
 	                      dto.getLabel(),
 	                      dto.getSolde());
 	}
+
+	public List<CompteDtoEx> compteToCompteDtoEx(List<Compte> entityList) {
+		return entityList.stream()
+		       .map((entity)->compteToCompteDtoEx(entity))
+		       .toList();
+	}
 	
 	
 

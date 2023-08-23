@@ -39,4 +39,5 @@ public interface ServiceCompte extends GenericService<Compte,Long,CompteDto> {
 	List<Compte> rechercherSelonSoldeMini(Double soldeMini);
 	
 	CompteDtoEx saveOrUpdateCompteDtoEx(CompteDtoEx compteDtoEx);
+	List<CompteDtoEx> searchAllDtoEx();
 }

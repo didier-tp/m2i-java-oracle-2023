@@ -191,6 +191,11 @@ public class ServiceCompteImpl
 		                    //avec la clef primaire éventuellement autoincrémenté
 	}
 
+	@Override
+	public List<CompteDtoEx> searchAllDtoEx() {
+		return dtoConverter.compteToCompteDtoEx(searchAll());
+	}
+
 	
 
 }
