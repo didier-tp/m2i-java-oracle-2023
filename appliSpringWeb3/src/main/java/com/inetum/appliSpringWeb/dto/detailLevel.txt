@@ -1,0 +1,11 @@
+detailLevel (null,0,1,2,3,...)
+==============================
+niveau 0 : dto.XxxL0 : 
+   que les propriétés de l'entity (sans aucun lien externe)
+   
+niveau 1 : dto.Xxx ou dto.XxxL1 ou dto.XxxEx1
+   niveau 0 + attribut de type yyyId , zzzId (clef etrangères , id des objets lies)
+   
+niveau 2 : dto.XxxL2 ou  dto.XxxEx2 ou ..
+   niveau 0 + sousDto ou collection de sousDto pour sous objets liés
+   (ex: .yyy de type YyyDto , .zzzs de type List<ZzzDto>)     
