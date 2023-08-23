@@ -1,0 +1,3 @@
+alter session set "_ORACLE_SCRIPT"=true;
+SELECT  * FROM USER_SEQUENCES WHERE sequence_name='COMPTE_SEQ';
+SELECT  * FROM USER_SEQUENCES WHERE sequence_name='OPERATION_SEQ';
