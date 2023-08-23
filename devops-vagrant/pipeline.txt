@@ -33,8 +33,17 @@ pipeline {
   }
   stage('prepa_docker') {
      steps {
-        echo "sonar scan ou construction container docker (souvent sous linux)"
+        script {
+            dir('appliSpringWeb3') {
+               echo "construction image docker (souvent sous linux)"
+               //sh "docker --version"
+               //nb : sudo usermod -a -G docker jenkins 
+               //is required (if not permission denied)
+               //nb: nom image en minuscule !!!
+               sh 'docker image build -t inetum/monappli:latest .'
+               }
            }
+       }
    }
  }
 }

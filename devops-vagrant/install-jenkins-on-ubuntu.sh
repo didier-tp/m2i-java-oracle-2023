@@ -9,6 +9,8 @@ sudo apt-get update
 sudo apt-get install jenkins -y
 
 systemctl status jenkins
+sudo usermod -a -G docker jenkins
+systemctl restart jenkins
 sudo ufw allow 8080
 #sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 #plugins à installer : buildTimeout , git et pipeline
