@@ -11,6 +11,6 @@ sudo apt-get install jenkins -y
 systemctl status jenkins
 sudo ufw allow 8080
 #sudo cat /var/lib/jenkins/secrets/initialAdminPassword
-#plugins à installer : buildTimeout et pipeline
+#plugins à installer : buildTimeout , git et pipeline
 #nouveau username/password : admin/admin123
 #url (en tp): http://localhost:8080
