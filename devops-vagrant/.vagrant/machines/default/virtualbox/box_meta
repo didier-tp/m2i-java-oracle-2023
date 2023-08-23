@@ -1,1 +1,1 @@
-{"name":"hashicorp/bionic64","version":"1.0.282","provider":"virtualbox","directory":"boxes/hashicorp-VAGRANTSLASH-bionic64/1.0.282/virtualbox"}
+{"name":"bento/ubuntu-22.04","version":"202303.13.0","provider":"virtualbox","directory":"boxes/bento-VAGRANTSLASH-ubuntu-22.04/202303.13.0/virtualbox"}

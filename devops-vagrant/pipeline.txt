@@ -1,0 +1,40 @@
+def maven_path = '/usr/share/maven'
+pipeline {
+  agent any
+  stages {
+    stage('SCM') {
+      steps {
+         git url : 'https://github.com/didier-tp/m2i-java-oracle-2023.git' , branch : 'main'
+      }
+    }
+   stage('Build') {
+     steps {
+       script {
+         dir('appliSpringWeb3') {
+            withEnv(["PATH=${maven_path}/bin:$PATH"]) {
+         	//sh "mvn -Dmaven.test.failure.ignore=true clean package"
+                sh "mvn clean package"
+         	//bat "mvn -Dmaven.test.failure.ignore=true clean package"
+	   }
+         }
+       }
+     }
+    post {
+      // If Maven was able to run the tests, even if some of the test failed, .....
+      success {
+         script {
+            dir('appliSpringWeb3') {
+               //sh "mvn javadoc:javadoc"
+               echo "javadoc generated , ..."
+            }
+          }
+      }
+    }
+  }
+  stage('prepa_docker') {
+     steps {
+        echo "sonar scan ou construction container docker (souvent sous linux)"
+           }
+   }
+ }
+}

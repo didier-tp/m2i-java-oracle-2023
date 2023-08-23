@@ -1,4 +1,7 @@
-
+**/*.zip
+**/*.tar
+**/*.gz
+**/.vagrant/*
 
 */*.class
 */.settings/*
