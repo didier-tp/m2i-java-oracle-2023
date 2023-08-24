@@ -1,0 +1,4 @@
+alter session set "_ORACLE_SCRIPT"=true;
+CREATE USER user2 IDENTIFIED BY pwd2;
+GRANT ALL PRIVILEGES TO user2;
+COMMIT;

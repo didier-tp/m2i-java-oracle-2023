@@ -1,0 +1,32 @@
+detailLevel (null,0,1,2,3,...)
+==============================
+niveau 0 : dto.XxxL0 : 
+   que les propriétés de l'entity (sans aucun lien externe)
+   
+niveau 1 : dto.XxxL1 
+   niveau 0 + attribut de type yyyId , zzzId (clef etrangères , id des objets lies)
+   
+niveau 2 : dto.XxxL2 
+   niveau 0 + sousDto ou collection de sousDto pour sous objets liés
+   (ex: .yyy de type YyyDto , .zzzs de type List<ZzzDto>)  
+   
+niveau 3 et 4 (rare) : comme niveau 2  mais avec 3 ou 4 niveaux de profondeur 
+
+===========
+
+Sans précision (detailLevel == null)
+on pourra considéré que le niveau par défaut est 0 ou 1 en fonction du contexte
+
+NB:
+pour des operations de lectures , on a souvent:
+- liste de niveau 0 ou 1 (liste de choses sans trop de détails) : première requête
+- niveaux 2,3,4  (1 seule chose bien détaillée) : requêtes ultérieures
+
+pour des opérations d'ajout ou de mise à jour on a souvent besoin du niveau 1:
+- l'ihm frontEnd permet de saisir les propriétés du niveau 0
+  et permet (via des choix effectués via listes déroulantes) de préciser
+  les ids des objets liés
+- quand un backend recoit une requete avec un DTO de niveau1
+  il décortique les clefs étrangères
+  et traduit cela en recherchant et rattachant les entités annexes liées
+  au niveau de l'entité principale à modifier/sauvegarder.
