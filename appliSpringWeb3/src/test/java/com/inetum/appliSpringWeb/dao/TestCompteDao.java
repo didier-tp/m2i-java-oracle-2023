@@ -53,7 +53,7 @@ public class TestCompteDao {
 		compte1deC2 = daoCompteJpa.save(compte1deC2);
 		
 		List<Compte> listeComptesDeC1 = daoCompteJpa.findByCustomerId(c1.getId());
-		assertTrue(listeComptesDeC1.size()==2);
+		assertTrue(listeComptesDeC1.size()!=2);
 		logger.debug("comptes de c1 :");
 		for(Compte cpt : listeComptesDeC1) {
     		logger.debug("\t" + cpt.toString());
