@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.inetum.appliSpringWeb.dto.CustomerL0;
 import com.inetum.appliSpringWeb.entity.Customer;
+import com.inetum.appliSpringWeb.service.generic.GenericService;
 
 //Business service / service métier
 //avec remontées d'exceptions (héritant de RuntimeException)

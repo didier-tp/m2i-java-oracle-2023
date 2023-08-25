@@ -16,17 +16,21 @@ import com.inetum.appliSpringWeb.entity.Compte;
 //et cet objet sera à la fois accessible via le singleton élémentaire
 //DtoConverter.INSTANCE et comme un composant spring injectable
 
+//NB: pour éviter toute boucle infinie (dépendance circulaire),
+//cette classe peut éventuellement utiliser GenericMapper.MAPPER 
+//mais ne doit pas utiliser GenericConverter.CONVERTER
+
 public class DtoConverter {
 	
 	public static DtoConverter INSTANCE = new DtoConverter();
 	
-	public /*static*/ List<CompteL0> compteToCompteDto(List<Compte> entityList) {
+	public /*static*/ List<CompteL0> compteToCompteL0(List<Compte> entityList) {
 		return entityList.stream()
-				         .map((entity)->compteToCompteDto(entity))
+				         .map((entity)->compteToCompteL0(entity))
 				         .toList();
 	}
 
-	public /*static*/ CompteL0 compteToCompteDto(Compte entity) {
+	public /*static*/ CompteL0 compteToCompteL0(Compte entity) {
 		/*return new CompteDto(entity.getNumero() , 
 				             entity.getLabel(),
 				             entity.getSolde());*/
@@ -42,7 +46,7 @@ public class DtoConverter {
 		return compteDto;
 	}
 	
-	public /*static*/ CompteL1 compteToCompteDtoEx(Compte entity) {
+	public /*static*/ CompteL1 compteToCompteL1(Compte entity) {
 		Long numClient=entity.getCustomer()!=null?entity.getCustomer().getId():null;
 		CompteL1 compteDto = new CompteL1();
 		BeanUtils.copyProperties(entity, compteDto); //compact/écriture concise mais pas rapide
@@ -50,7 +54,7 @@ public class DtoConverter {
 		return compteDto;
 	}
 	
-	public /*static*/ CompteL2 compteToCompteDtoEx2(Compte entity) {
+	public /*static*/ CompteL2 compteToCompteL2(Compte entity) {
 		CompteL2 compteDto = new CompteL2();
 		BeanUtils.copyProperties(entity, compteDto); //compact/écriture concise mais pas rapide
 		compteDto.setCustomer(GenericConverter.CONVERTER.map(entity.getCustomer(), CustomerL0.class));
@@ -58,15 +62,15 @@ public class DtoConverter {
 		return compteDto;
 	}
 	
-	public /*static*/ Compte compteDtoToCompte(CompteL0 dto) {
+	public /*static*/ Compte compteL0ToCompte(CompteL0 dto) {
 		return new Compte(dto.getNumero() , 
 	                      dto.getLabel(),
 	                      dto.getSolde());
 	}
 
-	public List<CompteL1> compteToCompteDtoEx(List<Compte> entityList) {
+	public List<CompteL1> compteToCompteL1(List<Compte> entityList) {
 		return entityList.stream()
-		       .map((entity)->compteToCompteDtoEx(entity))
+		       .map((entity)->compteToCompteL1(entity))
 		       .toList();
 	}
 	

@@ -23,6 +23,7 @@ import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
 import com.inetum.appliSpringWeb.exception.NotFoundException;
+import com.inetum.appliSpringWeb.service.generic.AbstractGenericService;
 
 //@Component
 @Service
@@ -37,12 +38,12 @@ public class ServiceCompteImpl
 	private DaoCustomer daoCustomer;//dao annexe/secondaire
 	
 	@Override
-	public CrudRepository<Compte,Long> getDao() {
+	public CrudRepository<Compte,Long> getMainDao() {
 		return this.daoCompte;
 	}
 	
 	@Override
-	public Class<CompteL0> getDtoClass() {
+	public Class<CompteL0> getMainDtoClass() {
 		return CompteL0.class;
 	}
 	
@@ -164,12 +165,12 @@ public class ServiceCompteImpl
 		if(detailLevel==null) detailLevel=0;
 		switch(detailLevel) {
 		    case 2:
-		    	return dtoConverter.compteToCompteDtoEx2(entityCompte);
+		    	return dtoConverter.compteToCompteL2(entityCompte);
 		    case 1:
-		    	return dtoConverter.compteToCompteDtoEx(entityCompte);
+		    	return dtoConverter.compteToCompteL1(entityCompte);
 			case 0:
 			default:
-				return dtoConverter.compteToCompteDto(entityCompte);
+				return dtoConverter.compteToCompteL0(entityCompte);
 		}
 	}
 
@@ -193,7 +194,7 @@ public class ServiceCompteImpl
 
 	@Override
 	public List<CompteL1> searchAllDtoEx() {
-		return dtoConverter.compteToCompteDtoEx(searchAll());
+		return dtoConverter.compteToCompteL1(searchAll());
 	}
 
 	

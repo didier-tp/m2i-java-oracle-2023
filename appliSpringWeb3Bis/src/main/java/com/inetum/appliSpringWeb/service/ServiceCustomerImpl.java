@@ -13,6 +13,7 @@ import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dto.CustomerL0;
 import com.inetum.appliSpringWeb.entity.Customer;
+import com.inetum.appliSpringWeb.service.generic.AbstractGenericService;
 
 @Service
 @Transactional
@@ -21,12 +22,12 @@ public class ServiceCustomerImpl
     implements ServiceCustomer {
 	
 	@Override
-	public CrudRepository<Customer, Long> getDao() {
+	public CrudRepository<Customer, Long> getMainDao() {
 		return this.daoCustomer;
 	}
 
 	@Override
-	public Class<CustomerL0> getDtoClass() {
+	public Class<CustomerL0> getMainDtoClass() {
 		return CustomerL0.class;
 	}
 	

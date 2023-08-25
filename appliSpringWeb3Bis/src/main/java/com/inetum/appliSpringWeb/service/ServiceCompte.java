@@ -9,6 +9,7 @@ import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
 import com.inetum.appliSpringWeb.exception.NotFoundException;
+import com.inetum.appliSpringWeb.service.generic.GenericService;
 
 //Business service / service métier
 //avec remontées d'exceptions (héritant de RuntimeException)

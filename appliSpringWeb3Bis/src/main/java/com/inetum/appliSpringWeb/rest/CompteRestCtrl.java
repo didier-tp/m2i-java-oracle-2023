@@ -103,7 +103,7 @@ public class CompteRestCtrl {
 		    return serviceCompte.searchAllDtoEx();
 		else
 			//return dtoConverter.compteToCompteDto(
-			return dtoConverter.compteToCompteDtoEx(
+			return dtoConverter.compteToCompteL1(
 					serviceCompte.rechercherSelonSoldeMini(soldeMini));
 	}
 	
