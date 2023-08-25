@@ -6,6 +6,17 @@ tr:nth-child(2n+1) td {  background-color : white; color: black;}
 
 label { display : inline-block ; width: 150px;}
 
+.mywrapbox {
+    display: flex;
+    flex-flow: row wrap;
+    align-items : center;
+}
+
+.myitem {
+    flex: 1 1 auto;
+    text-align: center; padding: 6px; margin: 10px;
+}
+
 /* ensuite nouvelles regles pour taille > 600px de large) */
 @media screen and (min-width : 600px){
    body { background-color : #f4b6a6}
