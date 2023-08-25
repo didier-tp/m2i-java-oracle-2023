@@ -1,0 +1,10 @@
+$couleurTexte : rgb(4, 136, 57);
+
+@mixin with-border($couleurBordure){
+    border: 2px solid $couleurBordure;
+    padding : 1px;
+}
+
+h2 { color : $couleurTexte; text-decoration: underline ; @include with-border(rgb(255, 0, 136));}
+h3 { color : $couleurTexte; @include with-border(red);}
+p { color : $couleurTexte; @include with-border(blue); }

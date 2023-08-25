@@ -1,0 +1,20 @@
+h2 {
+  color: rgb(4, 136, 57);
+  text-decoration: underline;
+  border: 2px solid rgb(255, 0, 136);
+  padding: 1px;
+}
+
+h3 {
+  color: rgb(4, 136, 57);
+  border: 2px solid red;
+  padding: 1px;
+}
+
+p {
+  color: rgb(4, 136, 57);
+  border: 2px solid blue;
+  padding: 1px;
+}
+
+/*# sourceMappingURL=common.css.map */
