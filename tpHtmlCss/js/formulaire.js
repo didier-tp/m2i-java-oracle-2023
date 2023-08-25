@@ -1,9 +1,11 @@
 function enregistrer(){
-    let inputNom = document.querySelector("input[name='nom'] ");
-    let valeurSaisieNom = inputNom.value;
-
     let inputPrenom = document.querySelector("input[name='prenom'] ");
+    console.log("zonePrenomValide=" + inputPrenom.checkValidity());
     let valeurSaisiePrenom = inputPrenom.value;
+
+    let inputNom = document.querySelector("input[name='nom'] ");
+    console.log("zoneNomValide=" + inputNom.checkValidity());
+    let valeurSaisieNom = inputNom.value;
 
     let selectSituation = document.querySelector("select[name='situation'] ");
     let valeurChoiseSituation = selectSituation.value;
