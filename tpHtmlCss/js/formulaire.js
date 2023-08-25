@@ -5,9 +5,13 @@ function enregistrer(){
     let inputPrenom = document.querySelector("input[name='prenom'] ");
     let valeurSaisiePrenom = inputPrenom.value;
 
+    let selectSituation = document.querySelector("select[name='situation'] ");
+    let valeurChoiseSituation = selectSituation.value;
+
     let personneJs = {
         nom : valeurSaisieNom ,
-        prenom : valeurSaisiePrenom 
+        prenom : valeurSaisiePrenom ,
+        situation: valeurChoiseSituation
     }
     let presonneAsJsonString  = JSON.stringify(personneJs);
 
