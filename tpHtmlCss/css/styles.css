@@ -1,5 +1,17 @@
  @import "common.css"; 
 
+ @keyframes secouer-anim {
+    0% { transform: rotate(10deg); }
+    25% { transform: rotate(-10deg); }
+    50% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+    100% { transform: rotate(0deg); }
+    }
+
+.secouer:hover {
+    animation: secouer-anim 3s;
+}
+
 /*d'abord les règles pour tous médias et tailles */
 .titreEnRouge { color: red;}
 th {  background-color : lightgray; color: blue;}
