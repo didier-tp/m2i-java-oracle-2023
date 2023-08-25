@@ -12,3 +12,4 @@ COPY  target/appliSpringWeb3.jar  ./
 EXPOSE 8181
 
 CMD ["java","-jar","appliSpringWeb3.jar" ]
+# CMD ["java","-jar","appliSpringWeb3.jar" ,"-Dspring.profiles.active" , "oracle" ]
