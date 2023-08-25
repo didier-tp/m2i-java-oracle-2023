@@ -4,6 +4,11 @@ th {  background-color : lightgray; color: blue;}
 tr:nth-child(2n) td {  background-color : black; color: white;}
 tr:nth-child(2n+1) td {  background-color : white; color: black;}
 
+button { background-color : lightgray; transform: scale(0.8);
+         transition : 1s linear}
+button:hover { background-color : rgb(100, 70, 190) ; transform: scale(1.0);
+               }
+
 /*
 //solution pas responsive pour label de meme largeur
 label { display : inline-block ; width: 150px;}
