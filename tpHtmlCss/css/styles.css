@@ -4,7 +4,19 @@ th {  background-color : lightgray; color: blue;}
 tr:nth-child(2n) td {  background-color : black; color: white;}
 tr:nth-child(2n+1) td {  background-color : white; color: black;}
 
+/*
+//solution pas responsive pour label de meme largeur
 label { display : inline-block ; width: 150px;}
+*/
+
+.mylabel {
+    flex : 0 0 250px;
+}
+
+.mymaxsize {
+   width : 100%;
+   min-width: 300px;
+}
 
 .mywrapbox {
     display: flex;
@@ -12,9 +24,14 @@ label { display : inline-block ; width: 150px;}
     align-items : center;
 }
 
-.myitem {
+.myitem_with_margin {
     flex: 1 1 auto;
     text-align: center; padding: 6px; margin: 10px;
+}
+
+.myitem {
+    flex: 1 1 auto;
+    text-align: center; padding: 6px; 
 }
 
 

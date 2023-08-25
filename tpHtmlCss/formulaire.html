@@ -1,12 +1,21 @@
 <html>
     <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <!-- for responsive css on mobile device(ex: android)-->
+
         <link rel="stylesheet" href="css/styles.css" />
         <script src="js/formulaire.js"></script>
     </head>
 <body>
     <h1 >formulaire</h1>
     <form>
-        <label>prenom :</label> <input type="text" name="prenom" required /> <br/>
+        <div class="mywrapbox">
+            <label class="mylabel">prenom :</label> 
+            <div class="myitem">
+               <input class="mymaxsize" type="text" name="prenom" required /> 
+            </div>
+        </div>
+        
         <label>nom :</label> <input type="text" name="nom" required pattern="[A-Z].*"/> <br/>
         <label>dateNaissance :</label> <input type="date" name="dateNaissance" /> <br/>
         <label>taille :</label> <input type="number" name="taille" /> <br/>
@@ -24,10 +33,14 @@
     <a href="index.html">retour index</a>
     <hr/>
     <div class="mywrapbox">
-        <button class="myitem">bouton1</button> <button  class="myitem">bouton2</button> 
-        <button  class="myitem">bouton3</button> <button  class="myitem">bouton4</button>
-        <button class="myitem">bouton5</button> <button  class="myitem">bouton6</button> 
-        <button  class="myitem">bouton7</button> <button  class="myitem">bouton8</button>
+        <button class="myitem_with_margin">bouton1 <br/> suite</button> 
+        <button  class="myitem_with_margin">bouton2</button> 
+        <button  class="myitem_with_margin">bouton3</button>
+         <button  class="myitem_with_margin">bouton4</button>
+        <button class="myitem_with_margin">bouton5</button>
+         <button  class="myitem_with_margin">bouton6</button> 
+        <button  class="myitem_with_margin">bouton7</button>
+         <button  class="myitem_with_margin">bouton8</button>
     </div>
 </body>
 </html>
