@@ -15,15 +15,36 @@
                <input class="mymaxsize" type="text" name="prenom" required /> 
             </div>
         </div>
+        <div class="mywrapbox">
+            <label class="mylabel">nom :</label> 
+            <div class="myitem">
+               <input class="mymaxsize" type="text" name="nom" required pattern="[A-Z].*"/>
+            </div>
+        </div>
         
-        <label>nom :</label> <input type="text" name="nom" required pattern="[A-Z].*"/> <br/>
-        <label>dateNaissance :</label> <input type="date" name="dateNaissance" /> <br/>
-        <label>taille :</label> <input type="number" name="taille" /> <br/>
-        <label>situation :</label> 
-        <select name="situation">
-            <option value="celib">celibataire</option>
-            <option value="enCouple">marié ou pacsé</option>
-        </select> <br/>
+        <div class="mywrapbox">
+            <label class="mylabel">dateNaissance :</label> 
+            <div class="myitem">
+               <input class="mymaxsize" type="date" name="dateNaissance" />
+            </div>
+        </div>
+        
+        <div class="mywrapbox">
+             <label class="mylabel">taille :</label> 
+             <div class="myitem">
+                <input class="mymaxsize" type="number" name="taille" />
+            </div> 
+        </div>
+
+        <div class="mywrapbox">
+            <label class="mylabel">situation :</label> 
+            <div class="myitem">
+                <select name="situation" class="mymaxsize">
+                    <option value="celib">celibataire</option>
+                    <option value="enCouple">marié ou pacsé</option>
+                </select>
+            </div>
+        </div>
         <button type="button" 
                 onclick="enregistrer()">enregistrer</button> <br/>
         <button type="submit">envoyer donnees a un eventuel serveur ...</button>
