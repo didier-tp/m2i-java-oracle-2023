@@ -11,6 +11,7 @@ label { display : inline-block ; width: 150px;}
 
 .mylabel {
     flex : 0 0 250px;
+    text-align: left;
 }
 
 .mymaxsize {
