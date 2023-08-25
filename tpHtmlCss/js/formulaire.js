@@ -8,9 +8,13 @@ function enregistrer(){
     let selectSituation = document.querySelector("select[name='situation'] ");
     let valeurChoiseSituation = selectSituation.value;
 
+    let inputDateNaissance = document.querySelector("input[name='dateNaissance'] ");
+    let valeurSaisieDateNaissance = inputDateNaissance.value;
+
     let personneJs = {
         nom : valeurSaisieNom ,
         prenom : valeurSaisiePrenom ,
+        dateNaissance: valeurSaisieDateNaissance,
         situation: valeurChoiseSituation
     }
     let presonneAsJsonString  = JSON.stringify(personneJs);

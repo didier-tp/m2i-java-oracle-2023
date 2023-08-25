@@ -6,15 +6,18 @@
 <body>
     <h1 >formulaire</h1>
     <form>
-        <label>prenom :</label> <input type="text" name="prenom" /> <br/>
-        <label>nom :</label> <input type="text" name="nom" /> <br/>
+        <label>prenom :</label> <input type="text" name="prenom" required /> <br/>
+        <label>nom :</label> <input type="text" name="nom" required pattern="[A-Z].*"/> <br/>
+        <label>dateNaissance :</label> <input type="date" name="dateNaissance" /> <br/>
+        <label>taille :</label> <input type="number" name="taille" /> <br/>
         <label>situation :</label> 
         <select name="situation">
-            <option>celibataire</option>
-            <option>marié</option>
+            <option value="celib">celibataire</option>
+            <option value="enCouple">marié ou pacsé</option>
         </select> <br/>
         <button type="button" 
-                onclick="enregistrer()">enregistrer</button>
+                onclick="enregistrer()">enregistrer</button> <br/>
+        <button type="submit">envoyer donnees a un eventuel serveur ...</button>
     </form>
     message : <span id="msg"></span>
     <hr/>
