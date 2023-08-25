@@ -18,13 +18,13 @@ import com.inetum.appliSpringWeb.entity.Compte;
 
 //NB: pour éviter toute boucle infinie (dépendance circulaire),
 //cette classe peut éventuellement utiliser GenericMapper.MAPPER 
-//mais ne doit pas utiliser GenericConverter.CONVERTER
+//mais NE DOIS PAS utiliser GenericConverter.CONVERTER !!!!
 
 public class DtoConverter {
 	
 	public static DtoConverter INSTANCE = new DtoConverter();
 	
-	public /*static*/ List<CompteL0> compteToCompteL0(List<Compte> entityList) {
+	public /*static*/ List<CompteL0> compteListToCompteL0List(List<Compte> entityList) {
 		return entityList.stream()
 				         .map((entity)->compteToCompteL0(entity))
 				         .toList();
@@ -57,8 +57,8 @@ public class DtoConverter {
 	public /*static*/ CompteL2 compteToCompteL2(Compte entity) {
 		CompteL2 compteDto = new CompteL2();
 		BeanUtils.copyProperties(entity, compteDto); //compact/écriture concise mais pas rapide
-		compteDto.setCustomer(GenericConverter.CONVERTER.map(entity.getCustomer(), CustomerL0.class));
-		compteDto.setOperations(GenericConverter.CONVERTER.map(entity.getOperations(), OperationL0.class));
+		compteDto.setCustomer(GenericMapper.MAPPER.map(entity.getCustomer(), CustomerL0.class));
+		compteDto.setOperations(GenericMapper.MAPPER.map(entity.getOperations(), OperationL0.class));
 		return compteDto;
 	}
 	
@@ -68,12 +68,11 @@ public class DtoConverter {
 	                      dto.getSolde());
 	}
 
-	public List<CompteL1> compteToCompteL1(List<Compte> entityList) {
+	public List<CompteL1> compteListToCompteL1List(List<Compte> entityList) {
 		return entityList.stream()
 		       .map((entity)->compteToCompteL1(entity))
 		       .toList();
 	}
-	
 	
 
 }

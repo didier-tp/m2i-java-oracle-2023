@@ -194,7 +194,7 @@ public class ServiceCompteImpl
 
 	@Override
 	public List<CompteL1> searchAllDtoEx() {
-		return dtoConverter.compteToCompteL1(searchAll());
+		return dtoConverter.compteListToCompteL1List(searchAll());
 	}
 
 	

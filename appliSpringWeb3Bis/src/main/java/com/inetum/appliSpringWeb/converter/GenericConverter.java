@@ -28,17 +28,17 @@ public class GenericConverter extends GenericMapper {
 					source.getClass().getSimpleName() + "To" + destinationClass.getSimpleName());
 			// System.out.println("convertMethodName="+convertMethodName);
 			Method convertMethod = DtoConverter.INSTANCE.getClass().getDeclaredMethod(convertMethodName, source.getClass());
-			if (convertMethod != null) {
-				destination = (D) convertMethod.invoke(DtoConverter.INSTANCE, source);
-			} else {
-				// second try without DtoConverter (as fault back)
-				destination = super.map(source, destinationClass);
-				/*
-				destination = destinationClass.getDeclaredConstructor().newInstance();
-				BeanUtils.copyProperties(source, destination);
-				*/
-			}
-		} catch (Exception e) {
+			destination = (D) convertMethod.invoke(DtoConverter.INSTANCE, source);
+		}
+		catch (NoSuchMethodException e) {
+			// second try without DtoConverter (as fault back)
+			destination = super.map(source, destinationClass);
+			/*
+			destination = destinationClass.getDeclaredConstructor().newInstance();
+			BeanUtils.copyProperties(source, destination);
+			*/
+		}
+		catch (Exception e) {
 			e.printStackTrace();
 		}
 		return destination;
