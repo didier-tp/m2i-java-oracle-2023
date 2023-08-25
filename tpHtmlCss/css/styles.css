@@ -2,3 +2,5 @@
 th {  background-color : lightgray; color: blue;}
 tr:nth-child(2n) td {  background-color : black; color: white;}
 tr:nth-child(2n+1) td {  background-color : white; color: black;}
+
+label { display : inline-block ; width: 150px;}
