@@ -31,7 +31,9 @@ label { display : inline-block ; width: 150px;}
 
 .myitem {
     flex: 1 1 auto;
-    text-align: center; padding: 6px; 
+    text-align: center;  
+    padding-top: 2px;
+    padding-bottom: 2px;
 }
 
 
