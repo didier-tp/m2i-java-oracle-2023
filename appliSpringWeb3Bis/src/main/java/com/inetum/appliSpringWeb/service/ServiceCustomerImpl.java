@@ -2,6 +2,7 @@ package com.inetum.appliSpringWeb.service;
 
 import java.util.List;
 
+import org.mycontrib.util.generic.service.AbstractGenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,24 +12,23 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
-import com.inetum.appliSpringWeb.dto.CustomerL0;
+import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
-import com.inetum.appliSpringWeb.service.generic.AbstractGenericService;
 
 @Service
 @Transactional
 public class ServiceCustomerImpl 
-    extends AbstractGenericService<Customer, Long, CustomerL0>
+    extends AbstractGenericService<Customer, Long>
     implements ServiceCustomer {
 	
 	@Override
 	public CrudRepository<Customer, Long> getMainDao() {
 		return this.daoCustomer;
 	}
-
+	
 	@Override
-	public Class<CustomerL0> getMainDtoClass() {
-		return CustomerL0.class;
+	public Class<Customer> getMainEntityClass() {
+		return Customer.class;
 	}
 	
 	Logger logger = LoggerFactory.getLogger(ServiceCustomerImpl.class);
@@ -66,6 +66,11 @@ public class ServiceCustomerImpl
 	@Override
 	public List<Customer> rechercherCustomerSelonPrenomEtNom(String prenom, String nom) {
 		return daoCustomer.findByFirstnameAndLastname(prenom, nom);
+	}
+
+	@Override
+	public void initEntityRelationShipsFromDtoBeforeSave(Customer entity, Object dto) {
+		// TODO Auto-generated method stub
 	}
 
 	

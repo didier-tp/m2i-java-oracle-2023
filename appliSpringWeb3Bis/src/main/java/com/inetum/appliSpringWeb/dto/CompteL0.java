@@ -1,5 +1,7 @@
 package com.inetum.appliSpringWeb.dto;
 
+import org.mycontrib.util.generic.dto.WithId;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -13,7 +15,7 @@ import lombok.NoArgsConstructor;
 
 //@Getter @Setter @NoArgsConstructor @ToString
 @Data @NoArgsConstructor
-public class CompteL0 {
+public class CompteL0 implements WithId {
 
     private Long numero;
 	private String label;
@@ -24,6 +26,11 @@ public class CompteL0 {
 		this.numero = numero;
 		this.label = label;
 		this.solde = solde;
+	}
+
+	@Override
+	public Object getId() {
+		return this.numero;
 	}
 	
 	

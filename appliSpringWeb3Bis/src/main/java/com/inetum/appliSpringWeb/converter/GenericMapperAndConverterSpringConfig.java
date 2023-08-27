@@ -1,5 +1,6 @@
 package com.inetum.appliSpringWeb.converter;
 
+import org.mycontrib.util.generic.converter.GenericMapper;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 

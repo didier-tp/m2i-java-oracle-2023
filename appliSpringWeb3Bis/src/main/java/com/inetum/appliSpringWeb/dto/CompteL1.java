@@ -1,5 +1,7 @@
 package com.inetum.appliSpringWeb.dto;
 
+import org.mycontrib.util.generic.dto.DtoByLevelUtil;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -10,4 +12,5 @@ import lombok.NoArgsConstructor;
 public class CompteL1  extends CompteL0{
     //private Long numeroClient ; //ancien nom (sans convention)
 	private Long customerId ;//nouveau nom respectant convention "xxxId"
+	
 }

@@ -1,4 +1,4 @@
-package com.inetum.appliSpringWeb.converter;
+package org.mycontrib.util.generic.converter;
 
 import java.util.List;
 

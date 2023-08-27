@@ -1,4 +1,4 @@
-package com.inetum.appliSpringWeb.dto;
+package org.mycontrib.util.generic.dto;
 
 import java.time.LocalDateTime;
 

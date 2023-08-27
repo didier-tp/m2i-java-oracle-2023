@@ -1,4 +1,4 @@
-package com.inetum.appliSpringWeb.service.generic;
+package org.mycontrib.util.generic.service;
 
 import java.util.List;
 
@@ -9,7 +9,7 @@ import java.util.List;
  */
 public interface InternalGenericService<E,ID> 
                  extends BasicGenericService<ID>{
-	 public E searchById(ID id);
-	 public List<E> searchAll();
-	 public E saveOrUpdate(E entity);
+	 public E searchEntityById(ID id);
+	 public List<E> searchAllEntities();
+	 public E saveOrUpdateEntity(E entity);
 }

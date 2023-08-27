@@ -3,6 +3,8 @@ package com.inetum.appliSpringWeb.service;
 import java.util.Date;
 import java.util.List;
 
+import org.mycontrib.util.generic.exception.NotFoundException;
+import org.mycontrib.util.generic.service.AbstractGenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.appliSpringWeb.converter.DtoConverter;
-import com.inetum.appliSpringWeb.converter.GenericConverter;
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
@@ -22,14 +23,12 @@ import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
-import com.inetum.appliSpringWeb.exception.NotFoundException;
-import com.inetum.appliSpringWeb.service.generic.AbstractGenericService;
 
 //@Component
 @Service
 @Transactional //ici (sur une classe de Service) en tant que bonne pratique
 public class ServiceCompteImpl 
-    extends AbstractGenericService<Compte,Long,CompteL0>
+    extends AbstractGenericService<Compte,Long>
     implements ServiceCompte {
 	
 	public DtoConverter dtoConverter = new DtoConverter();//for specific convert
@@ -43,8 +42,8 @@ public class ServiceCompteImpl
 	}
 	
 	@Override
-	public Class<CompteL0> getMainDtoClass() {
-		return CompteL0.class;
+	public Class<Compte> getMainEntityClass() {
+		return Compte.class;
 	}
 	
 	Logger logger = LoggerFactory.getLogger(ServiceCompteImpl.class);
@@ -142,61 +141,17 @@ public class ServiceCompteImpl
 		return daoCompte.findBySoldeGreaterThanEqual(soldeMini);
 	}
 
-	@Override
-	public CompteL1 searchDtoExByIdWithNumClient(long numeroCompte) {
-		return (CompteL1) searchDtoByIdWithDetailLevel(numeroCompte,1);
-	}
-
-	@Override
-	public CompteL2 searchDtoEx2ByIdWithClientAndOperations(long numeroCompte) {
-		return (CompteL2) searchDtoByIdWithDetailLevel(numeroCompte,2);
-	}
-	
-	@Override
-	public CompteL0 searchDtoByIdWithDetailLevel(long numeroCompte,Integer detailLevel)throws NotFoundException {
-		Compte entityCompte = searchById(numeroCompte);
-		if(entityCompte==null) 
-			throw new NotFoundException("no entity compte found with numero="+numeroCompte);
-		return convertWithDetailLevel(entityCompte,detailLevel);
-	}
-	
-
-	public CompteL0 convertWithDetailLevel(Compte entityCompte,Integer detailLevel) {
-		if(detailLevel==null) detailLevel=0;
-		switch(detailLevel) {
-		    case 2:
-		    	return dtoConverter.compteToCompteL2(entityCompte);
-		    case 1:
-		    	return dtoConverter.compteToCompteL1(entityCompte);
-			case 0:
-			default:
-				return dtoConverter.compteToCompteL0(entityCompte);
-		}
-	}
-
-	@Override
-	public CompteL1 saveOrUpdateCompteDtoEx(CompteL1 compteDtoEx) {
-		// en entree : CompteDtoEx avec .numeroClient
-		// a transformer en compteEntity relié à customerEntity si .customerId pas null
-		Compte compteEntity = genericConverter.map(compteDtoEx, Compte.class);
-		//Compte compteEntity = dtoConverter.compteDtoToCompte(compteDtoEx); //solution 2
-		if(compteDtoEx.getCustomerId()!=null) {
-			Customer customerEntity = daoCustomer.findById(compteDtoEx.getCustomerId()).get();
-			compteEntity.setCustomer(customerEntity);
 			
-		}
-		daoCompte.save(compteEntity); //NB: à ce moment là , 
-                                      //éventuelle auto_incr de compteEntity.numero
-		compteDtoEx.setNumero(compteEntity.getNumero());
-		return compteDtoEx; //on retourne le DtoEx sauvegardé
-		                    //avec la clef primaire éventuellement autoincrémenté
-	}
-
 	@Override
-	public List<CompteL1> searchAllDtoEx() {
-		return dtoConverter.compteListToCompteL1List(searchAll());
+	public void initEntityRelationShipsFromDtoBeforeSave(Compte entity,Object dto) {
+		if(dto instanceof CompteL1 compteL1) {
+			// en entree : dto de type CompteL1 avec .customerId
+			// cette liaison est à transformer en compteEntity relié à customerEntity si .customerId pas null
+				if(compteL1.getCustomerId()!=null) {
+					Customer customerEntity = daoCustomer.findById(compteL1.getCustomerId()).get();
+					entity.setCustomer(customerEntity);
+				}
+	     }
 	}
-
-	
 
 }

@@ -1,4 +1,4 @@
-package com.inetum.appliSpringWeb.exception;
+package org.mycontrib.util.generic.exception;
 
 
 public class NotFoundException extends RuntimeException {

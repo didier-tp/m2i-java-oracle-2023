@@ -2,6 +2,8 @@ package com.inetum.appliSpringWeb.dto;
 
 import java.util.List;
 
+import org.mycontrib.util.generic.dto.DtoByLevelUtil;
+
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
