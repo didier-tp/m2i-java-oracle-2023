@@ -1,0 +1,27 @@
+<html>
+<head>
+	<title>logInOut</title>
+	<script src="js/keycloak.js"></script>
+	<script src="js/logInOut.js"></script>
+</head>
+<body>
+    <h3>logInOut</h3>
+	<button id="btnLogin">login</button> &nbsp; <button id="btnLogout">logout</button>
+	<span id="spanMsg"></span> <br/>
+	username: <span id="username"></span> <br/>
+	name: <span id="name"></span> <br/>
+	oauth2/oidc scope: <span id="scope"></span> <br/>
+	<hr/>
+	<p>exemples of good Username/Password:</p>
+	<ul>
+	   <li>mgr1/pwd1 (MANAGE_RW : resource.read , resource.write )</li> 
+	   <li>admin1/pwd1 (ADMIN_CRUD : resource.read , resource.write , resource.delete )</li> 
+	   <li>user1/pwd1 (USER : resource.read  )</li> 
+	</ul>
+	<hr/>
+	<a href="./index.html">retour vers index</a>
+	<hr/>
+	<a href="https://www.d-defrance.fr/keycloak/realms/sandboxrealm/.well-known/openid-configuration">public keycloak oidc/oauth2 config</a> <br>
+	<a href="https://www.d-defrance.fr:443/keycloak/admin/sandboxrealm/console" target="blank">sandboxrealm console (after logout , admin/admin)</a>
+</body>
+</html>

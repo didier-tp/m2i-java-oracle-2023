@@ -9,7 +9,7 @@ public class AppliSpringWebApplication {
 	public static void main(String[] args) {
 		
 		//System.setProperty("spring.profiles.active", "oracle,init");
-		System.setProperty("spring.profiles.active", "oracle,init,withSecurity");
+		System.setProperty("spring.profiles.active", "h2,init,withSecurity");
 		//System.setProperty("spring.profiles.active", "h2,init");
 		SpringApplication.run(AppliSpringWebApplication.class, args);
 		

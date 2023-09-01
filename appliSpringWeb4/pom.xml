@@ -31,6 +31,7 @@
 			<artifactId>spring-boot-starter-security</artifactId>
 		</dependency>
 		-->
+		
 		<!-- 
 		NB: la dependance spring-boot-starter-security
 		    comporte une securité par défaut pour SpringMVC à l'ancienne (JSP/thymeleaf)

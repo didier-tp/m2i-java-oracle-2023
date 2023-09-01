@@ -3,10 +3,13 @@
   <groupId>org.mycontrib</groupId>
   <artifactId>my-security-configure</artifactId>
   <version>0.0.1-SNAPSHOT</version>
+  <description>auto configuration of main part of security filterChain
+               and protected areas
+               (whitelist , protectedlist) via xyz-withSecurity.properties</description>
 <properties>
 		<java.version>11</java.version>
-		 <spring-boot.version>2.7.5</spring-boot.version>
-		 <spring.version>5.3.23</spring.version>
+		 <spring-boot.version>2.7.14</spring-boot.version>
+		 <spring.version>5.3.29</spring.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 </properties>
 <dependencies>
@@ -27,7 +30,7 @@
 		</dependency>	
 		<dependency>
 		    <groupId>org.mycontrib</groupId>
-		    <artifactId>my-security</artifactId>
+		    <artifactId>my-security-standalone-jwt</artifactId>
 		    <version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
@@ -42,10 +45,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
+				<version>3.11.0</version>
 				<configuration>
 					<source>${java.version}</source>
 					<target>${java.version}</target>
+					<release>${java.version}</release>
 				</configuration>
 			</plugin>
 		</plugins>
