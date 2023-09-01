@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 
 import javax.sql.DataSource;
 
+import org.mycontrib.mysecurity.realm.config.default_users.MySecurityDefaultUsersSimpleConfigurer;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -50,7 +51,7 @@ public class MyAppGlobalUserDetailsConfigHelper  {
 	
 
     public UserDetailsManagerConfigurer initJdbcGlobalUserDetails(final AuthenticationManagerBuilder auth,
-    		   MySecuritySimpleConfigurer mySecuritySimpleConfigurer,DataSourceProperties dsProps) throws Exception {
+    		   MySecurityDefaultUsersSimpleConfigurer mySecuritySimpleConfigurer,DataSourceProperties dsProps) throws Exception {
 		initRealmDataSource(dsProps);
 		JdbcUserDetailsManagerConfigurer jdbcUserDetailsManagerConfigurer = 
 				auth.jdbcAuthentication()
@@ -73,7 +74,7 @@ public class MyAppGlobalUserDetailsConfigHelper  {
     }
     
     public UserDetailsManagerConfigurer initInMemoryGlobalUserDetails(final AuthenticationManagerBuilder auth,
-    		                 MySecuritySimpleConfigurer mySecuritySimpleConfigurer)throws Exception {
+    		                 MySecurityDefaultUsersSimpleConfigurer mySecuritySimpleConfigurer)throws Exception {
     	UserDetailsManagerConfigurer udmc  = auth.inMemoryAuthentication();
     	mySecuritySimpleConfigurer.configureDefaultUsers(udmc);
     	return udmc;

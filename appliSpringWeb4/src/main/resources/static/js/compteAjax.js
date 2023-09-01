@@ -12,7 +12,7 @@ function ajouterCompte(){
 	let compteJs = { label : label,
 	                 solde : parseFloat(soldeInitial) };
 	let compteJson = JSON.stringify(compteJs) ;  
-	let wsUrl = "./api-bank/compte";   
+	let wsUrl = "./rest/api-bank/compte";   
 	makeAjaxPostRequest(wsUrl,compteJson,function (responseJson){
 		console.log("responseJson="+responseJson);
 		rechercherComptesSelonSoldeMini(); //pour rafraîchir le tableau avec nouveau compte ajouté
@@ -22,7 +22,7 @@ function ajouterCompte(){
 function rechercherComptesSelonSoldeMini(){	
 	let soldeMini = (document.getElementById("inputSoldeMini")).value;
 	
-	let wsUrl = "./api-bank/compte?soldeMini="+soldeMini;
+	let wsUrl = "./rest/api-bank/compte?soldeMini="+soldeMini;
 	
 	makeAjaxGetRequest(wsUrl,function(responseJson){
 		let comptesJs = JSON.parse(responseJson);

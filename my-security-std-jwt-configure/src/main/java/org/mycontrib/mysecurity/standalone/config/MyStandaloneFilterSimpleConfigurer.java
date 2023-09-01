@@ -4,6 +4,7 @@ import org.mycontrib.mysecurity.chain.config.MyFilterSimpleConfigurer;
 import org.mycontrib.mysecurity.jwt.util.JwtAuthenticationFilter;
 import org.mycontrib.mysecurity.standalone.util.MyNoAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @Profile("withSecurity")
+@Qualifier("StandaloneJwt")
 public class MyStandaloneFilterSimpleConfigurer implements MyFilterSimpleConfigurer {
 
 	@Autowired

@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin("*")
 @Profile("withSecurity")
-@RequestMapping(value="/api-login/public/login" , headers="Accept=application/json")
+@RequestMapping(value="/rest/api-login/public/login" , headers="Accept=application/json")
 public class LoginRestCtrl {
 	
 	
@@ -31,7 +31,7 @@ public class LoginRestCtrl {
 	@Autowired
 	private JwtTokenProvider jwtTokenProvider;
 
-	//http://localhost:8080/..../api-login/public/login
+	//http://localhost:8080/..../rest/api-login/public/login
 	//avec { "username" : "user1" , "password" : "pwd1" }
 	//en retour { "message" :  "..." , "token" ; "..." , ...}
 	@PostMapping("")

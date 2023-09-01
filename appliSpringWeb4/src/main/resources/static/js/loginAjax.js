@@ -16,13 +16,13 @@ function doLogin(){
 	var password = document.getElementById("txtPassword").value;
 
 	
-	var url = "./api-login/public/login"
+	var url = "./rest/api-login/public/login"
 
     var callback = function(data){
 	   console.log("success data=" + data);
        var jwtToken = (JSON.parse(data)).token;
        //tokenGlobal=jwtToken;
-       sessionStorage.setItem("token",jwtToken);
+       sessionStorage.setItem("authToken",jwtToken);
        var message ="reponse login=" + data + " payload token=" + parseJwt(jwtToken);
        document.getElementById("spanMessageLogin").innerHTML="<b>"+message+"</b>";
     }

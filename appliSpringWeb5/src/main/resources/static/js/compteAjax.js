@@ -17,7 +17,7 @@ function ajouterCompte(){
 	                 solde : parseFloat(soldeInitial) ,
 	                 customerId : parseInt(customerId)};
 	let compteJson = JSON.stringify(compteJs) ;  
-	let wsUrl = "./api-bank/compte";   
+	let wsUrl = "./rest/api-bank/compte";   
 	makeAjaxPostRequest(wsUrl,compteJson,function (responseJson){
 		console.log("responseJson="+responseJson);
 		rechercherComptesSelonSoldeMini(); //pour rafraîchir le tableau avec nouveau compte ajouté
@@ -25,7 +25,7 @@ function ajouterCompte(){
 }
 
 function rechercherClients(){	
-	let wsUrl = "./api-bank/customer";
+	let wsUrl = "./rest/api-bank/customer";
 	makeAjaxGetRequest(wsUrl,function(responseJson){
 		let clientsJs = JSON.parse(responseJson);
 		console.log("clientsJs="+clientsJs);
@@ -45,7 +45,7 @@ function rechercherClients(){
 function rechercherComptesSelonSoldeMini(){	
 	let soldeMini = (document.getElementById("inputSoldeMini")).value;
 	
-	let wsUrl = "./api-bank/compte?soldeMini="+soldeMini;
+	let wsUrl = "./rest/api-bank/compte?soldeMini="+soldeMini;
 	
 	makeAjaxGetRequest(wsUrl,function(responseJson){
 		let comptesJs = JSON.parse(responseJson);

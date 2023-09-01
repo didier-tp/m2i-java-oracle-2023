@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 @Controller
-@RequestMapping("/calcul")
+@RequestMapping("/site/calcul")
 public class CalculController {
 	
 	// private ServiceCompte serviceCompte avec @Autowired possible ici

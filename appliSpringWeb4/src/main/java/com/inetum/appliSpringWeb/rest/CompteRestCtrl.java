@@ -24,7 +24,7 @@ import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.service.ServiceCompte;
 
 @RestController
-@RequestMapping(value="/api-bank/compte" , headers="Accept=application/json")
+@RequestMapping(value="/rest/api-bank/compte" , headers="Accept=application/json")
 //@CrossOrigin permet d'ajouter des autorisations "CORS" pour que ce web service
 //puisse être appelé en mode ajax depuis d'autres origines/url que http://localhost:8080
 @CrossOrigin(origins = "*" , methods = { RequestMethod.GET , RequestMethod.POST})

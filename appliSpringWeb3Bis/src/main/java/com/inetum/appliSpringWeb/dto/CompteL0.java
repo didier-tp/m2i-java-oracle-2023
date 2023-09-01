@@ -35,7 +35,5 @@ public class CompteL0 implements WithId<Long> {
 	public Long getId() {
 		return this.numero;
 	}
-	
-	
 
 }

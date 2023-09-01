@@ -2,20 +2,35 @@
 function registerCallbacks(xhr, callback, errCallback) {
 	xhr.onreadystatechange = function() {
 		if (xhr.readyState == 4) {
-			if ((xhr.status == 200 || xhr.status == 0)) {
+			if ((xhr.status == 200 || xhr.status == 204 ||  xhr.status == 201)) {
 				callback(xhr.responseText);
 			}
 			else {
 				if (errCallback)
-					errCallback(xhr.responseText);
+					errCallback(withDefaultErrorMessage(xhr,xhr.responseText));
 			}
 		}
 	};
 }
 
+function withDefaultErrorMessage(xhr,errorMessage){
+	if(errorMessage==null || errorMessage==""){
+		switch(xhr.status){
+			case 401:
+				return "401/Unauthorized (no authentication (ex: no token))";
+			case 403:
+				return "403/Forbidden (not enough access)";
+			case 500:
+				return "500/Internal Server Error";
+		}
+	}
+	else return errorMessage;
+}
+
 function setTokenInRequestHeader(xhr){
-	var token = sessionStorage.getItem("token");
-	xhr.setRequestHeader("Authorization", "Bearer " + token);
+	let authToken = sessionStorage.getItem("authToken");
+	if(authToken!=null && authToken!="")
+	   xhr.setRequestHeader("Authorization", "Bearer " + authToken);
 }
 
 function makeAjaxGetRequest(url, callback, errCallback) {

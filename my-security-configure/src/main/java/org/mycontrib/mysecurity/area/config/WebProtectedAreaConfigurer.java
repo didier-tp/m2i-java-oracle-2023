@@ -36,13 +36,13 @@ public class WebProtectedAreaConfigurer {
 		String[] defaultStaticWhitelist = { "/", "/favicon.ico", "/**/*.png", "/**/*.gif", "/**/*.svg", "/**/*.jpg",
 				"/**/*.html", "/**/*.css", "/**/*.js" }; // default value
 		
-		String[] defaultApiWhitelist = { "/my-api/public/**" }; // default value
+		String[] defaultApiWhitelist = { "/rest/my-api/public/**" }; // default value
 		
 		String[] defaultSwaggerWhitelist = { "/swagger-ui/**","/v3/api-docs" }; // "/swagger-resources/**" ?? , "/webjars/**" ??
 		
-		String[] defaultApiReadonlyWhitelist = { "/my-api/readonly/**" }; // default value
+		String[] defaultApiReadonlyWhitelist = { "/rest/my-api/readonly/**" }; // default value
 		
-		String[] defaultApiProtectedlist = { "/my-api/private/**" }; // default value
+		String[] defaultApiProtectedlist = { "/rest/my-api/private/**" }; // default value
 
 		if (mySecurityProperties != null && mySecurityProperties.getStaticWhitelist() != null)
 			areasConfig.setStaticWhitelist(mySecurityProperties.getStaticWhitelist().split(";"));

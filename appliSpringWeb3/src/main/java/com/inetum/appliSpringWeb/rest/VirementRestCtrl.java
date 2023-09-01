@@ -13,7 +13,7 @@ import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.service.ServiceCompte;
 
 @RestController
-@RequestMapping(value="/api-bank/virement" , 
+@RequestMapping(value="/rest/api-bank/virement" , 
                 headers="Accept=application/json")
 public class VirementRestCtrl {
 	

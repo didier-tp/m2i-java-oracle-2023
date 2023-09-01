@@ -2,6 +2,17 @@ package org.mycontrib.mysecurity.area.properties;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
+/*
+ a decomposer en 3 parties (abstract + webSite + restApi )
+ 
+ mysecurity.area.whitelist 
+ deviendra
+ mysecurity.site.whitelist 
+ plus
+ mysecurity.rest.whitelist
+ 
+ */
+
 @ConfigurationProperties(prefix="mysecurity.area")
 public class MySecurityAreaProperties {
 	
@@ -65,7 +76,6 @@ public class MySecurityAreaProperties {
 	public void setSwaggerWhitelist(String swaggerWhitelist) {
 		this.swaggerWhitelist = swaggerWhitelist;
 	}
-	
-	
+
 
 }

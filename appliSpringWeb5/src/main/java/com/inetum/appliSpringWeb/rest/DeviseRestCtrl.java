@@ -13,7 +13,7 @@ import com.inetum.appliSpringWeb.dto.DeviseL0;
 import com.inetum.appliSpringWeb.service.ServiceDevise;
 
 @RestController
-@RequestMapping(value="/api-devise/devise" , headers="Accept=application/json")
+@RequestMapping(value="/rest/api-devise/devise" , headers="Accept=application/json")
 public class DeviseRestCtrl extends AbstractGenericRestCtrl<String,DeviseL0>{
 	
 	@Autowired

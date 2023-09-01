@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.inetum.appliSpringWeb.dto.Devise;
 
 @RestController
-@RequestMapping(value="/api-devise/devise" , headers="Accept=application/json")
+@RequestMapping(value="/rest/api-devise/devise" , headers="Accept=application/json")
 public class DeviseRestCtrl {
 	
 	//exemple de fin d'URL: ./api-devise/devise/USD

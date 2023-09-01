@@ -8,7 +8,7 @@ window.onload=function(){
 function rechercherDeviseSelonCode(){	
 	let code = (document.getElementById("inputCode")).value;
 	
-	let wsUrl = "./api-devise/devise/"+code;
+	let wsUrl = "./rest/api-devise/devise/"+code;
 	
 	let successCallback = function(responseJson){
 		let deviseJs = JSON.parse(responseJson);

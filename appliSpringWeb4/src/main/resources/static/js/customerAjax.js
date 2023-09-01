@@ -14,7 +14,7 @@ function ajouterCustomer(){
 	                 lastname : nom,
 	                 password:password };
 	let customerJson = JSON.stringify(customerJs) ;  
-	let wsUrl = "./api-bank/customer";   
+	let wsUrl = "./rest/api-bank/customer";   
 	makeAjaxPostRequest(wsUrl,customerJson,function (responseJson){
 		console.log("responseJson="+responseJson);
 		rechercherCustomers(); //pour rafraîchir le tableau avec nouveau customer ajouté
@@ -22,7 +22,7 @@ function ajouterCustomer(){
 }
 	
 function rechercherCustomers(){	
-	let wsUrl = "./api-bank/customer";
+	let wsUrl = "./rest/api-bank/customer";
 	
 	makeAjaxGetRequest(wsUrl,function(responseJson){
 		let customersJs = JSON.parse(responseJson);
