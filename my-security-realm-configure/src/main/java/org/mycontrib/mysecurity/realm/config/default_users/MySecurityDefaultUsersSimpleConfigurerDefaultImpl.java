@@ -20,7 +20,7 @@ public class MySecurityDefaultUsersSimpleConfigurerDefaultImpl implements MySecu
 	}
 	
 	@Override
-	public void configureDefaultUsers(UserDetailsManagerConfigurer udmc) {
+	public void configureGlobalDefaultUsers(UserDetailsManagerConfigurer udmc) {
 		udmc
 		.withUser("user1").password(passwordEncoder.encode("pwd1")).roles("USER")
 		.and().withUser("admin1").password(passwordEncoder.encode("pwd1")).roles("ADMIN")

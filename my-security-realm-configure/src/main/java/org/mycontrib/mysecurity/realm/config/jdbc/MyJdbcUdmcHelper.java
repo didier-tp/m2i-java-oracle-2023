@@ -1,4 +1,4 @@
-package org.mycontrib.mysecurity.realm.config;
+package org.mycontrib.mysecurity.realm.config.jdbc;
 
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
@@ -12,9 +12,10 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.JdbcUserDetailsManagerConfigurer;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
-public class MyAppGlobalUserDetailsConfigHelper  {
+public class MyJdbcUdmcHelper  {
    
     private static DataSource realmDataSource;
     
@@ -50,11 +51,16 @@ public class MyAppGlobalUserDetailsConfigHelper  {
     }
 	
 
-    public UserDetailsManagerConfigurer initJdbcGlobalUserDetails(final AuthenticationManagerBuilder auth,
-    		   MySecurityDefaultUsersSimpleConfigurer mySecuritySimpleConfigurer,DataSourceProperties dsProps) throws Exception {
+    public UserDetailsManagerConfigurer initJdbcGlobalUserDetails(
+    		   final AuthenticationManagerBuilder authManagerBuilder,
+    		   MySecurityDefaultUsersSimpleConfigurer mySecuritySimpleConfigurer,
+    		   DataSourceProperties dsProps,
+    		   PasswordEncoder passwordEncoder) throws Exception {
 		initRealmDataSource(dsProps);
+	
 		JdbcUserDetailsManagerConfigurer jdbcUserDetailsManagerConfigurer = 
-				auth.jdbcAuthentication()
+				authManagerBuilder.jdbcAuthentication()
+				.passwordEncoder(passwordEncoder)
 		        .dataSource(realmDataSource);
 		if(isRealmSchemaInitialized()) {
 			/*
@@ -68,15 +74,10 @@ public class MyAppGlobalUserDetailsConfigHelper  {
 			//creating default schema and default tables "users" , "authorities"
 			jdbcUserDetailsManagerConfigurer.withDefaultSchema();
 			//inserting default users:
-			mySecuritySimpleConfigurer.configureDefaultUsers(jdbcUserDetailsManagerConfigurer);
+			mySecuritySimpleConfigurer.configureGlobalDefaultUsers(jdbcUserDetailsManagerConfigurer);
 		}
 		return jdbcUserDetailsManagerConfigurer;
     }
     
-    public UserDetailsManagerConfigurer initInMemoryGlobalUserDetails(final AuthenticationManagerBuilder auth,
-    		                 MySecurityDefaultUsersSimpleConfigurer mySecuritySimpleConfigurer)throws Exception {
-    	UserDetailsManagerConfigurer udmc  = auth.inMemoryAuthentication();
-    	mySecuritySimpleConfigurer.configureDefaultUsers(udmc);
-    	return udmc;
-    }
+    
 }

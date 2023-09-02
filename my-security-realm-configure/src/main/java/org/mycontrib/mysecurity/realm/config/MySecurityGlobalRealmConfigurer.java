@@ -1,88 +1,85 @@
 package org.mycontrib.mysecurity.realm.config;
 
-import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
-import org.mycontrib.mysecurity.jwt.util.JwtAuthenticationFilter;
+import javax.annotation.PostConstruct;
+
 import org.mycontrib.mysecurity.realm.config.default_users.MySecurityDefaultUsersSimpleConfigurer;
+import org.mycontrib.mysecurity.realm.config.jdbc.MyJdbcRealmSubConfigurer;
+import org.mycontrib.mysecurity.realm.config.memory.MyInMemoryRealmSubConfigurer;
 import org.mycontrib.mysecurity.realm.properties.MySecurityRealmProperties;
-import org.mycontrib.mysecurity.standalone.util.MyNoAuthenticationEntryPoint;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.boot.autoconfigure.jdbc.DataSourceProperties;
+import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.ObjectPostProcessor;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
-import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-//restSecondaryRealm=InMemory or none
-//none by default
 
-//webSiteSecondaryRealm=InMemory or none
-//none by default
-
-//restApiMainRealm=Jdbc or SpecificUserDetailsService or none(if oAuth2Server) or Ldap or ...
-//none by default (with oAuth2Server))
-
-//webSiteMainRealm=Jdbc or SpecificUserDetailsService or Ldap or ...
-//SpecificUserDetailsService par default 
-
-//restApiGlobalRealm=restApiMainRealm+restSecondaryRealm
-//none+none=none by default
-
-//webSiteGlobalRealm=webSiteMainRealm+webSiteSecondaryRealm
-
-//DefaultUsers config
-//(default values in MySecurityDefaultUsersSimpleConfigurerDefaultImpl or not specific value in another specific implementation in calling project)
-//defaultUsersTargets=site-(or rest-)main-(or secondary-)realm , ...
-
-//A determiner/configurer selon ce qui existe
-//ex:
-//mysecurity.main-site-realm.jdbc-realm....
-//...
-	
 
 
 @Configuration
 @Profile("withSecurity")
 @ConfigurationPropertiesScan("org.mycontrib.mysecurity.realm.properties")
-public class MySecurityRealmConfigurer {
+public class MySecurityGlobalRealmConfigurer {
 
-	private static Logger logger = LoggerFactory.getLogger(MySecurityRealmConfigurer.class);
+	private static Logger logger = LoggerFactory.getLogger(MySecurityGlobalRealmConfigurer.class);
 
 	@Autowired(required = false)
 	public MySecurityRealmProperties mySecurityRealmProperties;
-
+	
+	private Map<String,AuthenticationManager> authenticationMgrMap ;
+	
 	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 
 	@Autowired
-	private MySecurityDefaultUsersSimpleConfigurer mySecuritySimpleConfigurer;
+	private MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer;
 
-	@Autowired(required = false)
-	@Qualifier(MySecurityExtension.MY_EXCLUSIVE_USERDETAILSSERVICE_NAME)
-	UserDetailsService myExclusiveUserDetailsService;
-
-	@Autowired(required = false)
-	@Qualifier(MySecurityExtension.MY_ADDITIONAL_USERDETAILSSERVICE_NAME)
-	UserDetailsService myAdditionalUserDetailsService;
-
+	@Bean //default global AuthenticationManager
+	@ConditionalOnMissingBean(AuthenticationManager.class)
+	public AuthenticationManager authenticationManager(HttpSecurity httpSecurity)throws Exception {
+		initAuthenticationMgrMap(httpSecurity);
+		return authenticationMgrMap.get("global");
+	}
+	
+	
+	public void initAuthenticationMgrMap(HttpSecurity httpSecurity)throws Exception {
+		if(authenticationMgrMap!=null) return;
+		authenticationMgrMap = new HashMap<>();
+		
+		MyInMemoryRealmSubConfigurer myInMemoryRealmSubConfigurer = new MyInMemoryRealmSubConfigurer(mySecurityRealmProperties,
+			      authenticationMgrMap,passwordEncoder,mySecurityDefaultUsersSimpleConfigurer);
+		myInMemoryRealmSubConfigurer.initInMemoryAuthenticationManagersInMap();
+		
+		
+		MyJdbcRealmSubConfigurer myJdbcRealmSubConfigurer = new MyJdbcRealmSubConfigurer(mySecurityRealmProperties,
+				      authenticationMgrMap,passwordEncoder,mySecurityDefaultUsersSimpleConfigurer);
+		myJdbcRealmSubConfigurer.initJdbcAuthenticationManagersInMap();
+		
+		authenticationMgrMap.put("global",authenticationMgrMap.get("jdbc.global"));
+	}
+	
+	
+	
+	@Bean
+	public Map<String,AuthenticationManager> authenticationManagerMap(HttpSecurity httpSecurity) throws Exception {
+		initAuthenticationMgrMap(httpSecurity);
+		return authenticationMgrMap;
+	}
+	
+	
+	
+/*
 	@Bean // **** IMPORTANT *****
 	public AuthenticationManager authenticationManagerFromHttpSecurity(HttpSecurity http) throws Exception {
 		// Configure AuthenticationManagerBuilder
@@ -98,7 +95,7 @@ public class MySecurityRealmConfigurer {
 										.passwordEncoder(passwordEncoder);
 		} else {
 			UserDetailsManagerConfigurer udmc = null;
-			MyAppGlobalUserDetailsConfigHelper myAppGlobalUserDetailsConfigHelper = new MyAppGlobalUserDetailsConfigHelper();
+			MyJdbcUdmcHelper myAppGlobalUserDetailsConfigHelper = new MyJdbcUdmcHelper();
 			if (mySecurityRealmProperties != null && mySecurityRealmProperties.getJdbcRealm() != null) {
 				// JdbcUserDetailsManagerConfigurer if mysecurity.jdbc-realm properties not null
 				DataSourceProperties dsProps = mySecurityRealmProperties.getJdbcRealm();
@@ -106,22 +103,17 @@ public class MySecurityRealmConfigurer {
 						"configuring jdbcRealm from mysecurity.jdbc-realm properties : " + dsProps.getDriverClassName()
 								+ " , url=" + dsProps.getUrl() + " , username=" + dsProps.getUsername());
 				udmc = myAppGlobalUserDetailsConfigHelper.initJdbcGlobalUserDetails(authenticationManagerBuilder,
-						mySecuritySimpleConfigurer, dsProps);
+						mySecurityDefaultUsersSimpleConfigurer, dsProps);
 			} else {
 				// inMemoryAuthentication by default
 				logger.info("configuring inMemoryAuthentication by default");
 				udmc = myAppGlobalUserDetailsConfigHelper.initInMemoryGlobalUserDetails(authenticationManagerBuilder,
-						mySecuritySimpleConfigurer);
+						mySecurityDefaultUsersSimpleConfigurer);
 			}
 			logger.info("UserDetailsManagerConfigurer class=" + udmc.getClass().getName());
 			if (myAdditionalUserDetailsService != null) {
-				final ObjectPostProcessor<Object> objectPostProcessor = new ObjectPostProcessor<Object>() {
-					  @Override
-					  public <O extends Object> O postProcess(final O object) {
-					   return object;
-					  }
-				};
-				AuthenticationManagerBuilder authBuilder2  = new AuthenticationManagerBuilder(objectPostProcessor);
+
+				AuthenticationManagerBuilder authBuilder2  = MyAuthenticationManagerBuilderHelper.newAuthenticationManagerBuilder();
 				authBuilder2.userDetailsService(myAdditionalUserDetailsService)
 				            .passwordEncoder(passwordEncoder);
 				AuthenticationManager additionalAuthenticationManager = authBuilder2.build();
@@ -131,6 +123,6 @@ public class MySecurityRealmConfigurer {
 
 		return authenticationManagerBuilder.build(); // **** IMPORTANT *****
 	}
-
+*/
 
 }

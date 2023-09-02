@@ -1,7 +1,21 @@
 package org.mycontrib.mysecurity.realm.config;
 
 public interface MySecurityExtension {
+	public static final String MY_SECURITY_DEFAULT_LOGIN_PATH="/rest/api-login/public/login";
+	
+	//constantes pour nom à donner au composant de UserDetailsService spécifique au projet
+	//EXCLUSIVE si celui ci remplace la config par défaut de ce projet ("InMemory" ou autre)
+	//ADDITIONAL si celui s'ajoute à la config par défaut de ce projet
+	
+	//Si le UserDetailsService peut aussi bien être utilisé sur partie "site" que partie "rest"
 	public static final String MY_EXCLUSIVE_USERDETAILSSERVICE_NAME="MyExclusiveUserDetailsService";
 	public static final String MY_ADDITIONAL_USERDETAILSSERVICE_NAME="MyAdditionalUserDetailsService";
-	public static final String MY_SECURITY_DEFAULT_LOGIN_PATH="/rest/api-login/public/login";
+	
+	//Si le UserDetailsService ne doit être utilisé sur partie "rest"
+	public static final String MY_EXCLUSIVE_RESTONLY_USERDETAILSSERVICE_NAME="MyExclusiveRestOnlyUserDetailsService";
+	public static final String MY_ADDITIONAL_RESTONLY_USERDETAILSSERVICE_NAME="MyAdditionalRestOnlyUserDetailsService";
+	
+	//Si le UserDetailsService ne doit être utilisé sur partie "site"
+	public static final String MY_EXCLUSIVE_SITEONLY_USERDETAILSSERVICE_NAME="MyExclusiveSiteOnlyUserDetailsService";
+	public static final String MY_ADDITIONAL_SITEONLY_USERDETAILSSERVICE_NAME="MyAdditionalSiteOnlyUserDetailsService";
 }
