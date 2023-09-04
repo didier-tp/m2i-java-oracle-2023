@@ -2662,3 +2662,8 @@ drop table if exists compte_customer CASCADE ;
 drop table if exists customer CASCADE ;
 drop table if exists devise CASCADE ;
 drop table if exists operation CASCADE ;
+drop table if exists compte CASCADE ;
+drop table if exists compte_customer CASCADE ;
+drop table if exists customer CASCADE ;
+drop table if exists devise CASCADE ;
+drop table if exists operation CASCADE ;
