@@ -25,8 +25,8 @@
 **/.cache
 */mylog.txt
 
-*/src/main/script/create.sql
-*/src/main/script/drop.sql
+**/src/main/script/create.sql
+**/src/main/script/drop.sql
 
 */*.iml
 */.gradle
