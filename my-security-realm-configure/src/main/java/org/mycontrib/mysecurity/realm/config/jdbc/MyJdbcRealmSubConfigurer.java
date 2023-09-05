@@ -35,7 +35,11 @@ public class MyJdbcRealmSubConfigurer {
 	private BCryptPasswordEncoder passwordEncoder;
 	private MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer;
 	
-	public void initJdbcAuthenticationManagersInMap() {
+	private AuthenticationManager secondaryAuthenticationManager=null;
+	
+	public void initJdbcAuthenticationManagersInMap(
+			AuthenticationManager secondaryAuthenticationManager
+			) {
 		if (mySecurityRealmProperties !=null)
 			{
 			DataSourceProperties dsProps = null;
@@ -89,6 +93,9 @@ public class MyJdbcRealmSubConfigurer {
 						dsProps,
 						passwordEncoder);
 			
+			if(secondaryAuthenticationManager!=null)
+				authenticationManagerBuilder.parentAuthenticationManager(secondaryAuthenticationManager);
+		
 			jdbcAuthenticationManager = authenticationManagerBuilder.build();
 		} catch (Exception e) {
 			e.printStackTrace();
