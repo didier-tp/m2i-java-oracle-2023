@@ -23,8 +23,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 
 
-
-
 @Configuration
 @Profile("withSecurity")
 @ConfigurationPropertiesScan("org.mycontrib.mysecurity.realm.properties")
@@ -36,6 +34,12 @@ public class MySecurityGlobalRealmConfigurer {
 	public MySecurityRealmProperties mySecurityRealmProperties;
 	
 	private Map<String,AuthenticationManager> authenticationMgrMap ;
+	//mapEntry can be:
+	// "global" , "rest" or "site" (main alias)
+	// "userdetails.global" , "userdetails.rest" , "userdetails.site"
+	// "jdbc.global" , "jdbc.rest" , "jdbc.site"
+	// "inMemory.global" , "inMemory.rest" , "inMemory.site"
+	// other values in future versions
 	
 	
 	@Autowired
@@ -104,9 +108,50 @@ public class MySecurityGlobalRealmConfigurer {
 	}
 	
 	public void setHighPriorityAliasInauthenticationMgrMap() {
-		if(authenticationMgrMap.get("userdetails.global")!=null)
+		//first priority : "userdetails"
+		if(authenticationMgrMap.get("userdetails.global")!=null) {
 		   authenticationMgrMap.put("global",authenticationMgrMap.get("userdetails.global"));
-		//à continuer ... !!!!
+		}
+		else {
+			if(authenticationMgrMap.get("userdetails.rest")!=null) {
+				   authenticationMgrMap.put("rest",authenticationMgrMap.get("userdetails.rest"));
+				}
+			if(authenticationMgrMap.get("userdetails.site")!=null) {
+				   authenticationMgrMap.put("site",authenticationMgrMap.get("userdetails.site"));
+				}
+		}
+		
+		//second priority : "jdbc"
+		if(authenticationMgrMap.get("global")==null
+			&& authenticationMgrMap.get("jdbc.global")!=null) {
+				   authenticationMgrMap.put("global",authenticationMgrMap.get("jdbc.global"));
+				}
+		else {
+			if(authenticationMgrMap.get("rest")==null
+					&& authenticationMgrMap.get("jdbc.rest")!=null) {
+						   authenticationMgrMap.put("rest",authenticationMgrMap.get("jdbc.rest"));
+						}
+			if(authenticationMgrMap.get("site")==null
+					&& authenticationMgrMap.get("jdbc.site")!=null) {
+						   authenticationMgrMap.put("site",authenticationMgrMap.get("jdbc.site"));
+						}
+		}		
+		
+		//last priority : "inMemory"
+		if(authenticationMgrMap.get("global")==null
+			&& authenticationMgrMap.get("inMemory.global")!=null) {
+						   authenticationMgrMap.put("global",authenticationMgrMap.get("inMemory.global"));
+						}
+		else {
+			if(authenticationMgrMap.get("rest")==null
+				&& authenticationMgrMap.get("inMemory.rest")!=null) {
+								   authenticationMgrMap.put("rest",authenticationMgrMap.get("inMemory.rest"));
+				}
+			if(authenticationMgrMap.get("site")==null
+				&& authenticationMgrMap.get("inMemory.site")!=null) {
+								   authenticationMgrMap.put("site",authenticationMgrMap.get("inMemory.site"));
+				}
+			}
 	}
 	
 	
