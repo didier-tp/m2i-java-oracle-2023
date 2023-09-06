@@ -2,6 +2,7 @@ package org.mycontrib.mysecurity.realm.config;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import org.mycontrib.mysecurity.realm.config.default_users.MySecurityDefaultUsersSimpleConfigurer;
 import org.mycontrib.mysecurity.realm.config.jdbc.MyJdbcRealmSubConfigurer;
@@ -17,7 +18,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -36,7 +36,7 @@ public class MySecurityGlobalRealmConfigurer {
 	private Map<String,AuthenticationManager> authenticationMgrMap ;
 	//mapEntry can be:
 	// "global" , "rest" or "site" (main alias)
-	// "userdetails.global" , "userdetails.rest" , "userdetails.site"
+	// "userDetails.global" , "userDetails.rest" , "userDetails.site"
 	// "jdbc.global" , "jdbc.rest" , "jdbc.site"
 	// "inMemory.global" , "inMemory.rest" , "inMemory.site"
 	// other values in future versions
@@ -108,16 +108,18 @@ public class MySecurityGlobalRealmConfigurer {
 	}
 	
 	public void setHighPriorityAliasInauthenticationMgrMap() {
+		
+		
 		//first priority : "userdetails"
-		if(authenticationMgrMap.get("userdetails.global")!=null) {
-		   authenticationMgrMap.put("global",authenticationMgrMap.get("userdetails.global"));
+		if(authenticationMgrMap.get("userDetails.global")!=null) {
+		   authenticationMgrMap.put("global",authenticationMgrMap.get("userDetails.global"));
 		}
 		else {
-			if(authenticationMgrMap.get("userdetails.rest")!=null) {
-				   authenticationMgrMap.put("rest",authenticationMgrMap.get("userdetails.rest"));
+			if(authenticationMgrMap.get("userDetails.rest")!=null) {
+				   authenticationMgrMap.put("rest",authenticationMgrMap.get("userDetails.rest"));
 				}
-			if(authenticationMgrMap.get("userdetails.site")!=null) {
-				   authenticationMgrMap.put("site",authenticationMgrMap.get("userdetails.site"));
+			if(authenticationMgrMap.get("userDetails.site")!=null) {
+				   authenticationMgrMap.put("site",authenticationMgrMap.get("userDetails.site"));
 				}
 		}
 		
@@ -152,6 +154,10 @@ public class MySecurityGlobalRealmConfigurer {
 								   authenticationMgrMap.put("site",authenticationMgrMap.get("inMemory.site"));
 				}
 			}
+		
+		for( Entry<String,AuthenticationManager> entry: authenticationMgrMap.entrySet()) {
+			logger.debug("authenticationMgr[" + entry.getKey() + "]=" + entry.getValue().toString());
+		}
 	}
 	
 	

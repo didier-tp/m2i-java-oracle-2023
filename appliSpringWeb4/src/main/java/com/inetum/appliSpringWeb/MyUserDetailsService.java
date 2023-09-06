@@ -22,8 +22,8 @@ import com.inetum.appliSpringWeb.service.ServiceCompteImpl;
 import com.inetum.appliSpringWeb.service.ServiceCustomer;
 
 @Profile("withSecurity")
-@Service(MySecurityExtension.MY_EXCLUSIVE_USERDETAILSSERVICE_NAME)
-//@Service(MySecurityExtension.MY_ADDITIONAL_USERDETAILSSERVICE_NAME)
+//@Service(MySecurityExtension.MY_EXCLUSIVE_USERDETAILSSERVICE_NAME)
+@Service(MySecurityExtension.MY_ADDITIONAL_USERDETAILSSERVICE_NAME)
 public class MyUserDetailsService implements UserDetailsService {
 	
 	Logger logger = LoggerFactory.getLogger(MyUserDetailsService.class);
@@ -43,7 +43,7 @@ public class MyUserDetailsService implements UserDetailsService {
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
 		String password=null;
-		if(username.equals("jamesBond")) {
+		if(username.equals("james_Bond")) {
 			password=passwordEncoder.encode("007");//simulation password ici
 			authorities.add(new SimpleGrantedAuthority("ROLE_AGENTSECRET"));
 		}
