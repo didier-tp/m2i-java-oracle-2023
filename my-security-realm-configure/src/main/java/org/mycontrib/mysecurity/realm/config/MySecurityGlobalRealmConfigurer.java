@@ -18,6 +18,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
@@ -40,6 +41,7 @@ public class MySecurityGlobalRealmConfigurer {
 	// "jdbc.global" , "jdbc.rest" , "jdbc.site"
 	// "inMemory.global" , "inMemory.rest" , "inMemory.site"
 	// other values in future versions
+	//NB: AuthenticationManager interface is implemented by ProviderManager
 	
 	
 	@Autowired
@@ -157,6 +159,8 @@ public class MySecurityGlobalRealmConfigurer {
 		
 		for( Entry<String,AuthenticationManager> entry: authenticationMgrMap.entrySet()) {
 			logger.debug("authenticationMgr[" + entry.getKey() + "]=" + entry.getValue().toString());
+			//AuthenticationProvider authProv = (AuthenticationProvider)entry.getValue();
+			//logger.debug("---" + authProv.);
 		}
 	}
 	

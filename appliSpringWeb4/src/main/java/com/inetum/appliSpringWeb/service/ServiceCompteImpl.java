@@ -3,6 +3,8 @@ package com.inetum.appliSpringWeb.service;
 import java.util.Date;
 import java.util.List;
 
+import org.mycontrib.util.generic.exception.NotFoundException;
+import org.mycontrib.util.generic.service.AbstractGenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,10 +12,15 @@ import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.inetum.appliSpringWeb.converter.DtoConverter;
 import com.inetum.appliSpringWeb.dao.DaoCompte;
+import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
-import com.inetum.appliSpringWeb.dto.CompteDto;
+import com.inetum.appliSpringWeb.dto.CompteL0;
+import com.inetum.appliSpringWeb.dto.CompteL1;
+import com.inetum.appliSpringWeb.dto.CompteL2;
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
 
@@ -21,18 +28,19 @@ import com.inetum.appliSpringWeb.exception.BankException;
 @Service
 @Transactional //ici (sur une classe de Service) en tant que bonne pratique
 public class ServiceCompteImpl 
-    extends AbstractGenericService<Compte,Long,CompteDto>
+    extends AbstractGenericService<Compte,Long>
     implements ServiceCompte {
 	
+	public DtoConverter dtoConverter = new DtoConverter();//for specific convert
+	
+	@Autowired
+	private DaoCustomer daoCustomer;//dao annexe/secondaire
+	
 	@Override
-	public CrudRepository<Compte,Long> getDao() {
+	public CrudRepository<Compte,Long> getMainDao() {
 		return this.daoCompte;
 	}
 	
-	@Override
-	public Class<CompteDto> getDtoClass() {
-		return CompteDto.class;
-	}
 	
 	Logger logger = LoggerFactory.getLogger(ServiceCompteImpl.class);
 	
@@ -129,8 +137,17 @@ public class ServiceCompteImpl
 		return daoCompte.findBySoldeGreaterThanEqual(soldeMini);
 	}
 
-
-
-	
+			
+	@Override
+	public void initEntityRelationShipsFromDtoBeforeSave(Compte entity,Object dto) {
+		if(dto instanceof CompteL1 compteL1) {
+			// en entree : dto de type CompteL1 avec .customerId
+			// cette liaison est à transformer en compteEntity relié à customerEntity si .customerId pas null
+				if(compteL1.getCustomerId()!=null) {
+					Customer customerEntity = daoCustomer.findById(compteL1.getCustomerId()).get();
+					entity.setCustomer(customerEntity);
+				}
+	     }
+	}
 
 }

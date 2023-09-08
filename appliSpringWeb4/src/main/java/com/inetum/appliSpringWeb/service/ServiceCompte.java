@@ -2,14 +2,19 @@ package com.inetum.appliSpringWeb.service;
 
 import java.util.List;
 
-import com.inetum.appliSpringWeb.dto.CompteDto;
+import org.mycontrib.util.generic.exception.NotFoundException;
+import org.mycontrib.util.generic.service.GenericService;
+
+import com.inetum.appliSpringWeb.dto.CompteL0;
+import com.inetum.appliSpringWeb.dto.CompteL1;
+import com.inetum.appliSpringWeb.dto.CompteL2;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;
 
 //Business service / service métier
 //avec remontées d'exceptions (héritant de RuntimeException)
-public interface ServiceCompte extends GenericService<Compte,Long,CompteDto> {
+public interface ServiceCompte extends GenericService<Compte,Long> {
 	//méthode spécifique au métier de la banque 
 	void debiterCompte(long numeroCompte , double montant , String message);
 	void crediterCompte(long numeroCompte , double montant , String message);
@@ -26,8 +31,10 @@ public interface ServiceCompte extends GenericService<Compte,Long,CompteDto> {
 	List<Compte> rechercherComptesDuClient(long numeroCustomer);
 	//...
 	
+	
+	List<Compte> rechercherSelonSoldeMini(Double soldeMini);
+	
 	//void deleteById(Long numeroCompte);//hérité de GenericService
 	//boolean existById(Long numeroCompte);//hérité de GenericService
-	//List<Compte> searchAll();//hérité de GenericService
-	List<Compte> rechercherSelonSoldeMini(Double soldeMini);
+	//searchAll() et searchAllDto(dtoClass) hérité de GenericService
 }

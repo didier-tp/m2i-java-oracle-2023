@@ -25,6 +25,13 @@
 			<artifactId>spring-boot-starter-data-jpa</artifactId>
 		</dependency>
 		
+		 <!-- generic subproject "my-generic-spring-util" should be build & installed first -->
+		<dependency>
+			 <groupId>org.mycontrib</groupId>
+  			 <artifactId>my-generic-spring-util</artifactId>
+  			 <version>0.0.1-SNAPSHOT</version>
+		</dependency>
+		
 		<!--
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

@@ -9,29 +9,29 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.inetum.appliSpringWeb.dto.DeviseL0;
-import com.inetum.appliSpringWeb.service.ServiceDevise;
+import com.inetum.appliSpringWeb.dto.NewsL0;
+import com.inetum.appliSpringWeb.service.ServiceNews;
 
 @RestController
-@RequestMapping(value="/rest/api-devise/devise" , headers="Accept=application/json")
-public class DeviseRestCtrl extends AbstractGenericRestCtrl<String,DeviseL0>{
+@RequestMapping(value="/rest/api-news/news" , headers="Accept=application/json")
+public class NewsRestCtrl extends AbstractGenericRestCtrl<Long,NewsL0>{
 	
 	@Autowired
-	private ServiceDevise serviceDevise;
+	private ServiceNews serviceNews;
 	
 	@Override
-	public GenericServiceWithDto<String> getGenericServiceWithDto() {
-		return serviceDevise;
+	public GenericServiceWithDto<Long> getGenericServiceWithDto() {
+		return serviceNews;
 	}
 	
 	@Override
-	public Class<DeviseL0> getMainDtoClass() {
-		return DeviseL0.class;
+	public Class<NewsL0> getMainDtoClass() {
+		return NewsL0.class;
 	}
 	
 	//exemple de fin d'URL: ./api-devise/devise
 	@GetMapping("" )
-	public List<DeviseL0> getDevises(){
-		return serviceDevise.searchAllDto(DeviseL0.class);
+	public List<NewsL0> getDevises(){
+		return serviceNews.searchAllDto(NewsL0.class);
 	}
 }

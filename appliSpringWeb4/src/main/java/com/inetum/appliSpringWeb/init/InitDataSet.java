@@ -10,9 +10,11 @@ import org.springframework.stereotype.Component;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
+import com.inetum.appliSpringWeb.dao.DaoDevise;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
+import com.inetum.appliSpringWeb.entity.Devise;
 import com.inetum.appliSpringWeb.entity.Operation;
 
 /*
@@ -31,6 +33,10 @@ public class InitDataSet {
 	private DaoCompte daoCompteJpa;
 	
 	@Autowired
+	private DaoDevise daoDeviseJpa;
+	
+	
+	@Autowired
 	private DaoOperation daoOperationJpa;
 	
 	@Autowired
@@ -40,7 +46,7 @@ public class InitDataSet {
 	public void initData() {
 		
 		Customer customer1 = daoCustomerJpa.save(new Customer(null,"jean"  , "Aimare", "pwd1"));
-		daoCustomerJpa.save(new Customer(null,"jean"  , "Bon", "pwd1"));
+		Customer customer2 = daoCustomerJpa.save(new Customer(null,"jean"  , "Bon", "pwd1"));
 		daoCustomerJpa.save(new Customer(null,"jean"  , "Bon", "pwd1Bis"));
 		daoCustomerJpa.save(new Customer(null,"alex"  , "Therieur", "pwd2"));
 		
@@ -51,10 +57,27 @@ public class InitDataSet {
 		Operation op1CompteA = daoOperationJpa.save(
 	    		new Operation(null,-3.2 , "achat bonbons" , new Date() , compteAa));
 		
-    	daoCompteJpa.save(new Compte(null,"compte_Bbb" , 80.0));
-    	daoCompteJpa.save(new Compte(null,"compte_Cc" , -70.0));
-    	daoCompteJpa.save(new Compte(null,"compte_Dd" , -80.0));
+		Operation op2CompteA = daoOperationJpa.save(
+	    		new Operation(null,-3.0 , "achat croissants" , new Date() , compteAa));
+		
+		Compte compteBbb = new Compte(null,"compte_Bbb" , 80.0);
+		compteBbb.setCustomer(customer1);
+		compteBbb = daoCompteJpa.save(compteBbb);
+		
+		Compte compteCc = new Compte(null,"compte_Cc" , -70.0);
+		compteCc.setCustomer(customer2);
+		compteCc = daoCompteJpa.save(compteCc);
+		
+		Compte compteDd =new Compte(null,"compte_Dd" , -80.0);
+		compteDd.setCustomer(customer2);
+		compteDd = daoCompteJpa.save(compteDd);
+		
     	daoCompteJpa.save(new Compte(null,"compte_EEe" , 20.0));
+    	
+    	daoDeviseJpa.save(new Devise("EUR","Euro" , 1.0));
+    	daoDeviseJpa.save(new Devise("USD","Dollar" , 1.087));
+    	daoDeviseJpa.save(new Devise("JPY","Yen" , 158.73));
+    	daoDeviseJpa.save(new Devise("GBP","Livre" , 0.86));
 	}
 
 }

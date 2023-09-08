@@ -1,4 +1,4 @@
-sessionStorage.setItem("token",null);
+sessionStorage.setItem("authToken",null);
 
 function parseJwt (token) {
     let base64Url = token.split('.')[1];

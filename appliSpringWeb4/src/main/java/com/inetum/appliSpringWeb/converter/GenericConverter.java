@@ -1,28 +1,22 @@
 package com.inetum.appliSpringWeb.converter;
 
-import java.util.List;
+import java.lang.reflect.Method;
 
-import org.springframework.beans.BeanUtils;
+import org.mycontrib.util.generic.converter.AbstractGenericConverter;
 
-public class GenericConverter {
+/*
+ * Version plus sophistiquee de GenericMapper
+ * deleguant des conversions spécifique à DtoConverter
+ */
 
-	//GenericConverter.map(compteEntity,CompteDto.class)
-	public static <S,D> D map(S source , Class<D> targetClass) {
-		D target  = null;
-		try {
-			target = targetClass.getDeclaredConstructor().newInstance();
-			BeanUtils.copyProperties(source, target);
-		} catch (Exception e) {
-			e.printStackTrace();
-		} 
-		return target;
+public class GenericConverter extends AbstractGenericConverter {
+
+	public static GenericConverter CONVERTER = new GenericConverter();
+
+	@Override
+	public Object getDtoConverter() {
+		return DtoConverter.INSTANCE;
 	}
+
 	
-	//GenericConverter.map(ListeCompteEntity,CompteDto.class)
-	public static <S,D> List<D> map(List<S> sourceList , Class<D> targetClass){
-		return  sourceList.stream()
-			   .map((source)->map(source,targetClass))
-			   .toList();
-	}
-
 }

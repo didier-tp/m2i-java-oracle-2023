@@ -2,12 +2,14 @@ package com.inetum.appliSpringWeb.service;
 
 import java.util.List;
 
-import com.inetum.appliSpringWeb.dto.CustomerDto;
+import org.mycontrib.util.generic.service.GenericService;
+
+import com.inetum.appliSpringWeb.dto.CustomerL0;
 import com.inetum.appliSpringWeb.entity.Customer;
 
 //Business service / service métier
 //avec remontées d'exceptions (héritant de RuntimeException)
-public interface ServiceCustomer extends GenericService<Customer,Long,CustomerDto>{
+public interface ServiceCustomer extends GenericService<Customer,Long>{
 	//principales méthodes héritées:
 	/*
 	 Customer searchById(long idCustomer); //retournant le Customer seulement
