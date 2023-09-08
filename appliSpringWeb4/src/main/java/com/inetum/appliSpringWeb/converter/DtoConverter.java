@@ -5,12 +5,12 @@ import java.util.List;
 import org.mycontrib.util.generic.converter.GenericMapper;
 import org.springframework.beans.BeanUtils;
 
-import com.inetum.appliSpringWeb.dto.CompteL0;
 import com.inetum.appliSpringWeb.dto.CompteL1;
 import com.inetum.appliSpringWeb.dto.CompteL2;
 import com.inetum.appliSpringWeb.dto.CustomerL0;
 import com.inetum.appliSpringWeb.dto.OperationL0;
 import com.inetum.appliSpringWeb.entity.Compte;
+import com.inetum.appliSpringWeb.entity.Customer;
 
 //NB: pour un eventuel basculement sur mapStruct ou autre,
 //les méthodes de sont pas "static"
@@ -42,6 +42,14 @@ public class DtoConverter {
 		BeanUtils.copyProperties(entity, compteDto); //compact/écriture concise mais pas rapide
 		compteDto.setCustomerId(numClient);
 		return compteDto;
+	}
+	
+	public CustomerL0 customerToCustomerL0(Customer customer) {
+
+		return new CustomerL0(customer.getId(),
+				              customer.getFirstname() , 
+				              customer.getLastname(),
+				              "CONFIDENTIAL"); // NOT customer.getPassword() !!!!
 	}
 	
 	public  CompteL2 compteToCompteL2(Compte entity) {
