@@ -3,6 +3,8 @@ package org.mycontrib.mysecurity.standalone.rest;
 import org.mycontrib.mysecurity.jwt.util.JwtTokenProvider;
 import org.mycontrib.mysecurity.standalone.dto.LoginRequest;
 import org.mycontrib.mysecurity.standalone.dto.LoginResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
@@ -23,6 +25,8 @@ import org.springframework.web.bind.annotation.RestController;
 @Profile("withSecurity")
 @RequestMapping(value="/rest/api-login/public/login" , headers="Accept=application/json")
 public class LoginRestCtrl {
+	
+	Logger logger = LoggerFactory.getLogger(LoginRestCtrl.class);
 	
 	
 	@Autowired
@@ -52,7 +56,8 @@ public class LoginRestCtrl {
 			loginResponse.setMessage("successful login");
 			loginResponse.setToken(jwtTokenProvider.generateToken(authentication));
 		}catch(Exception ex) {
-			System.err.println("echec auth :" + ex.getMessage());
+			logger.error("echec auth :" + ex.getMessage());
+			ex.printStackTrace();
 			loginResponse.setOk(false);
 			loginResponse.setMessage("login failed");
 			loginResponse.setToken(null);

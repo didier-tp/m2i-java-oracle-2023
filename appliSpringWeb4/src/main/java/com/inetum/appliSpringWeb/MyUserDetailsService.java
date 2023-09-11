@@ -38,7 +38,7 @@ public class MyUserDetailsService implements UserDetailsService {
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+		UserDetails userDetails=null;
 		logger.debug("MyUserDetailsService.loadUserByUsername() called with username="+username);
 		
 		List<GrantedAuthority> authorities = new ArrayList<GrantedAuthority>();
@@ -46,26 +46,37 @@ public class MyUserDetailsService implements UserDetailsService {
 		if(username.equals("james_Bond")) {
 			password=passwordEncoder.encode("007");//simulation password ici
 			authorities.add(new SimpleGrantedAuthority("ROLE_AGENTSECRET"));
+			userDetails = new User(username, password, authorities);
 		}
 		else {
+			//NB le username considéré comme potentiellement
+			//égal à firstname_lastname
 			try {
-				//NB le username considéré comme potentiellement
-				//égal à firstname_lastname
 				String firstname = username.split("_")[0];
 				String lastname = username.split("_")[1];
-				
+					
 				List<Customer> customers = serviceCustomer.rechercherCustomerSelonPrenomEtNom(firstname,lastname);
-				Customer firstCurstomer = customers.get(0);
-				authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));//ou "ROLE_USER"
-				//password=customer.getPassword(); déjà stocké en base en mode crypté
-				password=passwordEncoder.encode(firstCurstomer.getPassword());
-			} catch (NumberFormatException e) {
+				if(!customers.isEmpty()) {
+					Customer firstCustomer = customers.get(0);
+					authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));//ou "ROLE_USER"
+						//password=customer.getPassword(); déjà stocké en base en mode crypté
+					password=passwordEncoder.encode(firstCustomer.getPassword());
+					userDetails = new User(username, password, authorities);
+				}
+			} catch (Exception e) {
 				//e.printStackTrace();
-				System.err.println(e.getMessage());
-				throw new UsernameNotFoundException(username + " not found by MyUserDetailsService");
 			}
 		}
-		return new User(username, password, authorities);
+		
+		
+		if(userDetails==null) {
+			//NB: il est important de remonter UsernameNotFoundException (mais pas null , ni une autre exception)
+			//si l'on souhaite qu'en cas d'échec avec cet AuthenticationManager
+			//un éventuel AuthenticationManager parent soit utilisé en plan B
+			throw new UsernameNotFoundException(username + " not found by MyUserDetailsService");
+		}
+			
+		return userDetails;
 	} 
 
 }

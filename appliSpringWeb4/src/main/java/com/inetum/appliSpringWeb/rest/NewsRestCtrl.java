@@ -6,6 +6,9 @@ import org.mycontrib.util.generic.rest.AbstractGenericRestCtrl;
 import org.mycontrib.util.generic.service.GenericServiceWithDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -33,5 +36,16 @@ public class NewsRestCtrl extends AbstractGenericRestCtrl<Long,NewsL0>{
 	@GetMapping("" )
 	public List<NewsL0> getDevises(){
 		return serviceNews.searchAllDto(NewsL0.class);
+	}
+	
+	@PostMapping("" ) 
+	public NewsL0 postNews(@RequestBody NewsL0 nouvelleNews) {
+		return serviceNews.saveNewFromDto(nouvelleNews);
+	}
+	
+	@PutMapping("" ) 
+	public NewsL0 putNews(@RequestBody NewsL0 newsToUpdate) {
+		serviceNews.updateExistingFromDto(newsToUpdate);
+		return  newsToUpdate;
 	}
 }

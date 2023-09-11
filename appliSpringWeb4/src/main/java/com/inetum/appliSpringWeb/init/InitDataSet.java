@@ -11,10 +11,12 @@ import org.springframework.stereotype.Component;
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dao.DaoDevise;
+import com.inetum.appliSpringWeb.dao.DaoNews;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Devise;
+import com.inetum.appliSpringWeb.entity.News;
 import com.inetum.appliSpringWeb.entity.Operation;
 
 /*
@@ -41,6 +43,9 @@ public class InitDataSet {
 	
 	@Autowired
 	private DaoCustomer daoCustomerJpa;
+	
+	@Autowired
+	private DaoNews daoNewsJpa;
 	
 	@PostConstruct
 	public void initData() {
@@ -78,6 +83,9 @@ public class InitDataSet {
     	daoDeviseJpa.save(new Devise("USD","Dollar" , 1.087));
     	daoDeviseJpa.save(new Devise("JPY","Yen" , 158.73));
     	daoDeviseJpa.save(new Devise("GBP","Livre" , 0.86));
+    	
+    	daoNewsJpa.save(new News(null,"News 1" ));
+    	daoNewsJpa.save(new News(null,"News 2" ));
 	}
 
 }

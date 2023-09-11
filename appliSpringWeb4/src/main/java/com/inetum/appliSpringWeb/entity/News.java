@@ -28,12 +28,16 @@ public class News {
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date date;
-
-	public News(Long id, String text) {
+	
+	public News(Long id, String text,Date date) {
 		super();
 		this.id = id;
 		this.text = text;
-		this.date = new Date();
+		this.date = date;
+	}
+
+	public News(Long id, String text) {
+		this(id,text,new Date());
 	}
 	
 

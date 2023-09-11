@@ -3,16 +3,16 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>compteAjax</title>
+<title>newsAjax</title>
 <script src="js/my_ajax_util.js"></script>
-<script src="js/deviseAjax.js"></script>
+<script src="js/newsAjax.js"></script>
 </head>
 <body>
 	
-	code: <input id="inputCode" /> (ex: USD , EUR) <br/>
-	nom: <input id="inputNom" /> (ex: Dollar , Euro) <br/>
-	change: <input id="inputChange" /> <br/>
-
+	id: <input id="inputId" /> (auto_incr) <br/>
+	text: <input id="inputText" /> <br/>
+	date: <input id="inputDate" /> <br/>
+	
 	<button id="btnReset">reset</button> &nbsp;
 	<button id="btnAdd">add</button> &nbsp;
 	<button id="btnUpdate">update</button>&nbsp;
@@ -24,10 +24,10 @@
 	<button id="btnRefreshAll">refresh all news</button>
     <table border="1">
 	   <thead>
-		<tr><th>code</th><th>nom</th><th>change</th></tr>
+		<tr><th>id</th><th>text</th><th>date</th></tr>
 	   </thead>
 	   <tbody id="table_body">
-		   <!-- <tr><td>EUR</td><td>Euro</td><td>1.0</td></tr> -->
+		   <!-- <tr><td>1</td><td>news A</td><td>2023-09-01</td></tr> -->
 	   </tbody>
 	</table>
 	<hr/>

@@ -39,17 +39,24 @@ public class MyInMemoryRealmSubConfigurer {
 	public void initInMemoryAuthenticationManagersInMap() {
 		AuthenticationManager authManager=null;
 		
-		authManager=buildInMemoryAuthenticationManager(RealmPurposeEnum.global);
-		if(authManager!=null)
-			authenticationMgrMap.put("inMemory.global",authManager);
-		
-		authManager=buildInMemoryAuthenticationManager(RealmPurposeEnum.rest);
-		if(authManager!=null)
-			authenticationMgrMap.put("inMemory.rest",authManager);
-		
-		authManager=buildInMemoryAuthenticationManager(RealmPurposeEnum.site);
-		if(authManager!=null)
-			authenticationMgrMap.put("inMemory.site",authManager);
+		if(mySecurityRealmProperties.isWithGlobalDefaultSecondaryInMemoryRealm()) {
+			authManager=buildInMemoryAuthenticationManager(RealmPurposeEnum.global);
+			if(authManager!=null)
+				authenticationMgrMap.put("inMemory.global",authManager);
+		}
+		else {
+			if(mySecurityRealmProperties.isWithRestDefaultSecondaryInMemoryRealm()) {
+				authManager=buildInMemoryAuthenticationManager(RealmPurposeEnum.rest);
+				if(authManager!=null)
+					authenticationMgrMap.put("inMemory.rest",authManager);
+			}
+			
+			if(mySecurityRealmProperties.isWithSiteDefaultSecondaryInMemoryRealm()) {
+				authManager=buildInMemoryAuthenticationManager(RealmPurposeEnum.site);
+				if(authManager!=null)
+					authenticationMgrMap.put("inMemory.site",authManager);
+			}
+		}
 	}
 	
 	public AuthenticationManager buildInMemoryAuthenticationManager(RealmPurposeEnum realmPurpose) {

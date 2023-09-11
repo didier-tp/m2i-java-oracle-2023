@@ -1,5 +1,9 @@
 package com.inetum.appliSpringWeb.converter;
 
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import org.mycontrib.util.generic.converter.GenericMapper;
@@ -8,9 +12,11 @@ import org.springframework.beans.BeanUtils;
 import com.inetum.appliSpringWeb.dto.CompteL1;
 import com.inetum.appliSpringWeb.dto.CompteL2;
 import com.inetum.appliSpringWeb.dto.CustomerL0;
+import com.inetum.appliSpringWeb.dto.NewsL0;
 import com.inetum.appliSpringWeb.dto.OperationL0;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
+import com.inetum.appliSpringWeb.entity.News;
 
 //NB: pour un eventuel basculement sur mapStruct ou autre,
 //les méthodes de sont pas "static"
@@ -50,6 +56,28 @@ public class DtoConverter {
 				              customer.getFirstname() , 
 				              customer.getLastname(),
 				              "CONFIDENTIAL"); // NOT customer.getPassword() !!!!
+	}
+	
+	public NewsL0 newsToNewsL0(News news) {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+        String sD = news.getDate()==null?null:(df.format(news.getDate()));
+		return new NewsL0(news.getId(),
+				          news.getText() , 
+				          sD); 
+	}
+	
+    public News newsL0ToNews(NewsL0 newsDto) {
+		
+		DateFormat df = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss");
+		Date d = null;
+		try {
+			d= df.parse(newsDto.getDate());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return new News(newsDto.getId(), newsDto.getText() , d); 
 	}
 	
 	public  CompteL2 compteToCompteL2(Compte entity) {

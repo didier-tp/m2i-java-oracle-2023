@@ -6,10 +6,14 @@ import org.mycontrib.util.generic.rest.AbstractGenericRestCtrl;
 import org.mycontrib.util.generic.service.GenericServiceWithDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.inetum.appliSpringWeb.dto.DeviseL0;
+import com.inetum.appliSpringWeb.dto.NewsL0;
 import com.inetum.appliSpringWeb.service.ServiceDevise;
 
 @RestController
@@ -33,5 +37,16 @@ public class DeviseRestCtrl extends AbstractGenericRestCtrl<String,DeviseL0>{
 	@GetMapping("" )
 	public List<DeviseL0> getDevises(){
 		return serviceDevise.searchAllDto(DeviseL0.class);
+	}
+	
+	@PostMapping("" ) 
+	public DeviseL0 postDevise(@RequestBody DeviseL0 nouvelleDevise) {
+		return serviceDevise.saveNewFromDto(nouvelleDevise);
+	}
+	
+	@PutMapping("" ) 
+	public DeviseL0 putDevise(@RequestBody DeviseL0 deviseToUpdate) {
+		serviceDevise.updateExistingFromDto(deviseToUpdate);
+		return  deviseToUpdate;
 	}
 }

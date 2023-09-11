@@ -57,6 +57,7 @@ public class MyUserDetailsServiceSubConfigurerBean {
 			Map<String,AuthenticationManager> authenticationMgrMap,
 			AuthenticationManager secondaryAuthenticationManager) {
 		AuthenticationManager authManager=null;
+		this.secondaryAuthenticationManager=secondaryAuthenticationManager;
 		if (myExclusiveUserDetailsService != null) {
 			authManager=buildUserDetailsAuthenticationManager(myExclusiveUserDetailsService,passwordEncoder,true);
 			if(authManager!=null) {
@@ -107,8 +108,10 @@ public class MyUserDetailsServiceSubConfigurerBean {
 			AuthenticationManagerBuilder authenticationManagerBuilder  = MyAuthenticationManagerBuilderHelper.newAuthenticationManagerBuilder();
 			authenticationManagerBuilder.userDetailsService(userDetailsService)
 										.passwordEncoder(passwordEncoder);
-			if(!exclusive && secondaryAuthenticationManager!=null)
+			if(!exclusive && secondaryAuthenticationManager!=null) {
+				logger.debug("secondaryAuthenticationManager="+secondaryAuthenticationManager);
 				authenticationManagerBuilder.parentAuthenticationManager(secondaryAuthenticationManager);
+			}
 			authManager = authenticationManagerBuilder.build();
 		} catch (Exception e) {
 			e.printStackTrace();
