@@ -96,17 +96,28 @@ public class WithSecurityMainFilterChainConfig {
     @Order(2)
 	protected SecurityFilterChain springMvcSiteFilterChain(HttpSecurity http/*, AuthenticationManager authenticationManager*/)
 			throws Exception {
+		
+		/*
+		 IMPORTANT DEFAULT VALUE : .and().csrf()
+		 tant que pas .and().csrf().disable()
+		 et donc besoin de 
+		     <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/>
+		 ou de
+		     <form:form> ou equivalent thymeleaf
+		 sinon 403 / Forbidden !!!!
+		 */
 
 		return
 		http
 		      .antMatcher("/site/**") //VERY IMPORTANT (matching for spring mvc site part and @Order(2) FilterChain)
 		      .authorizeRequests()
-		        //.antMatchers( "/site/**").permitAll()
+		        .antMatchers( "/site/**").permitAll()
 				//.antMatchers( "/site/**").authenticated()
-				.antMatchers( "/site/**").denyAll()
-				.and().formLogin().permitAll()
-				.and().httpBasic()
-				.and().csrf()
+				//.antMatchers( "/site/**").denyAll()
+				//.and().formLogin().permitAll()
+				//.and().httpBasic()
+				//.and().csrf().disable()
+		        .and().csrf()
 		        .and().cors().disable()
 				.build();
 	}
@@ -121,8 +132,9 @@ public class WithSecurityMainFilterChainConfig {
 		        .authorizeRequests()
 		        .antMatchers(areasConfig.getStaticWhitelist()).permitAll()
 		        .antMatchers(areasConfig.getSwaggerWhitelist()).permitAll()
-		        .and().csrf()
-		        .and().cors().disable()
+		        //.and().headers().frameOptions().disable() //ok for h2-console
+		        .and().headers().frameOptions().sameOrigin() //ok for h2-console
+		        .and().csrf().disable()//ok for h2-console
 		        .build();
 			
 	}

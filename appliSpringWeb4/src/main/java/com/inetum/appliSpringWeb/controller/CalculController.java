@@ -16,11 +16,12 @@ public class CalculController {
 	
 	// private ServiceCompte serviceCompte avec @Autowired possible ici
 	
-	//dans index.html <a href="calcul/saisieHt"> .... </a>
+	//dans index.html <a href="site/calcul/saisieHt"> .... </a>
 	@RequestMapping("/saisieHt")
 	public String versSasieTva(Model model) {
 		return "declencherCalcul"; // .../jsp/declencherCalcul.jsp
 	}
+	
 	
 	
 	//URL : http://localhost:8080/appliSpringWeb/calcul/tva?ht=200&tauxTvaPct=20
@@ -37,7 +38,6 @@ public class CalculController {
 		//on stocke le resultat dans le model qui sera recupéré par la page JSP "resTva.jsp"
 		model.addAttribute("tva", tva);
 		model.addAttribute("ttc", ttc);
-		
 		return "resTva"; //on retourne le nom de la vue qui va devoir mettre 
 		                 //en "page html" le resultat (ici "resTva.jsp")
 	}
