@@ -52,7 +52,7 @@ public class InitDataSet {
 		
 		Customer customer1 = daoCustomerJpa.save(new Customer(null,"jean"  , "Aimare", "pwd1"));
 		Customer customer2 = daoCustomerJpa.save(new Customer(null,"jean"  , "Bon", "pwd1"));
-		daoCustomerJpa.save(new Customer(null,"jean"  , "Bon", "pwd1Bis"));
+		daoCustomerJpa.save(new Customer(null,"alain"  , "Therieur", "pwd2"));
 		daoCustomerJpa.save(new Customer(null,"alex"  , "Therieur", "pwd2"));
 		
 		Compte compteAa = new Compte(null,"compte_Aa" , 70.0);

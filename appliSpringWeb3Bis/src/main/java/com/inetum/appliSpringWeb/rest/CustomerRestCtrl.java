@@ -2,7 +2,7 @@ package com.inetum.appliSpringWeb.rest;
 
 import java.util.List;
 
-import org.mycontrib.util.generic.rest.AbstractGenericRestCtrl;
+import org.mycontrib.util.generic.rest.AbstractGenericRestCtrlWithMapping;
 import org.mycontrib.util.generic.service.GenericServiceWithDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -30,7 +30,7 @@ import com.inetum.appliSpringWeb.service.ServiceCustomer;
 //@CrossOrigin permet d'ajouter des autorisations "CORS" pour que ce web service
 //puisse être appelé en mode ajax depuis d'autres origines/url que http://localhost:8080
 @CrossOrigin(origins = "*" , methods = { RequestMethod.GET , RequestMethod.POST})
-public class CustomerRestCtrl extends AbstractGenericRestCtrl<Long,CustomerL0>{
+public class CustomerRestCtrl extends AbstractGenericRestCtrlWithMapping<Long,CustomerL0>{
 	
 	
 	@Autowired

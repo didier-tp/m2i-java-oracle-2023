@@ -2,7 +2,7 @@ package com.inetum.appliSpringWeb.rest;
 
 import java.util.List;
 
-import org.mycontrib.util.generic.rest.AbstractGenericRestCtrl;
+import org.mycontrib.util.generic.rest.AbstractGenericRestCtrlWithMapping;
 import org.mycontrib.util.generic.service.GenericServiceWithDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -17,7 +17,7 @@ import com.inetum.appliSpringWeb.service.ServiceNews;
 
 @RestController
 @RequestMapping(value="/rest/api-news/news" , headers="Accept=application/json")
-public class NewsRestCtrl extends AbstractGenericRestCtrl<Long,NewsL0>{
+public class NewsRestCtrl extends AbstractGenericRestCtrlWithMapping<Long,NewsL0>{
 	
 	@Autowired
 	private ServiceNews serviceNews;

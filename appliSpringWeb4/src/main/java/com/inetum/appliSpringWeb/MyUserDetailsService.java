@@ -58,7 +58,7 @@ public class MyUserDetailsService implements UserDetailsService {
 				List<Customer> customers = serviceCustomer.rechercherCustomerSelonPrenomEtNom(firstname,lastname);
 				if(!customers.isEmpty()) {
 					Customer firstCustomer = customers.get(0);
-					authorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));//ou "ROLE_USER"
+					authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));//ou "ROLE_USER" ou "ROLE_ADMIN"
 						//password=customer.getPassword(); déjà stocké en base en mode crypté
 					password=passwordEncoder.encode(firstCustomer.getPassword());
 					userDetails = new User(username, password, authorities);

@@ -3,12 +3,14 @@ package com.inetum.appliSpringWeb.rest;
 import java.util.List;
 
 import org.mycontrib.util.generic.dto.DtoByLevelUtil;
+import org.mycontrib.util.generic.exception.NotFoundException;
 import org.mycontrib.util.generic.rest.AbstractGenericRestCtrl;
 import org.mycontrib.util.generic.service.GenericServiceWithDto;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -51,10 +53,28 @@ public class CompteRestCtrl extends AbstractGenericRestCtrl<Long,CompteL0>{
 	private DtoConverter dtoConverter = new DtoConverter();
 	
 	
+	// URL= ./rest/api-bank/compte/1_or_other_id
+	//   or ./rest/api-bank/compte/1?detailLevel=1ou2ouAutre
+	@GetMapping("/{id}")
+	@PreAuthorize("hasRole('ROLE_CUSTOMER') || hasRole('ROLE_ADMIN')")
+	public CompteL0 getDtoById(@PathVariable("id") Long id,
+				@RequestParam(value="detailLevel",required=false) Integer detailLevel) throws NotFoundException {
+			return super.internalGetDtoById(id,detailLevel); //may throwing NotFoundException
+	}
+		
 
-	//exemple de fin d'URL: ./api-bank/compte
-	//                      ./api-bank/compte?soldeMini=0
+	// URL= ./rest/api-bank/compte/1_or_other_id
+	// appelé en mode DELETE
+	@DeleteMapping("/{id}")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> deleteDtoById(@PathVariable("id") Long id) {
+			return super.internalDeleteDtoById(id);
+	}
+
+	//exemple de fin d'URL: ./rest/api-bank/compte
+	//                      ./rest/api-bank/compte?soldeMini=0
 	@GetMapping("" )
+	@PreAuthorize("hasRole('ROLE_CUSTOMER') || hasRole('ROLE_ADMIN')")
 	public List<CompteL1> getComptes(
 			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
 		if(soldeMini==null)
@@ -68,11 +88,12 @@ public class CompteRestCtrl extends AbstractGenericRestCtrl<Long,CompteL0>{
 	
 	
 	
-	//exemple de fin d'URL: ./api-bank/compte
+	//exemple de fin d'URL: ./rest/api-bank/compte
 	//appelé en mode POST avec dans la partie invisible "body" de la requête:
 	// { "numero" : null , "label" : "compteQuiVaBien" , "solde" : 50.0 , "numeroClient" : 1}
 	// ou bien { "label" : "compteQuiVaBien" , "solde" : 50.0  , "numeroClient" : null}
 	@PostMapping("" ) //NOUVELLE VERSION avec CompteDtoEx et .numeroClient (éventuellement null)
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public CompteL1 postCompte(@RequestBody CompteL1 nouveauCompte) {
 	    //on s'appuie ici sur la méthode spécifique ci dessous du serviceCompte
 		return serviceCompte.saveNewFromDto(nouveauCompte);
@@ -80,12 +101,13 @@ public class CompteRestCtrl extends AbstractGenericRestCtrl<Long,CompteL0>{
 	
 	
 		
-		//exemple de fin d'URL: ./api-bank/compte
-		//ou bien               ./api-bank/compte/5
+		//exemple de fin d'URL: ./rest/api-bank/compte
+		//ou bien               ./rest/api-bank/compte/5
 		//appelé en mode PUT avec dans la partie invisible "body" de la requête:
 		// { "numero" : 5 , "label" : "compte5QueJaime" , "solde" : 150.0 , "numeroClient" : null}
 		//ou bien {  "label" : "compte5QueJaime" , "solde" : 150.0 , "numeroClient" : 1}
 		@PutMapping({"" , "/{id}" }) 
+		@PreAuthorize("hasRole('ROLE_ADMIN')")
 		public CompteL1 putCompteToUpdate(@RequestBody CompteL1 compteDto , 
 				      @PathVariable(value="id",required = false ) Long idToUpdate) {
 			    if(compteDto.getNumero()==null)	compteDto.setNumero(idToUpdate);

@@ -23,6 +23,8 @@ function initListeners(){
 }
 
 function resetObject(){
+	document.getElementById("spanMsg").innerHTML="";
+	document.getElementById("spanMsg").style.color="black";
 	if(selectedRow!=null){
 		selectedRow.style.color="black";
 		selectedRow=null;
@@ -31,7 +33,11 @@ function resetObject(){
 	displayObject(blankObject());	
 }
 
-
+function basicErrorCallback(err){
+	console.log("err="+err);
+	document.getElementById("spanMsg").innerHTML=err;
+	document.getElementById("spanMsg").style.color="red";
+}
 
 
 function updateSelected(){
@@ -43,7 +49,7 @@ function updateSelected(){
 		console.log("responseJson="+responseJson);
 		//document.getElementById("spanMsg").innerHTML="successfully updated";
 		refreshAll();
-	}); 
+	},basicErrorCallback); 
 }
 
 function deleteSelected(){
@@ -52,7 +58,7 @@ function deleteSelected(){
 		let wsUrl = getWsBaseUrl() + "/" +id;
 		makeAjaxDeleteRequest(wsUrl,function(responseJson){
 			refreshAll();
-			});
+			} , basicErrorCallback);
 	}
 }
 
@@ -64,12 +70,14 @@ function addNew(){
 	makeAjaxPostRequest(wsUrl,objectJson,function (responseJson){
 		console.log("responseJson="+responseJson);
 		refreshAll(); //pour rafraîchir le tableau avec objet ajouté
-	});         
+	},basicErrorCallback);         
 }
 
 
 
 function onSelectRow(evt){
+	document.getElementById("spanMsg").innerHTML="";
+	document.getElementById("spanMsg").style.color="black";
 	let clickElt = evt.target;
 	if(selectedRow!=null){
 		selectedRow.style.color="black";
@@ -91,7 +99,7 @@ function searchById(id){
 		document.getElementById("spanMsg").innerHTML="selectedId="+id;
 		console.log("objectJs="+JSON.stringify(objectJs));
 		displayObject(objectJs);
-		});
+		},basicErrorCallback);
 }
 
 
@@ -118,6 +126,6 @@ function refreshAll(){
 		}
 		
 		resetObject();
-	});
+	},basicErrorCallback);
 	
 }

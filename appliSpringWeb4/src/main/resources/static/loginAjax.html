@@ -3,17 +3,23 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>compteAjax</title>
+<title>loginAjax</title>
 <script src="js/my_ajax_util.js"></script>
 <script src="js/loginAjax.js"></script>
 </head>
 <body>
 	
 	 <h3>login (post) pour obtenir token</h3>
-    username: <input type="text" value="user1" id="txtUsername" /> (ex: user1,admin1)<br/>
-    password: <input type="text" value="pwd1" id="txtPassword" /> <br/>
-    <input type="button" value="login" onclick="doLogin()" /><br/>
+    username: <input type="text" value="user1" id="txtUsername" /> <br/>
+    ex: user1,user2 with ROLE_USER<br/>
+    admin1,admin2 with ROLE_ADMIN <br/>
+    firstname_lastname (jean_Bon , jean_Aimare) with ROLE_CUSTOMER (bank)<br/>
+    password: <input type="text" value="pwd1" id="txtPassword" /> (ex: pwd1,pwd2,...)<br/>
+    <input type="button" value="login" onclick="doLogin()" />&nbsp;
+    <input type="button" value="logout" onclick="doLogout()" /><br/>
     message : <span id="spanMessageLogin"></span>
+    <hr/>
+    current token : <span id="spanMessageToken"></span>
     <hr/>
     <a href="index.html">retour vers index.html</a> <br/>
 </body>

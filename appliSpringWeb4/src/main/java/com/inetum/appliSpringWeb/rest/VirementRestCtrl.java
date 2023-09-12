@@ -2,6 +2,7 @@ package com.inetum.appliSpringWeb.rest;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,10 +21,11 @@ public class VirementRestCtrl {
 	@Autowired
 	private ServiceCompte serviceCompte;
 	
-	//exemple de fin d'URL: ./api-bank/virement
+	//exemple de fin d'URL: ./rest/api-bank/virement
 	//appelé en mode POST avec dans la partie invisible "body" de la requête:
 	// { "numCompteDebit" : 1 , "numCompteCredit" : 2 , "montant" : 50.0 }
 	@PostMapping("" )
+	@PreAuthorize("hasRole('ROLE_CUSTOMER')")
 	public VirementResponse postVirement(@RequestBody VirementRequest virementRequest) {
 		    VirementResponse virementResponse = new VirementResponse();
 		    /*

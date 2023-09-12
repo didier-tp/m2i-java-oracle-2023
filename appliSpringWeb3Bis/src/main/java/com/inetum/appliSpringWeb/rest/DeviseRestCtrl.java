@@ -2,7 +2,7 @@ package com.inetum.appliSpringWeb.rest;
 
 import java.util.List;
 
-import org.mycontrib.util.generic.rest.AbstractGenericRestCtrl;
+import org.mycontrib.util.generic.rest.AbstractGenericRestCtrlWithMapping;
 import org.mycontrib.util.generic.service.GenericServiceWithDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +14,7 @@ import com.inetum.appliSpringWeb.service.ServiceDevise;
 
 @RestController
 @RequestMapping(value="/api-devise/devise" , headers="Accept=application/json")
-public class DeviseRestCtrl extends AbstractGenericRestCtrl<String,DeviseL0>{
+public class DeviseRestCtrl extends AbstractGenericRestCtrlWithMapping<String,DeviseL0>{
 	
 	@Autowired
 	private ServiceDevise serviceDevise;
