@@ -2,12 +2,9 @@ package com.inetum.appliSpringWeb.service;
 
 import java.util.List;
 
-import org.mycontrib.util.generic.exception.NotFoundException;
 import org.mycontrib.util.generic.service.GenericService;
 
-import com.inetum.appliSpringWeb.dto.CompteL0;
 import com.inetum.appliSpringWeb.dto.CompteL1;
-import com.inetum.appliSpringWeb.dto.CompteL2;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Operation;
 import com.inetum.appliSpringWeb.exception.BankException;

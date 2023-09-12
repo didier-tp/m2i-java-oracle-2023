@@ -3,7 +3,6 @@ package com.inetum.appliSpringWeb.service;
 import java.util.Date;
 import java.util.List;
 
-import org.mycontrib.util.generic.exception.NotFoundException;
 import org.mycontrib.util.generic.service.AbstractGenericService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +17,6 @@ import com.inetum.appliSpringWeb.dao.DaoCustomer;
 import com.inetum.appliSpringWeb.dao.DaoOperation;
 import com.inetum.appliSpringWeb.dto.CompteL0;
 import com.inetum.appliSpringWeb.dto.CompteL1;
-import com.inetum.appliSpringWeb.dto.CompteL2;
 import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
 import com.inetum.appliSpringWeb.entity.Operation;

@@ -26,6 +26,7 @@ public class VirementRestCtrl {
 	// { "numCompteDebit" : 1 , "numCompteCredit" : 2 , "montant" : 50.0 }
 	@PostMapping("" )
 	@PreAuthorize("hasRole('ROLE_CUSTOMER')")
+	//pour affiner ultérieurement la sécurité: virement autorisé que si le compte à débiter appartient au client connecté .
 	public VirementResponse postVirement(@RequestBody VirementRequest virementRequest) {
 		    VirementResponse virementResponse = new VirementResponse();
 		    /*

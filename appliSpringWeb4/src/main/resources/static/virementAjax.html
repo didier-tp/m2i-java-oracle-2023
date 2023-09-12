@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
+<title>virementAjax</title>
+<script src="js/my_ajax_util.js"></script>
+<script src="js/virementAjax.js"></script>
+</head>
+<body>
+	customerId(id): <input id="inputCustomerId" /> <br/>
+	<button id="btnRefreshAll">comptes du client</button>
+    <table border="1">
+	   <thead>
+		<tr><th>numero</th><th>label</th><th>solde</th><th>customerId</th></tr>
+	   </thead>
+	   <tbody id="table_body">
+		   <!-- <tr><td>1</td><td>compteA</td><td>50.0</td><td>1</td></tr> -->
+	   </tbody>
+	</table>
+	<hr/>
+	<hr/>
+    <span id="spanMsg"></span>
+	<h3>Virement</h3>
+	montant: <input id="inputMontant" value="0" /> <br/>
+	compte_a_debiter: <select id="selectCptDeb">
+		<!-- <option value='1'>compte1</option> -->
+		<!-- <option value='2'>compte2</option> -->
+	</select> <br/>
+	compte_a_crediter:<select id="selectCptCred">
+		<!-- <option value='1'>compte1</option> -->
+		<!-- <option value='2'>compte2</option> -->
+	</select> <br/>
+	<button id="btnVirement">effectuer virement</button>
+    <hr/>
+	<a href="index.html">retour vers index.html</a> <br/>
+</body>
+</html>

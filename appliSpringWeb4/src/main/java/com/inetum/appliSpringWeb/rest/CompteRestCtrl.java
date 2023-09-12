@@ -73,17 +73,20 @@ public class CompteRestCtrl extends AbstractGenericRestCtrl<Long,CompteL0>{
 
 	//exemple de fin d'URL: ./rest/api-bank/compte
 	//                      ./rest/api-bank/compte?soldeMini=0
+    //                      ./rest/api-bank/compte?customerId=1
 	@GetMapping("" )
 	@PreAuthorize("hasRole('ROLE_CUSTOMER') || hasRole('ROLE_ADMIN')")
 	public List<CompteL1> getComptes(
-			 @RequestParam(value="soldeMini",required=false) Double soldeMini){
-		if(soldeMini==null)
-			//return serviceCompte.searchAllDto();
-		    return serviceCompte.searchAllDto(CompteL1.class);
-		else
-			//return dtoConverter.compteToCompteDto(
+			 @RequestParam(value="soldeMini",required=false) Double soldeMini,
+			 @RequestParam(value="customerId",required=false) Long customerId){
+		if(soldeMini!=null)
 			return dtoConverter.map(
 					serviceCompte.rechercherSelonSoldeMini(soldeMini),CompteL1.class);
+		else if(customerId!=null)
+		    return dtoConverter.map(
+		    		serviceCompte.rechercherComptesDuClient(customerId),CompteL1.class);
+		else
+		 return serviceCompte.searchAllDto(CompteL1.class);
 	}
 	
 	

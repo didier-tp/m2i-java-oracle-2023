@@ -35,6 +35,9 @@ function resetObject(){
 
 function basicErrorCallback(err){
 	console.log("err="+err);
+	if(err && err.length>256){
+		err = err.substring(0,256)
+	}
 	document.getElementById("spanMsg").innerHTML=err;
 	document.getElementById("spanMsg").style.color="red";
 }
