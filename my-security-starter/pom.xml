@@ -17,6 +17,8 @@
             <artifactId>spring-boot-starter</artifactId>
             <version>${spring-boot.version}</version>
         </dependency>
+        
+        <!--  my-security-common = indirect/transitive dependency to build/install -->
 
         <dependency>
             <groupId>org.mycontrib</groupId>

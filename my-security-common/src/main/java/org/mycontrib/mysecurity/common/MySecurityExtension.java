@@ -1,7 +1,13 @@
-package org.mycontrib.mysecurity.realm.config;
+package org.mycontrib.mysecurity.common;
 
 public interface MySecurityExtension {
 	public static final String MY_SECURITY_DEFAULT_LOGIN_PATH="/rest/api-login/public/login";
+	
+	//partie de l'url devant mener à une api REST (ex: /rest/api-xyz/xyz)
+	public static final String REST_PART_URI="/rest";
+	
+	//partie de l'url devant mener à une partie du site web (@Controller + JSP ou Thymeleaf)  (ex: /site/xxx/zzz)
+	public static final String SITE_PART_URI="/site";
 	
 	//constantes pour nom à donner au composant de UserDetailsService spécifique au projet
 	//EXCLUSIVE si celui ci remplace la config par défaut de ce projet ("InMemory" ou autre)

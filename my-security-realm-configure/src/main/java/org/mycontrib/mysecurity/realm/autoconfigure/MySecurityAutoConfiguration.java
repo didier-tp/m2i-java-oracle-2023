@@ -13,7 +13,8 @@ https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-featu
 @Configuration
 @ComponentScan({ "org.mycontrib.mysecurity.realm.config" ,
 	              "org.mycontrib.mysecurity.realm.config.userdetails",
-	              "org.mycontrib.mysecurity.realm.properties"})
+	              "org.mycontrib.mysecurity.realm.properties",
+	              "org.mycontrib.mysecurity.common"})
 public class MySecurityAutoConfiguration {
 
 }

@@ -18,6 +18,7 @@ public class MyAuthenticationManagerBuilderHelper {
 	}
 	
 	public static AuthenticationManagerBuilder authenticationManagerBuilderFromHttpSecurity(HttpSecurity httpSecurity) {
+		
 		AuthenticationManagerBuilder authenticationManagerBuilder = httpSecurity
 				.getSharedObject(AuthenticationManagerBuilder.class); // **** IMPORTANT *****
 		authenticationManagerBuilder.parentAuthenticationManager(null);

@@ -38,7 +38,7 @@ public class WebProtectedAreaConfigurer {
 		
 		String[] defaultApiWhitelist = { "/rest/my-api/public/**" }; // default value
 		
-		String[] defaultSwaggerWhitelist = { "/swagger-ui/**","/v3/api-docs" }; // "/swagger-resources/**" ?? , "/webjars/**" ??
+		String[] defaultToolsWhitelist = { "/swagger-ui/**","/v3/api-docs" ,"/h2-console/**"}; 
 		
 		String[] defaultApiReadonlyWhitelist = { "/rest/my-api/readonly/**" }; // default value
 		
@@ -48,9 +48,9 @@ public class WebProtectedAreaConfigurer {
 			areasConfig.setStaticWhitelist(mySecurityProperties.getStaticWhitelist().split(";"));
 		else areasConfig.setStaticWhitelist(defaultStaticWhitelist);
 		
-		if (mySecurityProperties != null && mySecurityProperties.getSwaggerWhitelist() != null)
-			areasConfig.setSwaggerWhitelist(mySecurityProperties.getSwaggerWhitelist().split(";"));
-		else areasConfig.setSwaggerWhitelist(defaultSwaggerWhitelist);
+		if (mySecurityProperties != null && mySecurityProperties.getToolsWhitelist() != null)
+			areasConfig.setToolsWhitelist(mySecurityProperties.getToolsWhitelist().split(";"));
+		else areasConfig.setToolsWhitelist(defaultToolsWhitelist);
 		
 		if (mySecurityProperties != null && mySecurityProperties.getWhitelist() != null)
 			areasConfig.setApiWhitelist(mySecurityProperties.getWhitelist().split(";"));
@@ -71,7 +71,7 @@ public class WebProtectedAreaConfigurer {
 				                                              areasConfig.getApiProtectedlist()));
 
 		logger.info("staticWhitelist=" + Arrays.asList(areasConfig.getStaticWhitelist()));
-		logger.info("swaggerWhitelist=" + Arrays.asList(areasConfig.getSwaggerWhitelist()));
+		logger.info("toolsWhitelist=" + Arrays.asList(areasConfig.getToolsWhitelist()));
 		logger.info("whitelist=" + Arrays.asList(areasConfig.getApiWhitelist()));
 		logger.info("readonlyWhitelist=" + Arrays.asList(areasConfig.getApiReadonlyWhitelist()));
 		logger.info("protectedlist=" + Arrays.asList(areasConfig.getApiProtectedlist()));

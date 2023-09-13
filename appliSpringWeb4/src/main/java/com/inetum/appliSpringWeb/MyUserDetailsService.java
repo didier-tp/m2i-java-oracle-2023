@@ -3,7 +3,7 @@ package com.inetum.appliSpringWeb;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.mycontrib.mysecurity.realm.config.MySecurityExtension;
+import org.mycontrib.mysecurity.common.MySecurityExtension;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,8 +59,8 @@ public class MyUserDetailsService implements UserDetailsService {
 				if(!customers.isEmpty()) {
 					Customer firstCustomer = customers.get(0);
 					authorities.add(new SimpleGrantedAuthority("ROLE_CUSTOMER"));//ou "ROLE_USER" ou "ROLE_ADMIN"
-						//password=customer.getPassword(); déjà stocké en base en mode crypté
-					password=passwordEncoder.encode(firstCustomer.getPassword());
+					password=firstCustomer.getPassword();// déjà stocké en base en mode crypté
+					//password=passwordEncoder.encode(firstCustomer.getPassword());//si pas stocké en base en mode crypté (PAS BIEN !!!)
 					userDetails = new User(username, password, authorities);
 				}
 			} catch (Exception e) {

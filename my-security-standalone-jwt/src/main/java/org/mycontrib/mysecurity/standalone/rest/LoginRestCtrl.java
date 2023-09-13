@@ -1,11 +1,13 @@
 package org.mycontrib.mysecurity.standalone.rest;
 
+import org.mycontrib.mysecurity.common.MySecurityExtension;
 import org.mycontrib.mysecurity.jwt.util.JwtTokenProvider;
 import org.mycontrib.mysecurity.standalone.dto.LoginRequest;
 import org.mycontrib.mysecurity.standalone.dto.LoginResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Profile;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,13 +25,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @CrossOrigin("*")
 @Profile("withSecurity")
-@RequestMapping(value="/rest/api-login/public/login" , headers="Accept=application/json")
+@RequestMapping(value=MySecurityExtension.MY_SECURITY_DEFAULT_LOGIN_PATH , headers="Accept=application/json")
 public class LoginRestCtrl {
 	
 	Logger logger = LoggerFactory.getLogger(LoginRestCtrl.class);
 	
 	
-	@Autowired
+	@Autowired(required = true)
+	@Qualifier("rest")  //NB: it may be an alias of global/unique AuthenticationManager (without @Qualifier)
     private AuthenticationManager authenticationManager;
 	
 	@Autowired

@@ -4,6 +4,10 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.annotation.PostConstruct;
+
+import org.mycontrib.mysecurity.common.MyRealmConfigurer;
+import org.mycontrib.mysecurity.common.RealmPurposeEnum;
 import org.mycontrib.mysecurity.realm.config.default_users.MySecurityDefaultUsersSimpleConfigurer;
 import org.mycontrib.mysecurity.realm.config.jdbc.MyJdbcRealmSubConfigurer;
 import org.mycontrib.mysecurity.realm.config.memory.MyInMemoryRealmSubConfigurer;
@@ -12,22 +16,19 @@ import org.mycontrib.mysecurity.realm.properties.MySecurityRealmProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.condition.ConditionalOnMissingBean;
 import org.springframework.boot.context.properties.ConfigurationPropertiesScan;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Component;
 
 
 
-@Configuration
+@Component
 @Profile("withSecurity")
 @ConfigurationPropertiesScan("org.mycontrib.mysecurity.realm.properties")
-public class MySecurityGlobalRealmConfigurer {
+public class MySecurityGlobalRealmConfigurer implements MyRealmConfigurer {
 
 	private static Logger logger = LoggerFactory.getLogger(MySecurityGlobalRealmConfigurer.class);
 
@@ -45,7 +46,7 @@ public class MySecurityGlobalRealmConfigurer {
 	
 	
 	@Autowired
-	private BCryptPasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder; //BCryptPasswordEncoder
 
 	@Autowired
 	private MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer;
@@ -53,13 +54,13 @@ public class MySecurityGlobalRealmConfigurer {
 	@Autowired
 	MyUserDetailsServiceSubConfigurerBean myUserDetailsServiceSubConfigurerBean;
 	
-	@Bean //default global AuthenticationManager
-	@ConditionalOnMissingBean(AuthenticationManager.class)
-	public AuthenticationManager authenticationManager(HttpSecurity httpSecurity)throws Exception {
-		initAuthenticationMgrMap(httpSecurity);
-		return authenticationMgrMap.get("global");
-	}
 
+
+	
+	@PostConstruct
+	public void initMySecurityGlobalRealmConfigurer(){
+		logger.debug("MySecurityGlobalRealmConfigurer with mySecurityRealmProperties="+mySecurityRealmProperties);
+	}
 		
 	public void initAuthenticationMgrMap(HttpSecurity httpSecurity)throws Exception {
 		if(authenticationMgrMap!=null) return;
@@ -164,12 +165,20 @@ public class MySecurityGlobalRealmConfigurer {
 		}
 	}
 	
-	
-	
-	@Bean
-	public Map<String,AuthenticationManager> authenticationManagerMap(HttpSecurity httpSecurity) throws Exception {
-		initAuthenticationMgrMap(httpSecurity);
-		return authenticationMgrMap;
+
+
+	@Override
+	public AuthenticationManager getRealmAuthenticationManager(HttpSecurity httpSecurity,RealmPurposeEnum realmPurpose) {
+		try {
+			initAuthenticationMgrMap(httpSecurity);
+		} catch (Exception e) {
+			logger.error("initAuthenticationMgrMap error",e);
+		}
+		String realmPurposeString  =  realmPurpose.toString();
+		AuthenticationManager authMgr =  authenticationMgrMap.get(realmPurposeString);
+		if(authMgr==null)
+			authMgr =  authenticationMgrMap.get("global");//as default if no specific for "rest" or "site"
+		return authMgr;
 	}
 	
 	

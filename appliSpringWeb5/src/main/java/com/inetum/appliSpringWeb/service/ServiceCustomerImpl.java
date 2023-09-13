@@ -7,12 +7,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.inetum.appliSpringWeb.dao.DaoCompte;
 import com.inetum.appliSpringWeb.dao.DaoCustomer;
-import com.inetum.appliSpringWeb.entity.Compte;
 import com.inetum.appliSpringWeb.entity.Customer;
 
 @Service
@@ -25,6 +25,9 @@ public class ServiceCustomerImpl
 	public CrudRepository<Customer, Long> getMainDao() {
 		return this.daoCustomer;
 	}
+	
+	@Autowired(required=false)
+	private PasswordEncoder passwordEncoder;
 	
 	
 	Logger logger = LoggerFactory.getLogger(ServiceCustomerImpl.class);
@@ -41,7 +44,12 @@ public class ServiceCustomerImpl
 	public boolean checkCustomerPassword(long customerId, String password) {
 		Customer customer = daoCustomer.findById(customerId).orElse(null);
 		if(customer==null || password==null) return false;
-		return password.equals(customer.getPassword());
+		if(this.passwordEncoder!=null) {
+			return passwordEncoder.matches(password,customer.getPassword());
+		}
+		else {
+		    return password.equals(customer.getPassword());
+		}
 	}
 
 	@Override
@@ -49,11 +57,21 @@ public class ServiceCustomerImpl
 		Customer customer = daoCustomer.findById(customerId).get();
 		String pwd = "tempPwd"; //à améliorer
 		customer.setPassword(pwd);
-		daoCustomer.save(customer);
+		saveOrUpdateEntity(customer);
 		return pwd;
 	}
+	
+	
 
 	
+	@Override  //override default implementation to encore password via passwordEncoder( bcrypt )
+	public Customer saveOrUpdateEntity(Customer entity) {
+		if(this.passwordEncoder!=null) {
+			entity.setPassword(passwordEncoder.encode(entity.getPassword()));
+		}
+		return super.saveOrUpdateEntity(entity);
+	}
+
 	@Override
 	public Customer rechercherCustomerAvecComptesParNumero(long idCustomer) {
 		return daoCustomer.findByIdWithComptes(idCustomer).orElse(null);

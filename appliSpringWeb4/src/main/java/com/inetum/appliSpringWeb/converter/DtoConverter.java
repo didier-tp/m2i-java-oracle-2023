@@ -55,7 +55,9 @@ public class DtoConverter {
 		return new CustomerL0(customer.getId(),
 				              customer.getFirstname() , 
 				              customer.getLastname(),
-				              "CONFIDENTIAL"); // NOT customer.getPassword() !!!!
+				              customer.getPassword() // IF password already crypted/encoded 
+				              //"CONFIDENTIAL" // NOT customer.getPassword() IF password not crypted/encoded !!!!
+				              );
 	}
 	
 	public NewsL0 newsToNewsL0(News news) {

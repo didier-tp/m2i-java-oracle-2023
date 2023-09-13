@@ -1,4 +1,4 @@
-package org.mycontrib.mysecurity.realm.config;
+package org.mycontrib.mysecurity.common;
 
 public enum RealmPurposeEnum {
    global , rest , site;

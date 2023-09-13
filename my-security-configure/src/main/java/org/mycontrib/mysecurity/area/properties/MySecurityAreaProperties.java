@@ -17,7 +17,7 @@ import org.springframework.boot.context.properties.ConfigurationProperties;
 public class MySecurityAreaProperties {
 	
 	private String staticWhitelist; //public static area (*.html , *.jpeg , ...)
-	private String swaggerWhitelist; //public static area for swagger /openapidoc
+	private String toolsWhitelist; //public static area for tools (swagger /openapidoc , h2-console, ...)
 	private String whitelist; //public area , whitelist (no need of authentication , all mode:GET/POST/PUT/DELETE)
 	private String readonlyWhitelist;//whitelist in mode GET only 
 	         //(nb: all elements in readonlyWhitelist will also automatic be put in protectedlist for other modes (POST/PUT/...)
@@ -33,7 +33,7 @@ public class MySecurityAreaProperties {
 	public String toString() {
 		return "AreaProperties [staticWhitelist=" + staticWhitelist + ", whitelist=" + whitelist
 				+ ", readonlyWhitelist=" + readonlyWhitelist + ", protectedlist=" + protectedlist 
-				+ ", swaggerWhitelist=" + swaggerWhitelist + "]";
+				+ ", toolsWhitelist=" + toolsWhitelist + "]";
 	}
 
 
@@ -69,13 +69,15 @@ public class MySecurityAreaProperties {
 		this.protectedlist = protectedlist;
 	}
 
-	public String getSwaggerWhitelist() {
-		return swaggerWhitelist;
+	public String getToolsWhitelist() {
+		return toolsWhitelist;
 	}
 
-	public void setSwaggerWhitelist(String swaggerWhitelist) {
-		this.swaggerWhitelist = swaggerWhitelist;
+	public void setToolsWhitelist(String toolsWhitelist) {
+		this.toolsWhitelist = toolsWhitelist;
 	}
+
+
 
 
 }

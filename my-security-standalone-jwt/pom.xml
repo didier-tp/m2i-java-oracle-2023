@@ -10,6 +10,12 @@
 		<spring.security.version>5.7.10</spring.security.version>
 </properties>
 <dependencies>
+	
+	<dependency>
+		    <groupId>org.mycontrib</groupId>
+		    <artifactId>my-security-common</artifactId>
+		    <version>0.0.1-SNAPSHOT</version>
+		</dependency>
 
     <dependency>
 			<groupId>org.springframework</groupId>

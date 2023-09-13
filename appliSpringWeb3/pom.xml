@@ -71,6 +71,7 @@
 			<artifactId>lombok</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		
 		<!-- 
 		pour que lombok fonctionne bien dans eclipse:
 		 1. lancer (via double click ou autre)
@@ -79,6 +80,8 @@
 		 3. "install/update"  eclipse.ini mis à jour
 		 4. redémarrer eclipse et clean ..
 		-->
+		
+
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>

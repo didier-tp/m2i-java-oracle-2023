@@ -4,12 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Primary;
 import org.springframework.context.annotation.Profile;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
 @Profile("withSecurity")
@@ -17,10 +20,11 @@ public class MySecurity {
 	
 	public static String DEFAULT_SPRING_SECURITY_ROLE_PREFIX = "ROLE_";
 	
-	@Bean
-	public BCryptPasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(); // By default since spring 5
-	}
+	//NB: passwordEncoder now in my-security-common 
+	//(org.mycontrib.mysecurity.common.CommonSecurityConfig)
+	
+	//need to scan org.mycontrib.mysecurity.common package
+	//in auto-configure (my-security-std-jwt-configure , my-security-configure, ...)
 
 	public static List<String> roleNameList(Authentication authentication) {
 		UserDetails userPrincipal = (UserDetails) authentication.getPrincipal();

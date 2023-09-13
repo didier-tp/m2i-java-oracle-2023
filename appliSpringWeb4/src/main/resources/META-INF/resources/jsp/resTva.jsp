@@ -10,4 +10,5 @@
    tva=${tva} <br/>
    ttc=${ttc} <br/>
 </body>
+<a href="../../index-site.html">index partie SITE (@Controller + JSP)</a> <br/>
 </html>

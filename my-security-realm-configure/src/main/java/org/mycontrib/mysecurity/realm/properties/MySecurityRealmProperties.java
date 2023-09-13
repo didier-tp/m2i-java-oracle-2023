@@ -1,9 +1,14 @@
 package org.mycontrib.mysecurity.realm.properties;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 
 @ConfigurationProperties(prefix="mysecurity.realm")
 public class MySecurityRealmProperties {
+	
+	private static Logger logger = LoggerFactory.getLogger(MySecurityRealmProperties.class);
+
 	
 	private ForJdbcRealmProperties site;//mysecurity.realm.site.jdbc-realm....
 	private ForJdbcRealmProperties rest;//mysecurity.realm.rest.jdbc-realm....
@@ -16,6 +21,7 @@ public class MySecurityRealmProperties {
 
 	public MySecurityRealmProperties() {
 		super();
+		logger.debug("MySecurityRealmProperties");
 	}
 
 

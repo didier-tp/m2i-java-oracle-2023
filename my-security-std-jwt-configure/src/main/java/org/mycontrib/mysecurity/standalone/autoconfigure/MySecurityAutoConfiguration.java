@@ -14,7 +14,8 @@ https://docs.spring.io/spring-boot/docs/2.1.18.RELEASE/reference/html/boot-featu
 @ComponentScan({ "org.mycontrib.mysecurity.standalone.config" , 
 	             "org.mycontrib.mysecurity.standalone.util" , 
 	             "org.mycontrib.mysecurity.jwt.util" ,
-	             "org.mycontrib.mysecurity.standalone.rest"})
+	             "org.mycontrib.mysecurity.standalone.rest",
+	             "org.mycontrib.mysecurity.common"})
 public class MySecurityAutoConfiguration {
 
 }

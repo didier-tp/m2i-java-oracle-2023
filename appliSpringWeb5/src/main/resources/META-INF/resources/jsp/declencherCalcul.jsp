@@ -8,9 +8,13 @@
 </head>
 <body>
      <form action="tva" method="POST" >
-        <label>ht:</label><input type="text" name="ht" /> <br/>
-        <label>tauxTva (en %):</label><input type="text" name="tauxTvaPct" /> <br/>
-        <input type="submit" value="calculer tva" />
+     
+       <!-- csrf protection activated by default -->
+       <input type="hidden"  name="${_csrf.parameterName}"  value="${_csrf.token}"/> 
+        
+        <label>ht:</label><input type="text" name="ht" value="200"/> <br/>
+        <label>tauxTva (en %):</label><input type="text" name="tauxTvaPct" value="20" /> <br/>
+        <input type="submit" value="Calculer TVA" />
      </form>
 </body>
 </html>

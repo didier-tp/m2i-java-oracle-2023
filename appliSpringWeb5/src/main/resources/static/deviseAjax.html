@@ -3,20 +3,35 @@
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
-<title>deviseAjax</title>
+<title>compteAjax</title>
 <script src="js/my_ajax_util.js"></script>
+<script src="js/my_crud_util.js"></script>
 <script src="js/deviseAjax.js"></script>
 </head>
 <body>
-	
-	code: <input id="inputCode" value="USD"/> (ex: USD , EUR) <br/>
-	
-	<button id="btnRecherche">get Devise By Code (get)</button>
+	<!-- nb id="inputId" for my_crud_util.js -->
+	code: <input id="inputId" /> (ex: USD , EUR) <br/>
+	nom: <input id="inputNom" /> (ex: Dollar , Euro) <br/>
+	change: <input id="inputChange" /> <br/>
+
+	<button id="btnReset">reset</button> &nbsp;
+	<button id="btnAdd">add</button> &nbsp;
+	<button id="btnUpdate">update</button>&nbsp;
+	<button id="btnDelete">delete</button>
 	
 	<hr/>
-	Devise ou message: <span id="spanMsg"></span>
-	
+    <span id="spanMsg"></span>
+    <hr/>
+	<button id="btnRefreshAll">refresh all news</button>
+    <table border="1">
+	   <thead>
+		<tr><th>code</th><th>nom</th><th>change</th></tr>
+	   </thead>
+	   <tbody id="table_body">
+		   <!-- <tr><td>EUR</td><td>Euro</td><td>1.0</td></tr> -->
+	   </tbody>
+	</table>
 	<hr/>
-	<a href="index.html">retour vers index.html</a> <br/>
+	<a href="index-rest.html">retour vers index-rest.html</a> <br/>
 </body>
 </html>

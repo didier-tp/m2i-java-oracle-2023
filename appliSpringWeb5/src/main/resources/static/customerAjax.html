@@ -5,24 +5,33 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1" />
 <title>customerAjax</title>
 <script src="js/my_ajax_util.js"></script>
+<script src="js/my_crud_util.js"></script>
 <script src="js/customerAjax.js"></script>
 </head>
 <body>
 	
-	prenom: <input id="inputPrenom" /> <br/>
-	nom: <input id="inputNom" /> <br/>
+	id: <input id="inputId" /> <br/>
+	firstname: <input id="inputFirstname" /> <br/>
+	lastname: <input id="inputLastname" /> <br/>
 	password: <input id="inputPassword" /> <br/>
-	<button id="btnAjout">ajouter customer (post)</button>
-	<hr/>
+	<button id="btnReset">reset</button> &nbsp;
+	<button id="btnAdd">add</button> &nbsp;
+	<button id="btnUpdate">update</button>&nbsp;
+	<button id="btnDelete">delete</button>
 	
-	<button id="btnRechercher">rechercher customers</button>
+	<hr/>
+    <span id="spanMsg"></span>
+    <hr/>
+	<button id="btnRefreshAll">refresh all customers</button>
     <table border="1">
 	   <thead>
-		<tr><th>id</th><th>prenom</th><th>nom</th><th>password</th></tr>
+		<tr><th>id</th><th>firstname</th><th>lastname</th><th>password</th></tr>
 	   </thead>
 	   <tbody id="table_body">
 		   <!-- <tr><td>1</td><td>jean</td><td>Bon</td><td>pwd1</td></tr> -->
 	   </tbody>
 	</table>
+	<hr/>
+	<a href="index-rest.html">retour vers index-rest.html</a> <br/>
 </body>
 </html>

@@ -12,6 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 public class MyJdbcRealmSubConfigurer {
@@ -21,7 +22,7 @@ public class MyJdbcRealmSubConfigurer {
 	public MyJdbcRealmSubConfigurer(
 			MySecurityRealmProperties mySecurityRealmProperties,
 			Map<String,AuthenticationManager> authenticationMgrMap,
-			BCryptPasswordEncoder passwordEncoder,
+			PasswordEncoder passwordEncoder,
 			MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer) {
 		this.authenticationMgrMap=authenticationMgrMap;
 		this.mySecurityRealmProperties=mySecurityRealmProperties;
@@ -32,7 +33,7 @@ public class MyJdbcRealmSubConfigurer {
 	
 	public MySecurityRealmProperties mySecurityRealmProperties;
 	private Map<String,AuthenticationManager> authenticationMgrMap ;
-	private BCryptPasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 	private MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer;
 	
 	private AuthenticationManager secondaryAuthenticationManager=null;

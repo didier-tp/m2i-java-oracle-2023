@@ -6,7 +6,7 @@ public class AreasConfig {
 	private String[] apiWhitelist ;
 	private String[] apiReadonlyWhitelist ; 
 	private String[] apiProtectedlist;
-	private String[] swaggerWhitelist;
+	private String[] toolsWhitelist; //h2-console , swagger, ...
 	
 	public String[] getStaticWhitelist() {
 		return staticWhitelist;
@@ -32,14 +32,13 @@ public class AreasConfig {
 	public void setApiProtectedlist(String[] apiProtectedlist) {
 		this.apiProtectedlist = apiProtectedlist;
 	}
-	public String[] getSwaggerWhitelist() {
-		return swaggerWhitelist;
+	public String[] getToolsWhitelist() {
+		return toolsWhitelist;
 	}
-	public void setSwaggerWhitelist(String[] swaggerWhitelist) {
-		this.swaggerWhitelist = swaggerWhitelist;
-	} 
+	public void setToolsWhitelist(String[] toolsWhitelist) {
+		this.toolsWhitelist = toolsWhitelist;
+	}
 	
 	
-	
-	
+
 }

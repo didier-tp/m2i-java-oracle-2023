@@ -2,8 +2,8 @@ package org.mycontrib.mysecurity.realm.config.memory;
 
 import java.util.Map;
 
+import org.mycontrib.mysecurity.common.RealmPurposeEnum;
 import org.mycontrib.mysecurity.realm.config.MyAuthenticationManagerBuilderHelper;
-import org.mycontrib.mysecurity.realm.config.RealmPurposeEnum;
 import org.mycontrib.mysecurity.realm.config.default_users.MySecurityDefaultUsersSimpleConfigurer;
 import org.mycontrib.mysecurity.realm.properties.MySecurityRealmProperties;
 import org.slf4j.Logger;
@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.authentication.configurers.provisioning.UserDetailsManagerConfigurer;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 
 public class MyInMemoryRealmSubConfigurer {
@@ -21,7 +21,7 @@ public class MyInMemoryRealmSubConfigurer {
 	public MyInMemoryRealmSubConfigurer(
 			MySecurityRealmProperties mySecurityRealmProperties,
 			Map<String,AuthenticationManager> authenticationMgrMap,
-			BCryptPasswordEncoder passwordEncoder,
+			PasswordEncoder passwordEncoder,
 			MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer) {
 		this.authenticationMgrMap=authenticationMgrMap;
 		this.mySecurityRealmProperties=mySecurityRealmProperties;
@@ -32,7 +32,7 @@ public class MyInMemoryRealmSubConfigurer {
 	
 	public MySecurityRealmProperties mySecurityRealmProperties;
 	private Map<String,AuthenticationManager> authenticationMgrMap ;
-	private BCryptPasswordEncoder passwordEncoder;
+	private PasswordEncoder passwordEncoder;
 	private MySecurityDefaultUsersSimpleConfigurer mySecurityDefaultUsersSimpleConfigurer;
 	
 	

@@ -1,6 +1,6 @@
 package org.mycontrib.mysecurity.standalone.config;
 
-import org.mycontrib.mysecurity.chain.config.MyFilterSimpleConfigurer;
+import org.mycontrib.mysecurity.common.MyFilterChainSimpleConfigurer;
 import org.mycontrib.mysecurity.jwt.util.JwtAuthenticationFilter;
 import org.mycontrib.mysecurity.standalone.util.MyNoAuthenticationEntryPoint;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Profile("withSecurity")
 @Qualifier("StandaloneJwt")
-public class MyStandaloneFilterSimpleConfigurer implements MyFilterSimpleConfigurer {
+public class MyStandaloneFilterSimpleConfigurer implements MyFilterChainSimpleConfigurer {
 
 	@Autowired
 	private JwtAuthenticationFilter jwtAuthenticationFilter;
@@ -24,7 +24,7 @@ public class MyStandaloneFilterSimpleConfigurer implements MyFilterSimpleConfigu
 	private MyNoAuthenticationEntryPoint unauthorizedHandler;
 	
 	@Override
-	public SecurityFilterChain configureAndBuildEndOfSecurityChain(HttpSecurity http)
+	public HttpSecurity configureEndOfSecurityChain(HttpSecurity http)
 			throws Exception {
 		return http
 		// If the user is not authenticated, returns 401
@@ -32,8 +32,8 @@ public class MyStandaloneFilterSimpleConfigurer implements MyFilterSimpleConfigu
 		// This is a stateless application, disable sessions
 		.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
 		// Custom filter for authenticating users using tokens
-		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-		.build();
+		.addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class);
+		
 	}
 
 }

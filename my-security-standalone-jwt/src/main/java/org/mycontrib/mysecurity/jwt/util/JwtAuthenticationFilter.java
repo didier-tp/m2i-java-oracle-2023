@@ -15,6 +15,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.security.web.util.matcher.NegatedRequestMatcher;
+import org.springframework.security.web.util.matcher.RequestMatcher;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
@@ -25,12 +28,23 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 	
     @Autowired
     private JwtTokenProvider tokenProvider;
+    
+    
+    private final RequestMatcher restUriMatcher = 
+            new AntPathRequestMatcher("/rest/**");
 
     //@Autowired
     //private UserDetailsService userDetailsService;
 
     private static final Logger logger = LoggerFactory.getLogger(JwtAuthenticationFilter.class);
 
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        RequestMatcher noRestUriMatcher = new NegatedRequestMatcher(restUriMatcher);
+        return noRestUriMatcher.matches(request); //DO NOT USE THIS FILTER IF NOT FOR REST API REQUEST !!!
+    }
+    
+    
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
         try {
